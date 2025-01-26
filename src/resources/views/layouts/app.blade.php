@@ -23,19 +23,24 @@
             <form action="" class="search-form" method="">
                 <input type="text" class="search-form__input" placeholder="なにをお探しですか？">
             </form>
-            <nav>
-                <ul>
-                    <li><form action="" class="" method="">
-                        <button class="btn">ログアウト</button>
-                    </form></li>
-                    <li><form action="" class="" method="">
-                        <button class="btn">マイページ</button>
-                    </form></li>
-                    <li><form action="" class="" method="">
-                        <button class=" btn sell-btn">出品</button>
-                    </form></li>
-                </ul>
-            </nav>
+            <div class="header-link-group">
+                <div class="header-link-item">
+                <form action="" class="" method="">
+                    <button class="btn">ログアウト</button>
+                </form>
+                </div>
+                <div class="header-link-item">
+                <form action="" class="" method="">
+                    <button class="btn">マイページ</button>
+                </form>
+                </div>
+                <div class="header-link-item">
+                <form action="" class="" method="">
+                    <button class=" btn sell-btn">出品</button>
+                </form>
+                </div>
+            </div>    
+            
             @endif
         <!-- </div> -->
         

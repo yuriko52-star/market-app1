@@ -1,0 +1,197 @@
+
+
+.all-contents {
+    display: flex;
+    margin: 60px;
+}
+.left-content {
+    width: 60%;
+
+}
+.item {
+    display: flex;
+    padding-bottom: 60px;
+    border-bottom: 1px solid #000;
+}
+.image-card {
+    width: 178px;
+    height: 178px;
+    background-color: #d9d9d9;
+    position: relative;
+    
+}
+.img {
+    font-family: Inter;
+        font-size: 18px;
+        font-weight: 400;
+        position: absolute;
+            top: 40%;
+            /* 縦方向の中央 */
+            left: 50%;
+            /* 横方向の中央 */
+            transform: translate(-50%, -50%);
+            /* 完全に中央に配置 */
+            text-align: center;
+            /* テキストの中央揃え */
+        
+}
+.item-info {
+    margin-left: 60px;
+}
+.item-name {
+    display: block;
+    
+    font-family: Inter;
+        font-size: 30px;
+        font-weight: 700;
+        
+}
+.item-price {
+    font-family: Inter;
+        font-size: 27px;
+        font-weight: 400;
+}
+
+.label-title {
+    font-family: Inter;
+        font-size: 20px;
+        font-weight: 700;
+        display: block;
+        margin-bottom: 20px;
+        
+        
+}
+option  {
+     background-color: #5f5f5f; 
+     border: 1.5px solid #5f5f5f;
+     color: #eaeaea
+}
+    
+
+
+
+.select {
+    margin-left: 80px;
+    width:265px ;
+    height: 31px;
+    background-color:#eaeaea;
+    color:#5f5f5f ;
+    border: 1px solid #5f5f5f;
+}
+.pay-method,
+.shipping-info {
+    padding: 20px 0 60px 0;
+    border-bottom: 1px solid #000;
+}
+.flex {
+    display: flex;
+    justify-content: space-between;
+}
+.link {
+    display: inline-block;
+    margin-right: 20px;
+    color: #0073cc;
+    font-family: Inter;
+        font-size: 20px;
+        font-weight: 400;
+        text-decoration: none;
+}        
+.address {
+    font-family: Inter;
+        font-size: 20px;
+        font-weight: 400;
+        margin-left: 80px;
+        
+}
+.right-content {
+    width: 40%;
+}
+/* .table__inner { 
+    text-align: right;
+}*/
+table {
+    display: block;
+    margin-left: 200px;
+    border-collapse: collapse;
+    
+}
+tr {
+    border: 1px solid #000;
+    /* padding: 40px 30px; */
+    /* display: block; */
+    width: 480px;
+    height: 120px;
+}
+th,td {
+    padding: 10px 30px;
+    text-align: center;
+}
+th {
+    font-family: Inter;
+        font-size: 20px;
+        font-weight: 400;
+        line-height: 24.2px;
+        
+        /* display: inline-block; */
+        /* margin-right: 10px; */
+        align-items: center;
+       
+}
+td {
+    font-family: Inter;
+        font-size: 24px;
+        font-weight: 400;
+        
+}
+.buy-btn {
+    text-align: center;
+    display: block;
+    margin-top: 60px;
+    margin-left: 190px;
+}
+ .button {
+    width: 380px;
+    height: 60px;
+    font-family: Inter;
+        font-size: 26px;
+        font-weight: 700;
+       color: #fff;
+       background-color: #ff5555;
+        text-align: center;
+        cursor: pointer;
+        border: none;
+ }
+
+
+
+
+@media screen and (min-width: 768px) and (max-width: 850px) 
+{
+    .left-content {
+            width: 50%;
+}
+    .right-content {
+    width: 50%;
+}
+    table {
+        margin-left: 20px;
+    }
+    th {
+        font-size: 16px;
+    }
+    td {
+        font-size: 20px;
+    }
+    .buy-btn {
+        margin-left: 20px;
+    }
+    .button {
+        width: 330px;
+    }
+    .select {
+        margin-left: 0;
+    }
+    .address {
+        margin-left: 0;
+    }
+}
