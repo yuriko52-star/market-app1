@@ -11,27 +11,37 @@
 /* あとでつけるかも */
 
 .header {
-
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
     background-color: #000;
     height: 80px;
+    align-items: center;
 }
 
-.header__inner {
-    display: flex;
-    justify-content: space-between;
+/*.header__inner {
+    /* display: flex; */
+    /* justify-content: space-between; 
     align-items: center;
     padding: 10px 10px 0 20px;
    
+    grid-column: 1;
 }
-
+*/
+.header__logo {
+    display: inline-block;
+    grid-column: 1;
+    margin-left: 50px;
+    
+}
 .search-form__input {
     width: 500px;
-    padding-top: 15px;
+    padding-top: 18px;
     height: 25px;
     border-radius: 5px;
     display: block;
     padding-left: 30px;
-     margin-bottom: 15px; 
+     margin-bottom: 5px; 
+     grid-column: 2;
 
 }
 
@@ -42,7 +52,9 @@ input::placeholder {
     font-weight: 400;
 
 }
-
+nav {
+    grid-column: 3;
+}
 ul {
     display: flex;
 
@@ -66,6 +78,7 @@ li {
         /* padding-top: 5px; */
     
     cursor: pointer;
+    grid-column: 3;
 
 }
 
@@ -90,18 +103,14 @@ li {
  
 
     
-    .header {
-       
-        background-color: #000;
-        height: 80px;
-       
-    }
-    .header__inner {
+    
+    /*.header__inner {
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding: 5px 10px 0 10px;
     }
+*/
 
 
     /* .search-form__input { */
@@ -124,14 +133,16 @@ li {
     /* } */
 
 
-    /* ul {
-        display: flex;
+    nav {
+        width: 200px;
     }
+
     li {
-        list-style: none;
-        
+        width: 200px;
+        margin-left: 0;
     }
-        */
+        
+        
     .btn {
         /*color: #fff;
         background-color: #000;
@@ -166,23 +177,29 @@ li {
 }
 
 /* タブレット（768px以上850px以下）のスタイル */
-@media screen and (min-width: 768px) and (max-width: 850px) {
-    .header__inner {
+@media screen and (min-width: 768px) and (max-width: 850px) 
+{
+    .header {
+            
+    
+        }
+    /*.header__inner {
         /* color: #000; */
 
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        margin: 0 ;
-        padding: 10px ;
+        /* display: grid; */
+        /* grid-template-columns: 1fr 1fr 1fr; */
+        /* margin: 0 ; */
+        /* padding: 10px ; */
 
-    }
+    
 
      .header__logo { 
-         display: block; 
+         /* display: block;  */
          width: 200px; 
          height: 30px; 
+         margin-left: 30px;
         /* margin-bottom: 5px; */
-         grid-column: 1; 
+         /* grid-column: 1;  */
     }
 
      img { 
@@ -190,25 +207,27 @@ li {
     } 
 
     .search-form__input {
-         width: 230px; 
+         width: 250px; 
          display: block; 
-          grid-column: 2;  
+          /* grid-column: 2;   */
          margin-left: 30px; 
 
         padding: 10px 20px;  
     }
 
-  
-
+    
 
 
     .btn {
         font-size: 13px;
         width: 80px;
         /* padding: 0; */
-          margin-right: 5px;   
+          margin-right: 0;   
+        margin-left: 0;
+        ;
+        }
 
-    }
+    
 
     .sell-btn {
         width: 60px;

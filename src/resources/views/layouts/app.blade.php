@@ -4,14 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FLEA MARKET</title>
+    <!-- <link rel="stylesheet" href="{{ asset('css/sanitize.css') }}" class=""> -->
     <link rel="stylesheet" href="{{ asset('css/common.css') }}">
     @yield('css')
 </head>
 <body>
     <div class="container">
-        <!-- あとで外すかも -->
+        
     <header class="header">
-        <div class="header__inner">
+        <!-- <div class="header__inner"> -->
             <a href="" class="header__logo">
                 <img src="{{ asset('images/logo (1).svg') }}  " alt="" class=""> 
 
@@ -36,7 +37,7 @@
                 </ul>
             </nav>
             @endif
-        </div>
+        <!-- </div> -->
         
     </header>
 
@@ -49,6 +50,6 @@
     </main>    
    
 </div>
-<!-- あとで外すかも -->
+
 </body>
 </html>
