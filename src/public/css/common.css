@@ -3,6 +3,9 @@
     max-width: 1540px;
     margin: 0 auto;
 }
+html {
+    font-size: 100%;
+}
 /* あとで外すかも */
 /*body {
 

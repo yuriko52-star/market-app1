@@ -2,7 +2,7 @@
 
 .all-contents {
     display: flex;
-    margin: 60px;
+    margin: 60px ;
 }
 .left-content {
     width: 60%;
@@ -139,7 +139,7 @@ th {
 }
 td {
     font-family: Inter;
-        font-size: 24px;
+        font-size: 22px;
         font-weight: 400;
         
 }
@@ -150,7 +150,7 @@ td {
     margin-left: 190px;
 }
  .button {
-    width: 380px;
+    width: 330px;
     height: 60px;
     font-family: Inter;
         font-size: 26px;
@@ -170,14 +170,23 @@ td {
     .left-content {
             width: 50%;
 }
+    .item-name {
+        font-size: 28px;
+    }
+    .item-price {
+        font-size: 25px;
+    }
     .right-content {
     width: 50%;
 }
     table {
         margin-left: 20px;
     }
+    tr {
+        width: 430px;
+    }
     th {
-        font-size: 16px;
+        font-size: 14px;
     }
     td {
         font-size: 20px;
@@ -185,9 +194,9 @@ td {
     .buy-btn {
         margin-left: 20px;
     }
-    .button {
-        width: 330px;
-    }
+     .button { 
+         width: 310px; 
+     } 
     .select {
         margin-left: 0;
     }
