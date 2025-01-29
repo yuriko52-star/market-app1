@@ -46,8 +46,9 @@
     </div>
 
     <div class="right-content">
-        <div class="teble__inner">
+        <!-- 修整しよう -->
         <table>
+            <div class="table__inner">
             <tr>
                 <th>商品代金</th>
                 <td>￥47,000</td>
@@ -56,8 +57,9 @@
                 <th>支払い方法</th>
                 <td>コンビニ払い</td>
             </tr>
+            </div>
         </table>
-        </div>
+        
 
         <div class="buy-btn">
             <button class="button" type="submit">購入する</button>

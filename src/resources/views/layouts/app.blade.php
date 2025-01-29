@@ -12,37 +12,37 @@
     <div class="container">
         
     <header class="header">
-        <!-- <div class="header__inner"> -->
+        <div class="header__inner">
+             <div class="header-utilities">
             <a href="" class="header__logo">
-                <img src="{{ asset('images/logo (1).svg') }}  " alt="" class=""> 
-
+                <img src="{{ asset('images/logo (1).svg') }}" > 
             </a>
             
              <!-- ログイン・登録画面ではナビゲーションを非表示 -->
-        @if (!Request::is('<auth>login') && !Request::is('auth/register'))
+        <!-- @if (!Request::is('<auth>login') && !Request::is('auth/register')) -->
             <form action="" class="search-form" method="">
                 <input type="text" class="search-form__input" placeholder="なにをお探しですか？">
             </form>
-            <div class="header-link-group">
-                <div class="header-link-item">
+            <div class="header-btn-group">
+                <!-- <div class="header-link-item"> -->
                 <form action="" class="" method="">
                     <button class="btn">ログアウト</button>
                 </form>
-                </div>
-                <div class="header-link-item">
+                <!-- </div> -->
+                <!-- <div class="header-link-item"> -->
                 <form action="" class="" method="">
                     <button class="btn">マイページ</button>
                 </form>
-                </div>
-                <div class="header-link-item">
+                <!-- </div> -->
+                <!-- <div class="header-link-item"> -->
                 <form action="" class="" method="">
                     <button class=" btn sell-btn">出品</button>
                 </form>
-                </div>
+                <!-- </div> -->
             </div>    
             
-            @endif
-        <!-- </div> -->
+            <!-- @endif -->
+        </div>
         
     </header>
 

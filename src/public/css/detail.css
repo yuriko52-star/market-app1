@@ -8,6 +8,7 @@
     padding-top: 40px;
 }
 .image-card {
+    
     width: 600px;
     height: 600px;
     background-color: #d9d9d9;
@@ -16,7 +17,9 @@
     
 
 }
-
+.item-img {
+    width: 100%;
+}
 .img {
     font-family: Inter;
     font-size: 40px;
@@ -231,7 +234,7 @@ dd {
     }
 .page-title,
 .item-price {
-    font-size: 40px;
+    font-size: 35px;
 }
 .brand-name {
     margin-bottom: 0;

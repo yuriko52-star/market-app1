@@ -1,55 +1,48 @@
-/* @charset"UTF-8"; */
+
 .container {
     max-width: 1540px;
     margin: 0 auto;
 }
-html {
-    font-size: 100%;
-}
-/* あとで外すかも */
+
 /*body {
 
      margin: 0 auto; 
  } 
-/* あとでつけるかも */
-
-.header {
-    max-width: 1540px;
-    /* display: grid; */
-    /* grid-template-columns: 1fr 1fr 1fr; */
-    background-color: #000;
-    display: flex;
-    height: 80px;
-    align-items: center;
-}
-
-/*.header__inner {
-    /* display: flex; */
-    /* justify-content: space-between; 
-    align-items: center;
-    padding: 10px 10px 0 20px;
-   
-    grid-column: 1;
-}
 */
-.header__logo {
-    display: inline-block;
-    /* grid-column: 1; */
-    margin-left: 50px;
-    margin-right: 20px;
+.header {
+    background-color: #000;
+    height: 85px;
+}
+.header__inner { 
+    margin: 0 auto;
+    padding: 20px 15px;
+    max-width: 1540px;
     
 }
-.search-form__input {
-    width: 550px;
-    padding-top: 18px;
-    height: 25px ;
-    border-radius: 5px;
-    display: block;
-    padding-left: 30px;
-     margin:  0 30px 5px 30px; 
-     /* grid-column: 2; */
+.header-utilities {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
 }
+.header__logo {
+   
+    width: 30vw;
+}
+img {
+    width: 100%;
+}
+.search-form__input {
+    
+    width: 30vw;
+    padding: 10px 20px;
+    margin-left: 2%;
+    height: 25px ;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    }
+
+
 
 input::placeholder {
     color: #000 ;
@@ -60,10 +53,11 @@ input::placeholder {
 }
 
 
-.header-link-group {
+.header-btn-group {
     display: flex;
-    /* justify-content: space-between; */
-    gap: 10px;
+     justify-content: center; 
+    width: 30vw;
+     margin-left: 2%;
 }
 
 
@@ -73,110 +67,28 @@ input::placeholder {
     border: none;
     font-family: Inter;
     font-weight: 400;
-    margin-left: 20px;
-    margin-right: 10px;
-    font-size: 24px;
-        width: 135px;
-        /* padding-top: 5px; */
-    
     cursor: pointer;
-    /* grid-column: 3; */
-
 }
 
 .sell-btn {
     color: #000;
     background-color: #fff;
-    /* padding-top: 8px; */
-    font-family: Inter;
-    font-weight: 400;
     border-radius: 4px;
-    width: 100px;
-     /* margin-bottom: 10px;  */
-        /* padding-top: 5px; */
-
 }
 
 @media screen and (min-width: 1400px) and (max-width: 1540px)
  {
-    body { 
-            
-            margin: 0 auto;
-        }
-        .header {
-            display: flex;
-        }
-
-    
-    
-    /*.header__inner {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 5px 10px 0 10px;
-    }
-*/
-
-
-    .search-form__input { 
-         margin-left: 50px; 
-        width: 400px;
-        /* padding-top: 15px; */
-        /* height: 25px; */
-        /* border-radius: 5px; */
-        /* display: block; */
-        /* padding-left: 30px; */
-        /* margin-bottom: 5px; */
-
-     } 
-
-    /* input::placeholder { */
-        /* color: #000; */
-        /* font-family: Inter; */
-        /* font-size: 24px; */
-        /* font-weight: 400; */
-
-    /* } */
-
-
-    /* nav { */
-        /* width: 200px; */
-    /* } */
-    ul {
-        margin-right: 10px;
-    }
-    li {
-        width: 200px;
-       
-    }
-        
-        
     .btn {
-        /*color: #fff;
-        background-color: #000;
-        border: none;
-        */
+       
         font-size: 24px;
         width: 135px;
         padding-top: 5px;
-        margin-right: 10px;
-        /*font-family: Inter;
-           
-            font-weight: 400;
-            margin-left: 5px;
-            cursor: pointer;
-            */
-
+        margin-right: 20px;
     }
 
     .sell-btn {
-        /*color: #000;
-        background-color: #fff;
-        
-        
         border-radius: 4px;
-        */
-        /* width: 100px; */
+        width: 90px;
         margin-bottom: 10px;
         padding-top: 5px;
 
@@ -184,59 +96,24 @@ input::placeholder {
 
 }
 
-/* タブレット（768px以上850px以下）のスタイル */
+
 @media screen and (min-width: 768px) and (max-width: 850px) 
 {
-    .header {
-            max-width: 850px;
-            /* color: #000; */
-    
-        }
-    /*.header__inner {
-        /* color: #000; */
-
-        /* display: grid; */
-        /* grid-template-columns: 1fr 1fr 1fr; */
-        /* margin: 0 ; */
-        /* padding: 10px ; */
-
-    
-
-     .header__logo { 
-        
-         width: 150px; 
-         height: 30px; 
-         margin-left: 10px;
-        
-    }
-
-      img {  
-          width: 180%;  
-    } 
-
-    .search-form__input {
+  .search-form__input {
          width: 200px; 
          display: block; 
-          /* grid-column: 2;   */
-         margin-left: 100px; 
-
-        padding: 10px 20px;  
-    }
+  }         
     input::placeholder {
     
     font-size: 20px;
-    font-weight: 400;
+    
     }
 
 
     .btn {
         font-size: 13px;
         width: 80px;
-        /* padding: 0; */
-          margin-right: 0;   
-        margin-left: 0;
-        
-        }
+    }
 
     
 

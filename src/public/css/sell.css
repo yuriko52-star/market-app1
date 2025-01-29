@@ -1,0 +1,195 @@
+.content {
+    width: 680px;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 50px;
+}
+
+h1 {
+    font-family: Inter;
+    font-size: 36px;
+    font-weight: 700;
+
+}
+/* .image-file { */
+    /* position: relative; */
+    /* display: flex; */
+    /* margin-bottom: 60px; */
+    /* align-items: center; */
+/* } */
+
+/* #fileInput { 
+    display: none;
+}
+    */
+#previewArea {
+
+    width: 680px;
+    height: 150px;
+    border-radius: 4px;
+    border: 1px dotted #5f5f5f;
+    position: relative;
+    /* text-align: left; */
+    /* margin-right: 400px; */
+
+}
+
+.image-btn {
+
+    transform: translate(250px, 40px);
+    display: block;
+    width: 165px;
+    /* height: 43px; */
+    padding-top: 5px ;
+    border-radius: 10px;
+    
+    background-color: #fff;
+    color: #ff5655;
+    border: 2px solid #ff5555;
+    font-family: Inter;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+
+}
+
+
+
+.label {
+    display: block;
+    font-family: Inter;
+        font-size: 24px;
+        font-weight: 700;
+        
+        text-align: left;
+       
+}
+.section-title {
+    font-family: Inter;
+        font-size: 30px;
+        font-weight: 700;
+       color: #5f5f5f;
+        text-align: left;
+        border-bottom: 1px solid #5f5f5f;
+}
+/* ボタン全体のコンテナ */
+.button-container {
+    display: flex;
+    flex-wrap: wrap;
+    /* 折り返し設定 */
+    /* justify-content: space-between; */
+    gap: 10px;
+    /* ボタン間のスペース */
+    width: 680px;
+    /* 全体の横幅 */
+     margin: 30px auto; 
+    /* センター寄せ */
+}
+
+/* ボタンスタイル */
+.category-button {
+   /* margin: 5px auto 20px; */
+    min-width: 52px;
+    /* max-width: 141px; */
+    /* flex: 1 1 calc(100% / 6 - 10px); */
+    /* 横6個並ぶ設定 (間隔を考慮) */
+    text-align: center;
+    margin-bottom: 30px;
+   
+    padding: 8px  18px 10px;
+    height: 32px;
+    border: 2px solid #ff5655;
+    /* ボタンの枠線 */
+    background-color: #fff;
+    /* ボタンの背景色 */
+    color: #ff5655;
+    font-family: Inter;
+        font-size: 15px;
+        font-weight: 500;
+        
+        line-height: 18.15px;
+            
+       
+        
+    /* テキストの色 */
+    border-radius: 20px;
+    /* 角を丸める */
+    cursor: pointer;
+    /* ホバー時のカーソル */
+    font-size: 16px;
+    transition: background-color 0.3s, color 0.3s;
+    /* アニメーション効果 */
+}
+/* クリック時のスタイル */
+.category-button:active {
+    background-color: #ff5655;
+    /* 緑色に変更 */
+    color: #fff;
+    /* テキストを白に */
+}
+.select {
+    /* margin-left: 80px; */
+    width: 680px;
+    height: 45px;
+    /* background-color: #eaeaea; */
+    color: #5f5f5f;
+    border: 1px solid #5f5f5f;
+}
+option {
+    background-color: #5f5f5f;
+    border: 1.5px solid #5f5f5f;
+    color: #eaeaea;
+    font-family: Inter;
+        font-size: 14px;
+        font-weight: 600;
+        
+}
+/* option .default { 
+    
+        font-size: 16px;
+        font-weight: 700;
+        
+        text-align: left;
+        
+}
+        */
+.text-input  input{
+   
+    border-radius: 4px;
+    border:1px solid  #5f5f5f;
+    text-align: left;
+    appearance: none;
+    width: 670px;
+        height: 45px;
+        font-family: Inter;
+        font-size: 24px;
+        font-weight: 700;
+    
+        text-align: left;
+        margin-bottom: 50px;
+        
+}
+
+.textarea {
+    width: 670px;
+    height: 125px;
+    border-radius: 4px;
+    border-color: #5f5f5f;
+    margin-bottom: 50px;
+}
+.button {
+    margin-top: 130px;
+}
+.sell-button {
+    width: 680px;
+    height: 60px;
+    background-color: #ff5555;   
+    border-radius: 5px ;
+    color: #fff;
+    font-family: Inter;
+        font-size: 26px;
+        font-weight: 700;
+        border: none;
+        text-align: center;
+       cursor: pointer;
+}
