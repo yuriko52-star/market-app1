@@ -4,11 +4,11 @@
 
 .image-file {
     /* position: relative; */
-    display: flex;
-    flex-wrap: nowrap;
+    /* display: flex; */
+    /* flex-wrap: nowrap; */
      margin: 60px  0; 
-     align-items: center; 
-    justify-content: center;  
+     /* align-items: center;  */
+    /* justify-content: center;   */
 }
 
 /* #fileInput { 
@@ -94,19 +94,28 @@ ul {
 }
 
 .under-content {
-    display: flex;
-    flex-wrap: wrap;
+    /*display: flex;
+    flex-wrap: wrap;*/
 
    
-    margin-top: 80px;
-    justify-content: flex-start;
-    margin-left: 60px;
-    gap: 50px;
+    margin: 80px 110px;
+    /* justify-content: flex-start; */
+    /* margin-left: 60px; */
+    /* gap: 50px; */
 }
-
-.image-card-link {
-    display: inline-block;
-    position: relative;
+.image-card-group {
+    display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        gap: 25px;
+        margin: 0 50px;
+}
+.image-card {
+position: relative;
+}
+.image {
+    /* display: inline-block; */
+    
 
     width: 290px;
     border-radius: 4px;
@@ -139,9 +148,22 @@ p {
     font-weight: 400;
 
 }
-
+@media screen and (min-width: 1400px) and (max-width: 1540px) {
+    .under-content {
+        margin:80px 55px;
+    }
+    .image-card-group {
+        margin: 0 30px;
+        
+        
+    }
+}
 @media screen and (min-width: 768px) and (max-width: 850px) {
-   
+    .image-file {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
      .text-image { 
         margin-left:100px;
         margin-right: 0;
@@ -151,8 +173,7 @@ p {
         font-size: 24px;
         display: inline-block;
         margin-right: 100px;
-        /* width: 100px; 
-        align-items: center;*/
+        margin-left: 10px;
     }
     .update-btn {
          margin-left: 0; 
@@ -174,6 +195,12 @@ p {
 
         font-size: 20px;
 
+    }
+    .under-content {
+        margin: 80px 4%;
+    }
+    .image-card-group {
+        justify-content: space-between;
     }
 
 }

@@ -10,7 +10,7 @@ class Item extends Model
     use HasFactory;
 
     protected $fillable = [
-        'seller_id','name','brand_name','image','price','description','condition_id'
+        'user_id','name','brand_name','img_url','price','description','condition_id'
     ];
     public function condition() {
         return $this->belongsTo(Condition::class);

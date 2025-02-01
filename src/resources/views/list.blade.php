@@ -16,57 +16,58 @@
     </div>
 
     <div class="under-content">
-        
-        <div class="image-card">
-            <a href="" class="image-card-link">
+        <div class="image-card-group">
+            <div class="image-card">
+                <a href="" class="image-card-link">
                 <img src="" alt="" class="image">
                 <p>商品画像</p>
-            </a>
+                </a>
        
             <label for="" class="image-card-name">商品名</label>
-        </div>
+            </div>
         
-        <div class="image-card">
-            <a href="" class="image-card-link">
+            <div class="image-card">
+                <a href="" class="image-card-link">
                 <img src="" alt="" class="image">
                  <p>商品画像</p>
-            </a>
+                </a>
             <label for="" class="image-card-name">商品名</label>
-        </div>
-        <div class="image-card">
-            <a href="" class="image-card-link">
+            </div>
+            <div class="image-card">
+                <a href="" class="image-card-link">
                 <img src="" alt="" class="image">
                  <p>商品画像</p>
-            </a>
+                </a>
             <label for="" class="image-card-name">商品名</label>
-        </div>
-        <div class="image-card">
-            <a href="" class="image-card-link">
+            </div>
+            <div class="image-card">
+                <a href="" class="image-card-link">
                 <img src="" alt="" class="image">
                  <p>商品画像</p>
-            </a>
+                </a>
             <label for="" class="image-card-name">商品名</label>
-        </div>
-        <div class="image-card">
-            <a href="" class="image-card-link">
+            </div>
+            <div class="image-card">
+                <a href="" class="image-card-link">
                 <img src="" alt="" class="image">
                  <p>商品画像</p>
-            </a>
+                </a>
             <label for="" class="image-card-name">商品名</label>
-        </div>
-        <div class="image-card">
-            <a href="" class="image-card-link">
+            </div>
+            <div class="image-card">
+                <a href="" class="image-card-link">
                 <img src="" alt="" class="image">
                  <p>商品画像</p>
-            </a>
+                </a>
             <label for="" class="image-card-name">商品名</label>
-        </div>
-        <div class="image-card">
-            <a href="" class="image-card-link">
+            </div>
+            <div class="image-card">
+                <a href="" class="image-card-link">
                 <img src="" alt="" class="image">
                  <p>商品画像</p>
-            </a>
+                </a>
             <label for="" class="image-card-name">商品名</label>
+            </div>
         </div>
 
     </div>
