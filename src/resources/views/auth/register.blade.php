@@ -28,6 +28,6 @@
     <button class="register-btn">登録する</button>
     </div>
     </form>
-    <a href="" class="link">ログインはこちら</a>
+    <a href="/login" class="link">ログインはこちら</a>
 </div>
 @endsection

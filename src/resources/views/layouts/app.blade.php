@@ -21,17 +21,19 @@
                 <input type="text" class="search-form__input" placeholder="なにをお探しですか？">
             </form>
             <div class="header-btn-group">
-                
-                <form action="" class="" method="">
+                <!-- @if (Auth::check()) -->
+                <form action="/logout" class="" method="post">
+                    @csrf
                     <button class="btn">ログアウト</button>
                 </form>
                 <!-- ログインしてなかったらボタンはログインを表示
                   -->
-                
+                <!-- @endif -->
                 <form action="" class="" method="">
                     <button class="btn">マイページ</button>
                 </form>
                 <!-- リンクになるかも -->
+                 <!-- <a href="" class="link">マイページ</a> -->
                 
                 <form action="" class="" method="">
                     <button class=" btn sell-btn">出品</button>
