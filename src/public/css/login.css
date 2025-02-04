@@ -1,9 +1,13 @@
 .search-form__input {
     display: none;
 }
-.header-btn-group {
+.header-nav {
     display: none;
 }
+/*.header-btn-group {
+    display: none;
+}
+    */
 .content {
     width: 680px;
     margin: 0 auto;

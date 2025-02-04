@@ -1,11 +1,13 @@
 .search-form__input {
     display: none;
 }
-
-.header-btn-group {
+li {
     display: none;
 }
-
+/*.header-btn-group {
+    display: none;
+}
+*/
 
 .content {
     width: 680px;
@@ -60,4 +62,8 @@ h1 {
     font-weight: 400;
     color: #0073CC;
     margin-top: 50px;
+}
+.form_error {
+    color: red;
+    text-align: left;
 }
