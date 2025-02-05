@@ -11,7 +11,7 @@
 
 
 
-    <form action="/register" class="" method="post" novalidate>
+    <form action="{{ route('register.process') }}" class="" method="post" novalidate>
         @csrf
     <label for="" >
         <h2 class="label-title">ユーザー名</h2>
