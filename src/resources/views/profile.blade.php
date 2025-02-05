@@ -13,23 +13,25 @@
         <input type="file" id="fileInput" style="display: none;" accept="image/*" name="img_url">
         <div id="previewArea">
             <img src="" alt="" class="">
-            <!-- アップロード用にstyleを追加する -->
+           
         </div>
         <label for="fileInput" class="image-btn">画像を選択する
         </label>
+     </div>
         <p class="form_error">
             @error('img_url')
             {{ $message}}
             @enderror
         </p>
+   
+   
     
-    </div>
-
+    
     <label for="" >
         <h2 class="label-title">ユーザー名</h2>
     </label>
     <input type="text" class="text" name="name" value="{{ old('name', $user->name) }}">
-    <p class="form-error">
+    <p class="form_error">
         @error('name')
         {{ $message}}
         @enderror

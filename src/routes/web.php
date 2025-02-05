@@ -5,6 +5,7 @@ use App\Http\Controllers\DebugController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\ImageController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,6 +28,11 @@ Route::post('/register',[RegisterController::class,'processRegister'])->name('re
 Route::get('/mypage/profile/show',[ProfileController::class,'showProfile'])->name('profile.show');
 Route::get('/mypage/profile/create',[ProfileController::class,'create'])->name('profile.create');
 Route::post('/mypage/profile/store',[ProfileController::class,'store'])->name('profile.store');
+
+Route::get('/download-image', [ImageController::class, 'downloadImage']);
+// Route::post('/mypage/profile/store-address',[ProfileController::class,'storeProfileAddress'])->name('profile.storeAddress');
+// Route::post('/mypage/profile/store-image',[ProfileController::class,'storeProfileImage'])->name('profile.storeImage');
+
 
 
 Route::get('/', [ItemController::class, 'index'])->name('list');
