@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\DB;
 
 class ItemsTableSeeder extends Seeder
 {
@@ -19,7 +19,7 @@ class ItemsTableSeeder extends Seeder
             'condition_id'=> 1,
             'name' => '腕時計',
             'img_url' =>  '/storage/images/Armani+Mens+Clock.jpg',
-            'price' => '15,000',
+            'price' => '15000',
             'description' => 'スタイリッシュなデザインのメンズ腕時計',
 
         ];
@@ -29,7 +29,7 @@ class ItemsTableSeeder extends Seeder
             'condition_id'=> 2,
             'name' => 'HDD',
             'img_url' =>  '/storage/images/HDD+Hard+Disk.jpg',
-            'price' => '5,000',
+            'price' => '5000',
             'description' => '高速で信頼性の高いハードディスク',
 
         ];
@@ -49,7 +49,7 @@ class ItemsTableSeeder extends Seeder
             'condition_id'=> 4,
             'name' => '革靴',
             'img_url' =>  '/storage/images/Leather+Shoes+Product+Photo.jpg',
-            'price' => '4,000',
+            'price' => '4000',
             'description' => 'クラシックなデザインの革靴',
 
         ];
@@ -59,7 +59,7 @@ class ItemsTableSeeder extends Seeder
             'condition_id'=> 1,
             'name' => 'ノートPC',
             'img_url' =>  '/storage/images/Living+Room+Laptop.jpg',
-            'price' => '4,5000',
+            'price' => '45000',
             'description' => '高性能なノートパソコン',
 
         ];
@@ -69,7 +69,7 @@ class ItemsTableSeeder extends Seeder
             'condition_id'=> 2,
             'name' => 'マイク',
             'img_url' =>  '/storage/images/Music+Mic+4632231.jpg',
-            'price' => '8,000',
+            'price' => '8000',
             'description' => '高音質のレコーディング用マイク',
 
         ];
@@ -79,38 +79,38 @@ class ItemsTableSeeder extends Seeder
             'condition_id'=> 3,
             'name' => 'ショルダーバッグ',
             'img_url' =>  '/storage/images/Purse+fashion+pocket.jpg',
-            'price' => '3,500',
+            'price' => '3500',
             'description' => 'おしゃれなショルダーバッグ',
 
         ];
         DB::table('items')->insert($data);
           $data = [
-            'user_id' => '',
-            'condition_id'=> '',
-            'name' => '',
-            'img_url' =>  '',
-            'price' => '',
-            'description' => '',
+            'user_id' => 2,
+            'condition_id'=> 4,
+            'name' => 'タンブラー',
+            'img_url' =>  '/storage/images/Tumbler+souvenir.jpg',
+            'price' => '500',
+            'description' => '使いやすいタンブラー',
 
         ];
         DB::table('items')->insert($data);
           $data = [
-            'user_id' => '',
-            'condition_id'=> '',
-            'name' => '',
-            'img_url' =>  '',
-            'price' => '',
-            'description' => '',
+            'user_id' => 1,
+            'condition_id'=> 1,
+            'name' => 'コーヒーミル',
+            'img_url' =>  '/storage/images/Waitress+with+Coffee+Grinder.jpg',
+            'price' => '4000',
+            'description' => '手動のコーヒーミル',
 
         ];
         DB::table('items')->insert($data);
           $data = [
-            'user_id' => '',
-            'condition_id'=> '1',
-            'name' => '',
-            'img_url' =>  '',
-            'price' => '',
-            'description' => '',
+            'user_id' => 2,
+            'condition_id'=> 2,
+            'name' => 'メイクセット',
+            'img_url' =>  '/storage/images/make_up_set.jpg',
+            'price' => '2500',
+            'description' => '便利なメイクアップセット',
 
         ];
         DB::table('items')->insert($data);
