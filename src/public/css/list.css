@@ -94,9 +94,9 @@ p {
 @media screen and (min-width: 1400px) and (max-width: 1540px) {
 
     .under-content {
-        /* margin-left :4%; */
+         margin-left :2%; 
         /* text-align: center; */
-        margin: 0 55px;
+        
     }
 }
 @media screen and (min-width: 768px) and (max-width: 850px) {
