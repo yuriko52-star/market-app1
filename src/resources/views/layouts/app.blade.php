@@ -17,8 +17,9 @@
             <a href="" class="header__logo">
                 <img src="{{ asset('images/logo (1).svg') }}" > 
             </a>
-            <form action="" class="search-form" method="">
-                <input type="text" class="search-form__input" placeholder="なにをお探しですか？">
+            <form action="{{route('item.search')}}" class="search-form" method="get">
+                <input type="text" name="keyword" class="search-form__input" placeholder="なにをお探しですか？">
+                <button type="submit" class="hidden-button"></button>
             </form>
             <!-- <div class="header-btn-group"> -->
     <nav>

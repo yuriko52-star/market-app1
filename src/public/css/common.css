@@ -51,8 +51,11 @@ input::placeholder {
     font-family: Inter;
     font-size: 24px;
     font-weight: 400;
-
 }
+.hidden-button {
+    display: none;
+}
+
 .header-nav {
     display: flex;
         justify-content: center;

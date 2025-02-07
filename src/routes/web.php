@@ -36,4 +36,6 @@ Route::get('/download-image', [ImageController::class, 'downloadImage']);
 
 
 Route::get('/', [ItemController::class, 'index'])->name('list');
+Route::get('/search',[ItemController::class,'search'])->name('item.search');
+Route::get('/item/{item_id}', [ItemController::class,'show']);
 

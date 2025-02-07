@@ -17,16 +17,18 @@
 
     <div class="under-content">
         <div class="image-card-group">
+            @foreach($items as $item)
             <div class="image-card">
-                <a href="" class="image-card-link">
-                <img src="" alt="" class="image">
+                <a href="/item/{{$item->id}}" class="image-card-link">
+                <img src="{{ asset($item->img_url) }}" alt="" class="image">
                 <p>商品画像</p>
                 </a>
        
-            <label for="" class="image-card-name">商品名</label>
+            <label for="" class="image-card-name">{{$item->name}}</label>
             </div>
+            @endforeach
         
-            <div class="image-card">
+            <!-- <div class="image-card">
                 <a href="" class="image-card-link">
                 <img src="" alt="" class="image">
                  <p>商品画像</p>
@@ -67,7 +69,7 @@
                  <p>商品画像</p>
                 </a>
             <label for="" class="image-card-name">商品名</label>
-            </div>
+            </div> -->
         </div>
 
     </div>
