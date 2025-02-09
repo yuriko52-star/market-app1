@@ -9,17 +9,20 @@
     <div class="left-content">
         
         <div class="image-card">
-             <img src="" alt="" class="item-img">
-             <p class="img">商品画像</p>
+           
+             <img src="{{ asset($item->img_url)}}" alt="" class="item-img">
+             <!-- <p class="img">商品画像</p> -->
         </div>
     </div>
 
     <div class="right-content">
         <label for="" class="page-title">
-            商品名がここに入る
+            {{$item->name}}
+           
         </label>
         <p class="brand-name">ブランド名</p>
-        <p class="item-price"><span>￥</span>47,000<span>（税込）</span>
+        <!--  -->
+        <p class="item-price"><span>￥</span>{{ number_format($item->price) }}<span>（税込）</span>
         </p>
         <div class="flex">
             <form action="" class="">
@@ -42,9 +45,10 @@
         <section class="item-info">
             <label for="" class="section-title">商品説明
             </label>
-            <p class="description">カラー：グレー</p>
-            <p class="description">新品<br>
-            商品の状態は良好です。傷もありません。</p>
+            <p class="description">{{$item->description}}</p>
+            
+            <!-- <p class="description">新品<br> -->
+            <!-- 商品の状態は良好です。傷もありません。</p> -->
             <p class="description">購入後、即発送いたします。</p>
 
             
@@ -54,12 +58,16 @@
             <label for="" class="section-title">商品の情報</label>
             <dl>
                 <dt>カテゴリー</dt>
-                <dd class="category">洋服</dd>
-                <dd class="category">メンズ</dd>
+                @foreach($item->categories as $category)
+                <dd class="category">{{$category->name}}</dd>
+                <!-- <dd class="category">メンズ</dd> -->
+                 @endforeach
             </dl>
             <dl>
                 <dt>商品の状態</dt>
-                <dd class="condition">良好</dd>
+               
+                <dd class="condition">{{$item->condition->content}}</dd>
+                
             </dl>
         </section>
         <section class="comments-form">

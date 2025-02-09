@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Item;
+use App\Models\Category;
+use App\Models\Condition;
 use Illuminate\Support\Facades\Auth;
 
 class ItemController extends Controller
@@ -31,8 +33,11 @@ class ItemController extends Controller
 
     
 
-    public function show() 
-    {
-        return view('detail');
+    public function show($itemId) 
+    {   $item = Item::with(['categories','condition'])->FindOrFail($itemId);
+
+       
+       
+        return view('detail',compact('item'));
     } 
 }

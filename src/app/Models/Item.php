@@ -13,7 +13,7 @@ class Item extends Model
         'user_id','name','brand_name','img_url','price','description','condition_id'
     ];
     public function condition() {
-        return $this->belongsTo(Condition::class);
+        return $this->belongsTo(Condition::class,'condition_id');
     }
     public function comments() {
         return $this->hasMany(Comment::class);
@@ -25,7 +25,7 @@ class Item extends Model
         return $this->hasOne(Purchase::class);
     }
     public function categories() {
-        return $this->belongsToMany(Category::class,'category-item');
+        return $this->belongsToMany(Category::class,'category_item');
     }
          
 }
