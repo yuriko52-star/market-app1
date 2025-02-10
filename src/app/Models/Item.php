@@ -27,5 +27,11 @@ class Item extends Model
     public function categories() {
         return $this->belongsToMany(Category::class,'category_item');
     }
-         
+    public function user() {
+        return $this->belongsTo(User::class,'user_id');
+    }
+    public function likedUsers()
+    {
+    return $this->belongsToMany(User::class, 'likes', 'item_id', 'user_id')->withTimestamps();
+    }        
 }

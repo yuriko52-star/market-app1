@@ -10,7 +10,7 @@
         <nav>
             <ul>
                 <li><a href="" class="page-title">おすすめ</a></li>
-                <li><a href="" class="page-title my-list">マイリスト</a></li>
+                <li><a href="{{ route('mylist', ['tab' => 'mylist']) }}" class="page-title my-list">マイリスト</a></li>
             </ul>
         </nav>
     </div>
@@ -27,49 +27,6 @@
             <label for="" class="image-card-name">{{$item->name}}</label>
             </div>
             @endforeach
-        
-            <!-- <div class="image-card">
-                <a href="" class="image-card-link">
-                <img src="" alt="" class="image">
-                 <p>商品画像</p>
-                </a>
-            <label for="" class="image-card-name">商品名</label>
-            </div>
-            <div class="image-card">
-                <a href="" class="image-card-link">
-                <img src="" alt="" class="image">
-                 <p>商品画像</p>
-                </a>
-            <label for="" class="image-card-name">商品名</label>
-            </div>
-            <div class="image-card">
-                <a href="" class="image-card-link">
-                <img src="" alt="" class="image">
-                 <p>商品画像</p>
-                </a>
-            <label for="" class="image-card-name">商品名</label>
-            </div>
-            <div class="image-card">
-                <a href="" class="image-card-link">
-                <img src="" alt="" class="image">
-                 <p>商品画像</p>
-                </a>
-            <label for="" class="image-card-name">商品名</label>
-            </div>
-            <div class="image-card">
-                <a href="" class="image-card-link">
-                <img src="" alt="" class="image">
-                 <p>商品画像</p>
-                </a>
-            <label for="" class="image-card-name">商品名</label>
-            </div>
-            <div class="image-card">
-                <a href="" class="image-card-link">
-                <img src="" alt="" class="image">
-                 <p>商品画像</p>
-                </a>
-            <label for="" class="image-card-name">商品名</label>
-            </div> -->
         </div>
 
     </div>

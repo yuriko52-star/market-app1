@@ -78,10 +78,38 @@ span {
     background-color: #fff;
     padding-right: 30px;
     cursor: pointer;
-    
-    
-  
+}
+.likes-img-wrapper {
+    position: relative;
+    width: 40px;
+    height: 40px;
+}
+/* .likes-img.liked { */
+    /* background-color: gold; */
+    /* いいねしたときの背景色 */
+    /* border: 2px solid orange; */
+    /* filter: grayscale(0%) invert(43%) sepia(100%) saturate(500%) hue-rotate(40deg); */
+/* } */
+.likes-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: yellow;
+    /* いいね時の色 */
+    mask-image: url('/images/星アイコン8.png');
+    /* マスクを適用 */
+    /* -webkit-mask-image: url('/images/星アイコン8.png'); */
+    /* Safari 用 */
+    mask-size: cover;
+        -webkit-mask-size: cover;
+            opacity: 0;
+            transition: opacity 0.3s;
+}
 
+.likes-overlay.liked {
+    opacity: 1;
 }
 .count {
     margin-left: 20px;
@@ -262,9 +290,45 @@ span {
     width: 30px;
     height: 30px;
 }
+
+
+.likes-img-wrapper {
+    position: relative;
+    width: 37px;
+    height: 30px;
+} 
 .likes-icon {
-   padding-left: 0;
-   padding-right: 40px;
+   /* padding-left: 0; */
+   /* padding-right: 40px; */
+   padding: 0;
+   margin-right: 10px;
+}
+.likes-overlay {
+    position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        /* border-color: yellow; */
+        background-color: yellow;
+        /* 星の色 */
+        /* mask-image: url('/images/星アイコン8.png'); */
+        /* -webkit-mask-image: url('/images/星アイコン8.png'); */
+        /* Safari 用 */
+        /* mask-size: contain; */
+        /* `contain` に変更 */
+        /* -webkit-mask-size: contain; */
+        mask-position: center;
+        /* -webkit-mask-position: center; */
+        mask-repeat: no-repeat;
+        -webkit-mask-repeat: no-repeat;
+        /* mask-composite: destination-in; */
+            /* -webkit-mask-composite: destination-in; */
+        /* opacity: 0; */
+        /* transition: opacity 0.3s; */
+    mask-size: 80%;
+    /* 画面サイズに応じて縮小 */
+    -webkit-mask-size: 80%;
 }
 .count {
     margin-left: 7px;

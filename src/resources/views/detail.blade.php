@@ -6,8 +6,9 @@
 
 @section('content')
 <div class="all-contents">
+   
     <div class="left-content">
-        
+      
         <div class="image-card">
            
              <img src="{{ asset($item->img_url)}}" alt="" class="item-img">
@@ -18,19 +19,41 @@
     <div class="right-content">
         <label for="" class="page-title">
             {{$item->name}}
-           
         </label>
         <p class="brand-name">ブランド名</p>
         <!--  -->
         <p class="item-price"><span>￥</span>{{ number_format($item->price) }}<span>（税込）</span>
         </p>
         <div class="flex">
-            <form action="" class="">
             <div class="likes">
-                <button class="likes-icon" type="submit"><img src="{{ asset('images/星アイコン8.png')}}" alt="" class="likes-img"></button>
-                <p class="count">3</p>
+       @php
+        $liked = false;
+        $likeCount = $item->likedUsers()->count(); // データベースの「いいね」数を取得
+
+        if (session()->has('guest_likes')) {
+        $guestLikes = session('guest_likes');
+        if (in_array($item->id, $guestLikes)) {
+            $liked = true; // 未ログインユーザーが「いいね」済みなら `liked` クラスを適用
+        }
+        $likeCount += count($guestLikes); // セッションの「いいね」数を合計
+        }
+        if (Auth::check()) {
+        $liked = \App\Models\Like::where('user_id', Auth::id())->where('item_id', $item->id)->exists();
+        }
+        @endphp
+        <form action="{{ route('toggle-like', ['item' => $item->id]) }}" method="POST">
+        @csrf
+            <button class="likes-icon" type="submit">
+                <div class="likes-img-wrapper">
+                    <img src="{{ asset('images/星アイコン8.png')}}" alt="" class="likes-img ">
+                    <div class="likes-overlay {{ $liked ? 'liked' : '' }}">
+                </div>
+                   
+            </button>
+        </form> 
+        <p class="count">{{ $likeCount }}</p>
             </div>
-            </form>
+            
             <div class="comments">
                 <img src="{{ asset('images/ふきだしのアイコン.png') }}" alt="" class="comments-img">
                 <p class="count">1</p>
