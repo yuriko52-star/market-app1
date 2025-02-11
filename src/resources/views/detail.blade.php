@@ -56,7 +56,7 @@
             
             <div class="comments">
                 <img src="{{ asset('images/ふきだしのアイコン.png') }}" alt="" class="comments-img">
-                <p class="count">1</p>
+                <p class="count">{{ $item->comments->count()}}</p>
             </div>
         </div>
         <form action="" class="">
@@ -88,26 +88,38 @@
             </dl>
             <dl>
                 <dt>商品の状態</dt>
-               
-                <dd class="condition">{{$item->condition->content}}</dd>
+              
+                <dd class="condition">{{$item->condition->content }}</dd>
                 
             </dl>
         </section>
         <section class="comments-form">
-            <f action="" class="">
-                <label for="" class="comment-title">コメント（１）</label>
+            @if(Auth::check())
+            <form action="{{ route('comment.store',['item' => $item->id]) }}" class="" method="post">
+                @csrf
+                <label for="" class="comment-title">コメント（{{ $item->comments->count()}} ）</label>
+                @foreach($item->comments as $comment)
                 <div class="flex">
+                  
                     <div class="image-file">
-                        <img src="" alt="" class="profile-img">
+                        <img src="{{ asset($comment->user->profile->img_url) }}" alt="" class="profile-img">
                     </div>
-                        <label for="" class="user-name">admin</label>
+                        <label for="" class="user-name">{{$comment->user->name}}</label>
                 </div>
-                <p class="comment-input">こちらにコメントが入ります。</p>
+                <p class="comment-input">{{ $comment->comment}}</p>
+                <p class="form_error">
+                    @error('comment')
+                    {{$message}}
+                    @enderror
+                </p>
+                @endforeach
                 <label for="" class="label">商品へのコメント</label>
-                <textarea name="" class="textarea"></textarea>
+                <textarea name="comment" class="textarea"></textarea>
                 <div class="comments-btn">
                     <button class="button" type="submit">コメントを送信する</button>
                 </div>
+            </form>
+            @endif
         </section>
     </div>
 </div>

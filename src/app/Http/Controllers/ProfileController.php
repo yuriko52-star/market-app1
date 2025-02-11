@@ -67,7 +67,7 @@ class ProfileController extends Controller
       if ($profileRequest->hasFile('img_url') && $profileRequest->file('img_url')->isValid()) {
         $filename = uniqid() . '_' . $profileRequest->file('img_url')->getClientOriginalName();
         $profileRequest->file('img_url')->storeAs('public/images', $filename);
-        $profile->img_url = "storage/images/$filename";
+        $profile->img_url = "/storage/images/$filename";
     } 
         $profile->save();
      return redirect()->route('list');

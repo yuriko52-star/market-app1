@@ -10,10 +10,27 @@ use Illuminate\Support\Facades\Auth;
 
 class ItemController extends Controller
 {
-    public function index() 
+    public function index(Request $request) 
     {
         $userId = Auth::id();
+
+        if ($request->query('tab') == 'mylist' && Auth::check()) {
+        $items = Auth::user()->likedItems; // ユーザーが「いいね」したアイテムのみ取得
+    } else {
+        // ログインユーザーの出品アイテムを除外（未ログイン時はすべて取得）
         if ($userId) {
+            $items = Item::select('id', 'name', 'img_url')->where('user_id', '!=', $userId)->get();
+        } else {
+            $items = Item::select('id', 'name', 'img_url')->get();
+        }
+    }
+
+    return view('list', compact('items'));
+}
+
+
+
+       /* if ($userId) {
              $items = Item::select('id','name','img_url')->where('user_id','!=',$userId)->get();
         } else {
             
@@ -21,7 +38,8 @@ class ItemController extends Controller
         }
 
         return view ('list',compact('items'));
-    }
+        */
+    
     public function search (Request $request)
      {
         $keyword = $request->input('keyword');
