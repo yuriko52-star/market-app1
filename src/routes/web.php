@@ -8,6 +8,7 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ImageController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\PurchaseController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -45,12 +46,9 @@ Route::get('/', [ItemController::class, 'index'])->name('list');
 Route::get('/search',[ItemController::class,'search'])->name('item.search');
 Route::get('/item/{item_id}', [ItemController::class,'show']);
 
-
-/*Route::post('/like/{item}', [LikeController::class, 'like'])->name('like');
-Route::post('/unlike/{item}', [LikeController::class, 'unlike'])->name('unlike');*/
-
 Route::post('/toggle-like/{item}', [LikeController::class, 'toggleLike'])->name('toggle-like');
-Route::post('/items/{item}/comment',[CommentController::class,'store'])->name('comment.store');
+Route::post('/items/{item_id}/comment',[CommentController::class,'store'])->name('comment.store');
+Route::post('/purchase/{item_id}',[PurchaseCOntroller::class,'show'])->name('purchase.show');
 
 
 

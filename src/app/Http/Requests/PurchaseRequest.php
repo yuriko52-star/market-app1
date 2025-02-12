@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 
-class CommentRequest extends FormRequest
+class PurchaseRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,14 +22,9 @@ class CommentRequest extends FormRequest
      * @return array
      */
     public function rules()
-    {   
-        if(!Auth::check()) {
-            return [];
-        }
+    {
         return [
-            'comment' => ['required' , 'max:255',],
+            //
         ];
     }
-    
-    }
-
+}

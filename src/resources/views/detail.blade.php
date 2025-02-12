@@ -59,7 +59,8 @@
                 <p class="count">{{ $item->comments->count()}}</p>
             </div>
         </div>
-        <form action="" class="">
+        <form action="{{ route('purchase.show',['item_id' => $item->id]) }}" class=""method="post">
+            @csrf
             <div class="buy-btn">
                 <button class="button" type="submit">購入手続きへ</button>
             </div>
@@ -94,8 +95,9 @@
             </dl>
         </section>
         <section class="comments-form">
-            @if(Auth::check())
-            <form action="{{ route('comment.store',['item' => $item->id]) }}" class="" method="post">
+            {{--@if(Auth::check())--}}
+            
+            <form action="{{ route('comment.store',['item_id' => $item->id]) }}" class="" method="post">
                 @csrf
                 <label for="" class="comment-title">コメント（{{ $item->comments->count()}} ）</label>
                 @foreach($item->comments as $comment)
@@ -107,19 +109,21 @@
                         <label for="" class="user-name">{{$comment->user->name}}</label>
                 </div>
                 <p class="comment-input">{{ $comment->comment}}</p>
-                <p class="form_error">
+               
+                @endforeach
+                <label for="" class="label">商品へのコメント</label>
+                <textarea name="comment" class="textarea"></textarea>
+                 <p class="form_error">
                     @error('comment')
                     {{$message}}
                     @enderror
                 </p>
-                @endforeach
-                <label for="" class="label">商品へのコメント</label>
-                <textarea name="comment" class="textarea"></textarea>
                 <div class="comments-btn">
                     <button class="button" type="submit">コメントを送信する</button>
                 </div>
+                
             </form>
-            @endif
+            {{--@endif--}}
         </section>
     </div>
 </div>

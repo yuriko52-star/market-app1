@@ -10,14 +10,16 @@ use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
-    public function store (CommentRequest $request, Item $item) {
-        if(Auth::check()) {
+    public function store (CommentRequest $request,  $item_id) {
+        ;
+         if(Auth::check()) {
+            
            Comment::create([
             'user_id' => Auth::id(),
-            'item_id' => $item->id,
+            'item_id' => $item_id,
             'comment' => $request->comment,
            ]);
-        }
+         }
 
         return redirect()->back();
     }

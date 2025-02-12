@@ -11,28 +11,29 @@
     <div class="left-content">
         <div class="item">
             <div class="image-card">
-             <img src="" alt="" class="item-img">
-             <p class="img">商品画像</p>
+             <img src="{{ asset($item->img_url) }}" alt="" class="item-img">
+             <!-- <p class="img">商品画像</p> -->
              </div>
             <div class="item-info">
-             <label for="" class="item-name">商品名</label>
-             <p class="item-price">￥47,000</p>
+             <label for="" class="item-name">{{ $item->name }}</label>
+             <p class="item-price"><span>￥</span>{{number_format($item->price)}}</p>
              </div>
         </div>
         <div class="pay-method">
         <label for="" class="label-title">支払い方法</label>
         <div class="select-inner">
-          <select class="select" name="" id="">
-            <option disabled selected>選択してください</option>
-           
-            <option value="">
-                
-                コンビニ払い</option>
-            <option value="">
-               
-                カード支払い</option>
-           
-          </select>
+          <select class="select" name="payment_method" id="">
+            <option value=""disabled selected>選択してください</option>
+           @foreach($payment_methods as $method)
+            <option value="{{ $method}}">&#160;&#160;&#160;{{$method}}</option>
+            @endforeach
+        </select>
+        
+        <style>
+            select:focus option[value=""] {
+            display: none;
+            }
+        </style>
         </div>
         </div>
         <div class="shipping-info">
@@ -40,8 +41,9 @@
             <label for="" class="label-title">配送先</label>
             <a href="" class="link">変更する</a>
          </div>
-         <p class="address">〒xxx-yyyy</p>
-         <p class="address">ここには住所と建物が入ります</p>
+         <p class="address"><span>〒</span>{{$shipping_post_code}}</p>
+         <p class="address">{{$shipping_address}}</p>
+         <p class="address">{{$shipping_building}}</p>
         </div>
     </div>
 
@@ -51,11 +53,11 @@
             <div class="table__inner">
             <tr>
                 <th>商品代金</th>
-                <td>￥47,000</td>
+                <td>￥{{number_format($item->price)}}</td>
             </tr>
             <tr>
                 <th>支払い方法</th>
-                <td>コンビニ払い</td>
+                <td>{{$method}}</td>
             </tr>
             </div>
         </table>
