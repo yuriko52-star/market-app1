@@ -59,8 +59,8 @@
                 <p class="count">{{ $item->comments->count()}}</p>
             </div>
         </div>
-        <form action="{{ route('purchase.show',['item_id' => $item->id]) }}" class=""method="post">
-            @csrf
+        <form action="{{ route('purchase.show',['item_id' => $item->id]) }}" class=""method="get">
+            
             <div class="buy-btn">
                 <button class="button" type="submit">購入手続きへ</button>
             </div>

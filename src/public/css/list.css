@@ -71,7 +71,8 @@ p {
     font-family: Inter;
     font-size: 35px;
     font-weight: 400;
-
+    background-color: red;
+    color: white;
 
     position: absolute;
     top: 40%;

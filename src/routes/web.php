@@ -24,6 +24,8 @@ use App\Http\Controllers\PurchaseController;
     return view('welcome');
 });
 */
+
+
 Route::get('/preview/{viewName}', [DebugController::class, 'show']);
 
 Route::get('/register',[RegisterController::class,'showRegister'])->name('register.show');
@@ -42,13 +44,25 @@ Route::get('/download-image', [ImageController::class, 'downloadImage']);
 // })->name('mylist');
 
 
+
+
+
 Route::get('/', [ItemController::class, 'index'])->name('list');
 Route::get('/search',[ItemController::class,'search'])->name('item.search');
 Route::get('/item/{item_id}', [ItemController::class,'show']);
 
 Route::post('/toggle-like/{item}', [LikeController::class, 'toggleLike'])->name('toggle-like');
 Route::post('/items/{item_id}/comment',[CommentController::class,'store'])->name('comment.store');
-Route::post('/purchase/{item_id}',[PurchaseCOntroller::class,'show'])->name('purchase.show');
+
+ Route::get('/purchase/address/{item_id}',[PurchaseController::class,'editAddress'])->name('purchase.address');
+// Route::get('/purchase/address/{item_id}', [PurchaseController::class, 'updateAddress'])->name('purchase.address.update');
+ Route::post('/purchase/address/{item_id}', [PurchaseController::class, 'updateAddress'])->name('purchase.address.update');
+Route::get('/purchase/{item_id}',[PurchaseController::class,'show'])->name('purchase.show');
+route::post('/purchase/{item_id}',[PurchaseController::class,'store'])->name('purchase.store');
+
+
+
+
 
 
 

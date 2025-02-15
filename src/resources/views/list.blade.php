@@ -21,7 +21,9 @@
             <div class="image-card">
                 <a href="/item/{{$item->id}}" class="image-card-link">
                 <img src="{{ asset($item->img_url) }}" alt="" class="image">
-                <p>商品画像</p>
+                @if($item->isSold())
+                    <p>sold</p>
+                @endif
                 </a>
        
             <label for="" class="image-card-name">{{$item->name}}</label>
