@@ -7,6 +7,7 @@ use App\Models\Item;
 use App\Models\Profile;
 use App\Models\User;
 use App\Models\Purchase;
+use App\Http\Requests\PurchaseRequest;
 use Illuminate\Support\Facades\Auth;
 
 class PurchaseController extends Controller
@@ -117,19 +118,47 @@ class PurchaseController extends Controller
     // return view('buy',['item_id' => $item_id]);
 }
     
-public function store(Request $request) 
+    public function store(PurchaseRequest $request) 
 {
+
+    $user = auth()->user(); // ログインユーザーを取得
+
+    // デフォルトの配送先を `profile` から取得
+    $shipping_address = !empty($request->shipping_address) ? $request->shipping_address : $user->profile->address;
+    $shipping_post_code = !empty($request->shipping_post_code) ? $request->shipping_post_code : $user->profile->post_code;
+    $shipping_building = !empty($request->shipping_building) ? $request->shipping_building : $user->profile->building;
+
     Purchase::create([
         'user_id' => auth()->id(),
         'item_id' =>$request->item_id,
         'payment_method'=> $request->payment_method,
         'shipping_address' =>$request->shipping_address,
         'shipping_post_code' =>$request->shipping_post_code,
-        'shipping_builrding'=>$request->shipping_building,
+        'shipping_building'=>$request->shipping_building,
 
     ]);
     return redirect('/');
-}
+    }
+    /*public function buyPage(Request $requet)
+    {
+          $user = Auth::user();
+      
+        $tab = $request->query('tab');
+        $items = collect();
+      if($tab === 'buy')
+      {
+        /*$items = \DB::table('purchases')
+                    ->where('user_id', $user->id)
+                    ->join('items', 'purchases.item_id', '=', 'items.id')
+                    ->select('items.*')
+                    ->get();
+                    
+         $items = $user->buyItems()->get();
+      }
+         return view('mypage',compact('user','items','tab'));
+
+    */
+
 
 
 

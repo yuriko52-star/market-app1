@@ -59,4 +59,14 @@ class User extends Authenticatable
     public function purchases() {
         return $this->hasMany(Purchase::class);
     }
+    public function buyItems()
+    {
+        return $this->belongsToMany(Item::class,'purchases','user_id','item_id')
+        ->withPivot('payment_method', 'shipping_address', 'shipping_post_code', 'shipping_building')
+        ->withTimestamps();
+    }
+    public function sellItems()
+    {
+        return $this->hasMany(Item::class,'user_id');
+    }
 }

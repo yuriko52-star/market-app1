@@ -82,7 +82,10 @@ select {
 .hidden-button {
     display: none;
 }
-
+.form_error {
+    color: red;
+    text-align: left;
+}
 .pay-method,
 .shipping-info {
     padding: 20px 0 60px 0;

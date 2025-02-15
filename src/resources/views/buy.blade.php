@@ -23,7 +23,7 @@
         <div class="pay-method">
         <label for="" class="label-title">支払い方法</label>
        
-        <div class="select-inner">
+        <!-- <div class="select-inner"> -->
             <select class="select" name="payment_method" id="payment_select" >
             <option value=""disabled selected>選択してください</option>
            @foreach($payment_methods as $method)
@@ -35,16 +35,25 @@
             display: none;
             }
         </style>
-        </div>
+        <p class="form_error">
+            @error('payment_method')
+            {{$message}}
+            @enderror
+        </p>
+        <!-- </div> -->
         </div>
         <div class="shipping-info">
-         <div class="flex">
+            <div class="flex">
             <label for="" class="label-title">配送先</label>
             <a href="{{route('purchase.address',['item_id' => $item->id]) }}" class="link">変更する</a>
-         </div>
+            </div>
          <p class="address"><span>〒</span>{{$shipping_post_code}}</p>
          <p class="address">{{$shipping_address}}</p>
          <p class="address">{{$shipping_building}}</p>
+        
+            <input type="hidden" name="shipping_address" value="{{ auth()->user()->profile->address }}">
+            <input type="hidden" name="shipping_post_code" value="{{ auth()->user()->profile->post_code }}">
+            <input type="hidden" name="shipping_building" value="{{  auth()->user()->profile->building }}">
         </div>
     </div>
 

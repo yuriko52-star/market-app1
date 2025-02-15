@@ -60,8 +60,9 @@ Route::post('/items/{item_id}/comment',[CommentController::class,'store'])->name
 Route::get('/purchase/{item_id}',[PurchaseController::class,'show'])->name('purchase.show');
 route::post('/purchase/{item_id}',[PurchaseController::class,'store'])->name('purchase.store');
 
-
-
+Route::get('/mypage',[ProfileController::class,'index']);
+ Route::get('/mypage',[ProfileController::class,'show'])->name('mypage');
+// Route::get('/mypage?tab==buy',[PurchaseController::class,'buyPage']);
 
 
 

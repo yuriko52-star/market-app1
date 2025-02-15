@@ -44,7 +44,7 @@
                     <!-- <button class="btn">マイページ</button> -->
                 <!-- </form> -->
                 <!-- リンクになるかも -->
-                 <a href="" class="header-nav-link">マイページ</a>
+                 <a href="/mypage" class="header-nav-link">マイページ</a>
             </li>
             <li>    
                 <form action="" class="" method="">
