@@ -18,6 +18,7 @@ class PurchaseController extends Controller
     $item = Item::findOrFail($item_id);
     $profile = $user->profile;
     $purchase = $user->purchases()->where('item_id', $item_id)->first();
+// dd($purchase);
 
     return view('buy', [
         'item' => $item,
@@ -25,8 +26,42 @@ class PurchaseController extends Controller
         'shipping_address' => $purchase->shipping_address ?? $profile->address ?? '',
         'shipping_post_code' => $purchase->shipping_post_code ?? $profile->post_code ?? '',
         'shipping_building' => $purchase->shipping_building ?? $profile->building ?? '',
-        'payment_methods' => ['クレジットカード支払い', 'コンビニ決済']
+        'payment_method' => $purchase->payment_method ?? '',
+         'payment_methods' => ['カード支払い', 'コンビニ支払い']
     ]);
+}
+
+public function updatePayment(Request $request)
+{
+    $user = auth()->user();
+    //  dd($request->all());
+    $item_id = $request->input('item_id');
+    // $item_id = $request->input('item_id') ?? $request->route('item_id');
+
+    if (!$item_id) {
+        dd('Error: item_id is missing', $request->all());
+    }
+
+
+    $purchase = $user->purchases()->where('item_id',$request->input('item_id'))->first();
+ 
+    if($purchase) {
+        $purchase->update([
+            'payment_method' => $request->input('payment_method'),
+        ]);
+    } else {
+        $purchase = $user->purchases()->create([
+            'item_id' => $item_id,
+            'payment_method' => $request->input('payment_method'),
+            'shipping_address' => $user->profile->address,
+            'shipping_post_code' => $user->profile->post_code,
+            'shipping_building' => $user->profile->building,
+        ]);
+    }
+     return redirect()->route('purchase.show', ['item_id' => $item_id]);
+
+    // return redirect()->route('purchase.show', ['item_id' => $item_id ?? 'missing']);
+    // return redirect()->route('purchase.show',['item_id' =>$request->input('item_id')]);
 }
     /*public function show($item_id)
     {
@@ -82,15 +117,7 @@ class PurchaseController extends Controller
 
     public function updateAddress(Request $request, $item_id)
     {
-    // $user = auth()->user();
-
-    // バリデーション
-    /*$request->validate([
-        'shipping_address' => 'required|string|max:255',
-        'shipping_post_code' => 'required|string|max:10',
-        'shipping_building' => 'nullable|string|max:255',
-    ]);
-    */
+    
     $user = auth()->user();
     // `purchases` テーブルに該当データがあるか確認
     $purchase = $user->purchases()->where('item_id', $item_id)->first();
@@ -101,6 +128,7 @@ class PurchaseController extends Controller
             'shipping_address' => $request->input('shipping_address'),
             'shipping_post_code' => $request->input('shipping_post_code'),
             'shipping_building' => $request->input('shipping_building'),
+            // 'payment_method' => $purchase->payment_method,
         ]);
     } else {
         // 購入データがない場合は新規作成
@@ -112,22 +140,63 @@ class PurchaseController extends Controller
             'shipping_building' => $request->input('shipping_building'),
             'payment_method' => '',
         ]);
+        $updatedPurchase = $user->purchases()->where('item_id', $item_id)->first();
+    // dd($updatedPurchase); 
     }
-
-    return redirect()->route('purchase.show', ['item_id' => $item_id])->with('purchase',$purchase);
+     return redirect()->route('purchase.show', ['item_id' => $item_id]);
+    // return redirect()->route('purchase.show', ['item_id' => $item_id])->with('purchase',$purchase);
+    // return redirect()->route('purchase.show', ['item_id' => $item_id])->with('purchase',$purchase);
     // return view('buy',['item_id' => $item_id]);
 }
     
     public function store(PurchaseRequest $request) 
 {
-
+//  dd('store() メソッドが実行された！', $request->all()); // 🔥 追加
+    //  dd($request->all());
     $user = auth()->user(); // ログインユーザーを取得
-
+    $item_id = $request->input('item_id');
+     $payment_method = $request->input('payment_method');
+      if (empty($payment_method)) {
+        return redirect()->back()->withErrors(['payment_method' => 'エラー: 支払い方法を選択してください。']);
+    }
     // デフォルトの配送先を `profile` から取得
     $shipping_address = !empty($request->shipping_address) ? $request->shipping_address : $user->profile->address;
     $shipping_post_code = !empty($request->shipping_post_code) ? $request->shipping_post_code : $user->profile->post_code;
     $shipping_building = !empty($request->shipping_building) ? $request->shipping_building : $user->profile->building;
 
+    //   if (empty($item_id)) {
+        // dd('Error: item_id is null', $request->all());
+    // }
+  $purchase = $user->purchases()->where('item_id', $request->item_id)->first();
+if ($purchase) {
+    //  dd('Updating:', $purchase, $request->all());
+        // すでに購入データがある場合は更新
+      $purchase->update([
+            'payment_method' => $request->payment_method,
+            'shipping_address' => $request->shipping_address ?: $user->profile->address,
+            'shipping_post_code' => $request->shipping_post_code ?: $user->profile->post_code,
+            'shipping_building' => $request->shipping_building ?: $user->profile->building,
+        ]);
+    } else {
+        Purchase::create([
+            'user_id' => auth()->id(),
+            'item_id' => $item_id, // 🔥 `null` になっていないか確認！
+            'payment_method' => $request->payment_method,
+            'shipping_address' => $request->shipping_address ?: $user->profile->address,
+            'shipping_post_code' => $request->shipping_post_code ?: $user->profile->post_code,
+            'shipping_building' => $request->shipping_building ?: $user->profile->building,
+        ]);
+
+        // うまくいかなかったらここを直そう！
+       /* $purchase->update([
+            'payment_method' => $request->payment_method,
+            'shipping_address' => !empty($request->shipping_address) ? $request->shipping_address : $user->profile->address,
+            'shipping_post_code' => !empty($request->shipping_post_code) ? $request->shipping_post_code : $user->profile->post_code,
+            'shipping_building' => !empty($request->shipping_building) ? $request->shipping_building : $user->profile->building,
+        ]);
+
+    }else {
+        // dd('Creating:', $request->all());
     Purchase::create([
         'user_id' => auth()->id(),
         'item_id' =>$request->item_id,
@@ -137,8 +206,11 @@ class PurchaseController extends Controller
         'shipping_building'=>$request->shipping_building,
 
     ]);
-    return redirect('/');
+}
+    */
     }
+    return redirect('/');
+    
     /*public function buyPage(Request $requet)
     {
           $user = Auth::user();
@@ -167,3 +239,4 @@ class PurchaseController extends Controller
 
  
 
+}

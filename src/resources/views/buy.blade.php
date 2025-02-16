@@ -5,8 +5,7 @@
 @endsection
 
 @section('content')
- <form action="{{ route('purchase.store',['item_id' => $item->id]) }}" class="" method="post">
-    @csrf
+
 <div class="all-contents">
     <!-- <form action="" class=""> -->
     <div class="left-content">
@@ -20,15 +19,24 @@
              <p class="item-price"><span>￥</span>{{number_format($item->price)}}</p>
              </div>
         </div>
+    <form action="{{route('purchase.updatePayment') }}" method="post">
+    @csrf
+        <input type="hidden" name="item_id" value="{{ $item->id}}">
         <div class="pay-method">
-        <label for="" class="label-title">支払い方法</label>
+        <label for="payment_method" class="label-title">支払い方法</label>
        
         <!-- <div class="select-inner"> -->
-            <select class="select" name="payment_method" id="payment_select" >
-            <option value=""disabled selected>選択してください</option>
-           @foreach($payment_methods as $method)
+        <select class="select" name="payment_method" id="payment_method" onchange="this.form.submit()" >
+            <option value="" disabled {{ empty(old('payment_method', $payment_method)) ? 'selected' : '' }}>選択してください</option>
+            <option value="コンビニ支払い" {{ old('payment_method', $payment_method) == 'コンビニ支払い' ? 'selected' : '' }}>コンビニ支払い</option>
+            <option value="カード支払い" {{ old('payment_method', $payment_method) == 'カード支払い' ? 'selected' : '' }}>カード支払い</option>
+    </select>
+            {{--<option value=""disabled selected>選択してください</option>
+            <option value="カード支払い" {{ old('payment_method', $payment_method ?? '') == 'カード支払い' ? 'selected' : '' }}>カード支払い</option>
+            <option value="コンビニ支払い" {{ old('payment_method', $payment_method ?? '') == 'コンビニ支払い' ? 'selected' : '' }}>コンビニ払い</option>--}}
+           {{--@foreach($payment_methods as $method)
             <option value="{{ $method}}">&#160;&#160;&#160;{{$method}}</option>
-           @endforeach
+           @endforeach--}}
         </select>
         <style>
             select:focus option[value=""] {
@@ -42,6 +50,12 @@
         </p>
         <!-- </div> -->
         </div>
+    </form>
+    {{--<form action="{{ route('purchase.store',['item_id' => $item->id]) }}" class="" method="post">--}}
+      <form action="{{ route('purchase.store') }}" method="post">  
+    @csrf
+     <input type="hidden" name="item_id" value="{{ $item->id }}">  
+      <input type="hidden" name="payment_method" value="{{ $payment_method }}">
         <div class="shipping-info">
             <div class="flex">
             <label for="" class="label-title">配送先</label>
@@ -51,9 +65,13 @@
          <p class="address">{{$shipping_address}}</p>
          <p class="address">{{$shipping_building}}</p>
         
-            <input type="hidden" name="shipping_address" value="{{ auth()->user()->profile->address }}">
+         {{--   <input type="hidden" name="shipping_address" value="{{ auth()->user()->profile->address }}">
             <input type="hidden" name="shipping_post_code" value="{{ auth()->user()->profile->post_code }}">
-            <input type="hidden" name="shipping_building" value="{{  auth()->user()->profile->building }}">
+            <input type="hidden" name="shipping_building" value="{{  auth()->user()->profile->building }}">--}}
+             <input type="hidden" name="shipping_address" value="{{ $shipping_address }}">
+            <input type="hidden" name="shipping_post_code" value="{{ $shipping_post_code }}">
+            <input type="hidden" name="shipping_building" value="{{ $shipping_building }}">
+  
         </div>
     </div>
 
@@ -67,7 +85,7 @@
             </tr>
             <tr>
                 <th>支払い方法</th>
-                <td>{{$method}}</td>
+                <td>{{$payment_method}}</td>
             </tr>
             <!-- </div> -->
         </table>
