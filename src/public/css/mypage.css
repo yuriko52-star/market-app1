@@ -35,7 +35,7 @@
     height: 50px;
      padding-top: 3px; 
     border-radius: 10px;
-    
+    text-decoration: none;
     background-color: #fff;
     color: #ff5555;
     border: 2px solid #ff5555;
@@ -157,6 +157,10 @@ p {
         
         
     }
+    .update-btn {
+        height: 40px;
+        padding-top: 8px;
+    }
 }
 @media screen and (min-width: 768px) and (max-width: 850px) {
     .image-file {
@@ -178,8 +182,10 @@ p {
     .update-btn {
          margin-left: 0; 
          margin-right:120px; 
-        font-size: 23px;
+        font-size: 19px;
         width: 250px;
+        padding: 3px 5px;
+        height: 28px;
     }
         
 

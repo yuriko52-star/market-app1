@@ -7,8 +7,56 @@
 .left-content {
     width: 60%;
 
+}.right-content {
+    width: 440px;
+    /* テーブルと同じ幅 */
+    margin-left: 50px;
+    /* テーブルの `margin-left` に合わせる */
 }
 
+table {
+    width: 100%;
+    /* 親要素 `.right-content` に合わせる */
+    height: 220px;
+    margin-left: 0;
+    border-collapse: collapse;
+    border: 1px solid #000;
+    margin-bottom: 50px;
+}
+
+th {
+    font-size: 14px;
+}
+
+td {
+    font-size: 18px;
+}
+
+.buy-btn {
+    width: 100%;
+    /* `.right-content` の幅に合わせる */
+    text-align: center;
+   
+    /* ボタンを中央揃え */
+}
+
+.button {
+    width: 100%;
+    /* `.buy-btn` の幅にフィット */
+    margin: 0;
+    /* 左の余白をなくす */
+    padding: 10px;
+    /* 適度な余白 */
+    display: block;
+    /* 幅いっぱいに広げる */font-family: Inter;
+        font-size: 26px;
+        font-weight: 700;
+        color: #fff;
+        background-color: #ff5555;
+        text-align: center;
+        cursor: pointer;
+        border: none;
+}
 
 .item {
     display: flex;
@@ -111,12 +159,12 @@ select {
         margin-left: 80px;
         
 }
-.right-content {
+/* .right-content { 
     width: 38%;
 }
 
 table {
-    /* display: block; */
+    /* display: block; 
     margin-left: 145px;
     border-collapse: collapse;
      width: 80%; 
@@ -159,11 +207,11 @@ td {
         font-weight: 400;
         
 }
-.buy-btn {
+/*.buy-btn {
     text-align: center;
     display: block;
     margin-top: 60px;
-    /* margin-left: 90px; */
+    /* margin-left: 90px; 
 }
  .button {
     width: 350px;
@@ -178,6 +226,7 @@ td {
         cursor: pointer;
         border: none;
  }
+        */
 @media screen and (min-width: 1400px) and (max-width: 1540px) {
     .right-content {
             width: 440px;

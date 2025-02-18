@@ -9,6 +9,7 @@ use App\Models\Profile;
 use App\Models\User;
 use App\Models\Item;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 
 
@@ -107,7 +108,33 @@ class ProfileController extends Controller
         //  dd($tab);
       return view('mypage',compact('user','items','tab'));
     }
+  public function edit(User $user)
+  {
+    //  $user = auth()->user();
+    return view('profile',compact('user'));
+  }
+  
+  public function update(ProfileRequest $profileRequest,AddressRequest $addressRequest ,User $user)
+  {
+    $validated = array_merge(
+      $profileRequest->validated(),
+      $addressRequest->validated()
+    );
 
+    if($profileRequest->hasFile('img_url') && $profileRequest->file('img_url')->isValid()) {
+      if ($user->profile && $user->profile->img_url) {
+        Storage::delete(str_replace('/storage','public/',$user->profile->img_url));
+      }
+      $filename = uniqid() .'_' . $profileRequest->file('img_url')->getClientOriginalName();
+
+      $profileRequest->file('img_url')->storeAs('public/images',$filename);
+
+      $validated['img_url'] = "/storage/images/$filename";
+
+    }
+    $user->profile->update($validated);
+    return redirect()->route('profile.edit' ,$user->id);
     
+  }
 
 }

@@ -26,7 +26,11 @@
     margin-right: 400px;
 
 }
-
+.img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
 .image-btn {
 
     transform: translate(-350px, 50px);

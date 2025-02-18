@@ -33,7 +33,8 @@ Route::post('/register',[RegisterController::class,'processRegister'])->name('re
 Route::get('/mypage/profile/show',[ProfileController::class,'showProfile'])->name('profile.show');
 Route::get('/mypage/profile/create',[ProfileController::class,'create'])->name('profile.create');
 Route::post('/mypage/profile/store',[ProfileController::class,'store'])->name('profile.store');
-
+Route::get('/mypage/profile/{user}',[ProfileController::class,'edit'])->name('profile.edit');
+Route::patch('/mypage/profile/{user}',[ProfileController::class,'update'])->name('profile.update');
 Route::get('/download-image', [ImageController::class, 'downloadImage']);
 // Route::post('/mypage/profile/store-address',[ProfileController::class,'storeProfileAddress'])->name('profile.storeAddress');
 // Route::post('/mypage/profile/store-image',[ProfileController::class,'storeProfileImage'])->name('profile.storeImage');

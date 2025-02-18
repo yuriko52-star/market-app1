@@ -9,7 +9,7 @@
     <div class="top-content">
         <nav>
             <ul>
-                <li><a href="" class="page-title">おすすめ</a></li>
+                <li><a href="{{ route('list') }}" class="page-title">おすすめ</a></li>
                 <li><a href="{{ route('list', ['tab' => 'mylist']) }}" class="page-title my-list">マイリスト</a></li>
             </ul>
         </nav>
