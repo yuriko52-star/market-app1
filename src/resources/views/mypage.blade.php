@@ -49,6 +49,20 @@
             </div>
             @endforeach
         @endif
+        @if($tab==='sell')
+            @foreach($items as $sellItem)
+            <div class="image-card">
+                 
+            <!-- <a href="" class="image-card-link"> -->
+                <img src="{{ asset($sellItem->img_url) }}" alt="" class="image">
+                <!-- <p>商品画像</p> -->
+            <!-- </a> -->
+       
+            <label for="" class="image-card-name">{{$sellItem->name}}</label>
+            </div>
+            @endforeach
+        @endif
+
         
            
     </div>

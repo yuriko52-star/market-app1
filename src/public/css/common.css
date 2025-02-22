@@ -94,6 +94,7 @@ li {
     align-items: center;
     font-family: Inter;
         font-weight: 400;
+        text-align: center;
 }
 .sell-btn {
     color: #000;
@@ -101,6 +102,10 @@ li {
     border-radius: 4px;
     width: 100px;
     padding-top: 5px;
+    display: inline-block;
+    align-items: center;
+    text-align: center;
+    /* text-decoration: none; */
 }
 
 @media screen and (min-width: 1400px) and (max-width: 1540px)

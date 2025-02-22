@@ -51,7 +51,9 @@ Route::get('/download-image', [ImageController::class, 'downloadImage']);
 Route::get('/', [ItemController::class, 'index'])->name('list');
 Route::get('/search',[ItemController::class,'search'])->name('item.search');
 Route::get('/item/{item_id}', [ItemController::class,'show']);
-
+Route::get('/sell',[ItemController::class,'sellPage']);
+Route::get('/sell', [ItemController::class, 'create']);
+Route::post('/sell',[ItemController::class,'store'])->name('sell.store');
 Route::post('/toggle-like/{item}', [LikeController::class, 'toggleLike'])->name('toggle-like');
 Route::post('/items/{item_id}/comment',[CommentController::class,'store'])->name('comment.store');
 
@@ -63,9 +65,9 @@ Route::post('/purchase/update-payment',[PurchaseController::class,'updatePayment
 // route::post('/purchase/{item_id}',[PurchaseController::class,'store'])->name('purchase.store');
 route::post('/purchase',[PurchaseController::class,'store'])->name('purchase.store');
 
-Route::get('/mypage',[ProfileController::class,'index']);
+// Route::get('/mypage',[ProfileController::class,'index']);
  Route::get('/mypage',[ProfileController::class,'show'])->name('mypage');
- 
+
 // Route::get('/mypage?tab==buy',[PurchaseController::class,'buyPage']);
 
 

@@ -20,7 +20,7 @@
         <label for="" class="page-title">
             {{$item->name}}
         </label>
-        <p class="brand-name">ブランド名</p>
+        <p class="brand-name">{{$item->brand_name}}</p>
         <!--  -->
         <p class="item-price"><span>￥</span>{{ number_format($item->price) }}<span>（税込）</span>
         </p>

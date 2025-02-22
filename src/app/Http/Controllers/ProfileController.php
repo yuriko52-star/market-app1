@@ -75,37 +75,30 @@ class ProfileController extends Controller
         $profile->save();
      return redirect()->route('list');
     }
-    public function index()
+    /*public function index()
      {
       $user = Auth::user();
       return view('mypage');
     }
+      */
 
 
     public function show(Request $request) 
     {
        $user = Auth::user();
-      //  dd($user);
-      //  Auth::loginUsingId(3);
+      
         $tab = $request->query('tab');
-        // $tab = $request->query('tab','buy');
+        
 
           $items = collect();
       if($tab === 'buy')
       {
-        /*$items = \DB::table('purchases')
-                    ->where('user_id', $user->id)
-                    ->join('items', 'purchases.item_id', '=', 'items.id')
-                    ->select('items.*')
-                    ->get();
-                    */
+        
          $items = $user->buyItems()->get();
       }elseif($tab === 'sell') {
         $items = $user->sellItems()->get();
       }
-      // dd($tab, $items);
-      
-        //  dd($tab);
+    //  dd($tab,$items);
       return view('mypage',compact('user','items','tab'));
     }
   public function edit(User $user)

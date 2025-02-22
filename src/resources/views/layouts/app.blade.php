@@ -46,10 +46,12 @@
                 <!-- リンクになるかも -->
                  <a href="/mypage" class="header-nav-link">マイページ</a>
             </li>
-            <li>    
-                <form action="" class="" method="">
+            <li>
+                <a href="/sell" class="header-nav-link sell-btn">出品</a> 
+                <!-- <form action="" class="" method=""> 
                     <button class=" btn sell-btn">出品</button>
                 </form>
+                -->
             </li>
                 
         </ul>  

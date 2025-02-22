@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\ExhibitionRequest;
 use App\Models\Item;
 use App\Models\Category;
 use App\Models\Condition;
@@ -58,4 +59,48 @@ class ItemController extends Controller
        
         return view('detail',compact('item'));
     } 
+    public function sellPage()
+    {
+      $user = Auth::user();
+      return view('sell');
+
+    }
+    public function create()
+    {
+        //  dd(Category::all()); // デバッグ用
+
+        $user = auth()->user();
+        $item = new Item();
+        $categories = Category::all();
+        $conditions = Condition::all();
+        $condition_id = null; 
+        return view('sell',compact('user','item','categories','conditions','condition_id'));
+    }
+    public function store(ExhibitionRequest $request)
+    {   
+        if (!auth()->check()) {
+    return redirect()->route('login');
+        }
+        //  $user = auth()->user();
+        //  $item->user_id = $user->id; 
+         $user_id = auth()->id();
+        $item = new Item();
+        $item->user_id = $user_id;
+        $item->name = $request->input('name');
+        $item->brand_name = $request->input('brand_name');
+        $item->price = $request->input('price');
+        $item->description = $request->input('description');
+        $item->condition_id = $request->input('condition_id');
+
+         if ($request->hasFile('img_url') && $request->file('img_url')->isValid()) {
+        $filename = uniqid() . '_' . $request->file('img_url')->getClientOriginalName();
+        $request->file('img_url')->storeAs('public/images', $filename);
+        $item->img_url = "/storage/images/$filename";
+    } 
+        $item->save();
+        if($request->has('category_ids')) {
+            $item->categories()->attach($request->input('category_ids'));
+        }
+        return redirect()->route('mypage',['tab' => 'sell']);
+    }
 }

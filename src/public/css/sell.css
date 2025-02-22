@@ -85,9 +85,12 @@ h1 {
      margin: 30px auto; 
     /* センター寄せ */
 }
-
+.category-checkbox {
+    display: none;
+}
 /* ボタンスタイル */
 .category-button {
+    display: inline-block;
    /* margin: 5px auto 20px; */
     min-width: 52px;
     /* max-width: 141px; */
@@ -95,9 +98,9 @@ h1 {
     /* 横6個並ぶ設定 (間隔を考慮) */
     text-align: center;
     margin-bottom: 30px;
-   
-    padding: 8px  18px 10px;
-    height: 32px;
+
+     padding: 10px  15px 0; 
+    height: 22px;
     border: 2px solid #ff5655;
     /* ボタンの枠線 */
     background-color: #fff;
@@ -120,13 +123,11 @@ h1 {
     transition: background-color 0.3s, color 0.3s;
     /* アニメーション効果 */
 }
-/* クリック時のスタイル */
-.category-button:active {
+.category-checkbox:checked+label {
     background-color: #ff5655;
-    /* 緑色に変更 */
     color: #fff;
-    /* テキストを白に */
 }
+
 .select {
     /* margin-left: 80px; */
     width: 680px;
@@ -134,7 +135,66 @@ h1 {
     /* background-color: #eaeaea; */
     color: #5f5f5f;
     border: 1px solid #5f5f5f;
+    margin-bottom: 50px;
 }
+/*.checkmark-select {
+    appearance: none;
+    /* デフォルトの矢印を削除 
+    background-color: white;
+    border: 2px solid #ff5655;
+    padding: 8px;
+    font-size: 16px;
+    width: 250px;
+    cursor: pointer;
+}
+    */
+.checkmark-select option.selected-option {
+    background-image: url('/images/Vector1(Stroke).png');
+    /* ✔ の画像 */
+    background-repeat: no-repeat;
+    background-position: left center;
+    padding-left: 25px;
+    /* ✔ の画像のスペース確保 */
+}
+
+/* セレクトボックスをカスタマイズ */
+/*.select-wrapper {
+    position: relative;
+    display: inline-block;
+}
+
+/* 矢印の代わりにチェックマークを表示 */
+/*.select-wrapper:after {
+    content: "✔";
+    /* チェックマーク 
+    position: absolute;
+    left: 15px;
+    
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #ff5655;
+    pointer-events: none;
+    /* クリックできないようにする 
+    opacity: 0;
+    /* 初期状態では非表示 
+}
+
+ /*選択されたらチェックマークを表示 
+.select-wrapper select:valid+ .select-wrapper:after {
+    opacity: 1;
+    /* ✔ を表示 
+}
+/*.checkmark {
+    position: absolute;
+    left: 10px;
+    /* 左側に配置 
+    font-size: 18px;
+    color: #ff5655;
+    /* ✔の色 
+}
+    */
+    
 option {
     background-color: #5f5f5f;
     border: 1.5px solid #5f5f5f;
@@ -153,7 +213,7 @@ option {
         
 }
         */
-.text-input  input{
+.input{
    
     border-radius: 4px;
     border:1px solid  #5f5f5f;
@@ -162,7 +222,7 @@ option {
     width: 670px;
         height: 45px;
         font-family: Inter;
-        font-size: 24px;
+        font-size: px;
         font-weight: 700;
     
         text-align: left;
@@ -192,4 +252,7 @@ option {
         border: none;
         text-align: center;
        cursor: pointer;
+}
+.form_error {
+    color: red;
 }
