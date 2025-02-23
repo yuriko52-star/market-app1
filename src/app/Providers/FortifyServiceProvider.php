@@ -17,7 +17,8 @@ use Laravel\Fortify\Fortify;
 use App\Models\User;
 use Laravel\Fortify\Http\Requests\LoginRequest as FortifyLoginRequest;
 use App\Http\Requests\LoginRequest;
-
+use Illuminate\Support\Facades\View;
+use Laravel\Fortify\Contracts\VerifyEmailViewResponse;
 
 class FortifyServiceProvider extends ServiceProvider
 {
@@ -45,6 +46,21 @@ class FortifyServiceProvider extends ServiceProvider
         Fortify::registerView(function () {
          return view('auth.register');
         });
+
+
+        // Fortifyのメール認証画面を設定
+        Fortify::verifyEmailView(function () {
+        return view('auth.verify-email');
+        });
+
+        $this->app->singleton(
+        VerifyEmailViewResponse::class,
+        function () {
+            return response()->view('auth.verify-email');
+        }
+        );
+
+
 
          Fortify::loginView(function () { 
             return view('auth.login'); 

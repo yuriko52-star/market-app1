@@ -15,10 +15,23 @@ use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
+  public function __construct()
+  {
+    $this->middleware(['auth','verified']);
+  }
     public function showProfile() {
          $user = Auth::user();
+        /*$profile = $user->profile ?? $user->profile()->create([
+          'img_url' => '',
+          'post_code' => '',
+          'address' => '',
+          'building' => '',
+        ]);
 
-      return view('profile',compact('user'));
+        // dd($profile);
+        */
+       return view('profile',compact('user'));
+      // return view('profile',compact('user','profile'));
     }
     public function create() {
       $profile = new Profile();
@@ -126,8 +139,16 @@ class ProfileController extends Controller
 
     }
     $user->profile->update($validated);
-    return redirect()->route('profile.edit' ,$user->id);
     
+
+    /* if (!$user->profile) {
+        $user->profile()->create($validated);
+    } else {
+        $user->profile->update($validated);
+    }
+*/
+    // return redirect()->route('list');
+     return redirect()->route('profile.edit' ,$user->id);
   }
 
 }

@@ -31,13 +31,8 @@
             <option value="コンビニ支払い" {{ old('payment_method', $payment_method) == 'コンビニ支払い' ? 'selected' : '' }}>コンビニ支払い</option>
             <option value="カード支払い" {{ old('payment_method', $payment_method) == 'カード支払い' ? 'selected' : '' }}>カード支払い</option>
     </select>
-            {{--<option value=""disabled selected>選択してください</option>
-            <option value="カード支払い" {{ old('payment_method', $payment_method ?? '') == 'カード支払い' ? 'selected' : '' }}>カード支払い</option>
-            <option value="コンビニ支払い" {{ old('payment_method', $payment_method ?? '') == 'コンビニ支払い' ? 'selected' : '' }}>コンビニ払い</option>--}}
-           {{--@foreach($payment_methods as $method)
-            <option value="{{ $method}}">&#160;&#160;&#160;{{$method}}</option>
-           @endforeach--}}
-        </select>
+           
+       
         <style>
             select:focus option[value=""] {
             display: none;

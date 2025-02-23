@@ -7,8 +7,9 @@
 @section('content')
 <div class="content">
     <h1>プロフィール設定</h1>
-    @if(isset($user))
-    <form action="{{route('profile.update',$user->id)}}" method="post" enctype="multipart/form-data">
+    @if(isset($user->profile) && $user->profile->exists)
+    <!-- {{--@if(isset($user))--}} -->
+    <form action="{{route('profile.update',$user->profile->id)}}" method="post" enctype="multipart/form-data">
         @method('PATCH')
     @else
     <form action="{{ route('profile.store') }}" class="" method="post" enctype="multipart/form-data">
@@ -17,9 +18,12 @@
     <div class="image-file">
         <input type="file" id="fileInput" style="display: none;" accept="image/*" name="img_url">
         <div id="previewArea">
-            @if(isset($user) && $user->profile->img_url)
-            <img src="{{asset( $user->profile->img_url)}}" alt="" class="img">
+           <!-- {{-- @if(isset($user) && $user->profile->img_url)--}} -->
+           <!-- {{--@if(isset($profile->img_url))--}} -->
+           @if(!empty($user->profile) && !empty($user->profile->img_url))
+            <img src="{{ asset($user->profile->img_url)}}" alt="" class="img">
             @else
+            <!-- {{--<img src="{{ asset('storage/images/default-profile.png') }}" alt="" class="img">--}} -->
             <img src="" alt="" class="img">
             @endif
            

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use App\Http\Requests\RegisterRequest;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Events\Registerd;
 
 class RegisterController extends Controller
 {
@@ -22,7 +23,8 @@ class RegisterController extends Controller
       Auth::login($user);
       Session::put('user_id', $user->id);
 
-       return redirect()->route('profile.show');
+      //  return redirect()->route('profile.show');
+      return redirect('/email/verify');
     }
     
    

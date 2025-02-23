@@ -45,15 +45,22 @@
 
             <label for="" class="label">商品の状態</label>
             <div class="select-wrapper">
+                 <!-- <span class="checkmark">✔</span> -->
                  <!-- <span class="checkmark">{{ old('condition_id', $condition_id) ? '✔' : '' }}</span> -->
                 <select class="select checkmark-select" name="condition_id" id="">
                 <option value="" disabled hidden {{ empty(old('condition_id', $condition_id)) ? 'selected' : '' }}>選択してください
 
                 </option>
                 @foreach($conditions as $condition)
-                <option value="{{$condition->id}}" {{ old('condition_id', $condition_id) == $condition->id ? 'selected-option' : '' }}>
-                    <!-- &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;{{$condition->content}} -->
-                    {{ $condition->content }}
+                {{--<option value="{{$condition->id}}" class="checkmark-option">
+                    {{$condition->content}}
+                </option>--}}
+                <option value="{{$condition->id}}" {{ old('condition_id', $condition_id) == $condition->id ? 'selected' : '' }}>
+                    <!-- &#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;-->{{$condition->content}} 
+                  {{--   @if(old('condition_id',$condition_id )==$condition->id)
+                        ✔
+                     @endif
+                    {{ $condition->content }}--}}
             
                 </option>
                 @endforeach
