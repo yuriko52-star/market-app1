@@ -21,18 +21,32 @@ class ProfileController extends Controller
   }
     public function showProfile() {
          $user = Auth::user();
-        /*$profile = $user->profile ?? $user->profile()->create([
+           $profile = $user->profile ?? null; // プロフィールがある場合のみ取得
+    
+       /* $profile = $user->profile ?? $user->profile()->create([
           'img_url' => '',
           'post_code' => '',
           'address' => '',
           'building' => '',
         ]);
-
+      */
         // dd($profile);
+        
+       /* if (!$user->profile) {
+        $profile = $user->profile()->create([
+            'img_url' => '',
+            'post_code' => '',
+            'address' => '',
+            'building' => '',
+        ]);
         */
-       return view('profile',compact('user'));
-      // return view('profile',compact('user','profile'));
+        // $user->setRelation('profile', $profile);
+      return view('profile',compact('user','profile'));
     }
+    // dd($user->profile);
+      //  return view('profile',compact('user'));
+      
+    
     public function create() {
       $profile = new Profile();
       $profile->user_id = Auth::id();
@@ -74,6 +88,7 @@ class ProfileController extends Controller
     */
     public function store(ProfileRequest $profileRequest, AddressRequest $addressRequest) 
     {
+      //  dd($profileRequest->all());
       $profile = new Profile();
       $profile->user_id = Auth::id();
       $profile->post_code  = $addressRequest->post_code;
@@ -114,8 +129,10 @@ class ProfileController extends Controller
     //  dd($tab,$items);
       return view('mypage',compact('user','items','tab'));
     }
-  public function edit(User $user)
+  public function edit($userId)
   {
+    // dd($user);
+    $user = User::find($userId);
     //  $user = auth()->user();
     return view('profile',compact('user'));
   }
@@ -141,12 +158,12 @@ class ProfileController extends Controller
     $user->profile->update($validated);
     
 
-    /* if (!$user->profile) {
+    if (!$user->profile) {
         $user->profile()->create($validated);
     } else {
         $user->profile->update($validated);
     }
-*/
+
     // return redirect()->route('list');
      return redirect()->route('profile.edit' ,$user->id);
   }

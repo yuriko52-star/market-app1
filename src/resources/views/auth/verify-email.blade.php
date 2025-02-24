@@ -5,12 +5,12 @@
 @endsection
 @section('content')
 <div class="content">
-    <h2>登録していただいたメールアドレスに認証メールを送付しました。</h2>
-    <h2>メール認証を完了してください。</h2>
-   <a href="" class="verify-btn">
+    <p>登録していただいたメールアドレスに認証メールを送付しました。</p>
+    <p>メール認証を完了してください。</p>
+   <a href="http://localhost:8025" class="verify-btn">
      認証はこちらから
    </a>
-   @if (session('message'))
+  @if (session('message'))
             <div class="alert alert-success">
                 {{ session('message') }}
             </div>

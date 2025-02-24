@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-// use App\Http\Controllers\DebugController;
+ use App\Http\Controllers\DebugController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ItemController;
@@ -29,7 +29,7 @@ use App\Http\Controllers\EmailVerificationController;
 */
 
 
-// Route::get('/preview/{viewName}', [DebugController::class, 'show']);
+Route::get('/preview/{viewName}', [DebugController::class, 'show']);
 
 Route::get('/register',[RegisterController::class,'showRegister'])->name('register.show');
 Route::post('/register',[RegisterController::class,'processRegister'])->name('register.process');
@@ -50,12 +50,15 @@ Route::middleware(['auth'])->group(function () {
         ->middleware(['throttle:6,1'])
         ->name('verification.resend');
 });
-
-Route::get('/mypage/profile/show',[ProfileController::class,'showProfile'])->name('profile.show');
+Route::middleware(['auth', 'verified'])->group(function () {
+Route::get('/mypage/profile',[ProfileController::class,'showProfile'])->name('profile.show');
 Route::get('/mypage/profile/create',[ProfileController::class,'create'])->name('profile.create');
 Route::post('/mypage/profile/store',[ProfileController::class,'store'])->name('profile.store');
-Route::get('/mypage/profile/{user}',[ProfileController::class,'edit'])->name('profile.edit');
+Route::get('/mypage/profile/{user}',[ProfileController::class,'edit'])
+->where('user', '[0-9]+')
+->name('profile.edit');
 Route::patch('/mypage/profile/{user}',[ProfileController::class,'update'])->name('profile.update');
+});
 Route::get('/download-image', [ImageController::class, 'downloadImage']);
 // Route::post('/mypage/profile/store-address',[ProfileController::class,'storeProfileAddress'])->name('profile.storeAddress');
 // Route::post('/mypage/profile/store-image',[ProfileController::class,'storeProfileImage'])->name('profile.storeImage');

@@ -7,14 +7,27 @@
 @section('content')
 <div class="content">
     <h1>プロフィール設定</h1>
-    @if(isset($user->profile) && $user->profile->exists)
+    <!-- {{--@if($user->profile)--}} -->
+    <!-- {{--@if(isset($user->profile) && $user->profile->exists)--}} -->
     <!-- {{--@if(isset($user))--}} -->
-    <form action="{{route('profile.update',$user->profile->id)}}" method="post" enctype="multipart/form-data">
+@if(!empty($user->profile) && $user->profile->id)
+      @php $isEdit = true; @endphp
+@else
+    @php $isEdit = false; @endphp
+@endif
+<form action="{{ $isEdit ? route('profile.update', $user->profile->id) : route('profile.store') }}" method="post" enctype="multipart/form-data">
+    @csrf
+    @if($isEdit)
+        @method('PATCH')  <!-- 編集時のみ PATCH を使用 -->
+    @endif
+
+
+   {{-- <form action="{{ route('profile.update',$user->profile->id)}}" method="post" enctype="multipart/form-data">
         @method('PATCH')
     @else
     <form action="{{ route('profile.store') }}" class="" method="post" enctype="multipart/form-data">
     @endif
-        @csrf
+        @csrf--}}
     <div class="image-file">
         <input type="file" id="fileInput" style="display: none;" accept="image/*" name="img_url">
         <div id="previewArea">

@@ -16,7 +16,7 @@
             
         <!-- </div> -->
         <label class="top-title">{{$user->name}}</label>
-        <a href="{{ route('profile.edit' ,$user->id) }} " class="update-btn">プロフィールを編集</a>
+        <a href="{{ route('profile.edit' ,Auth::user()->id) }} " class="update-btn">プロフィールを編集</a>
         <!-- <button class="update-btn" type="submit"> -->
         <!-- </button> -->
     </div>
