@@ -12,6 +12,7 @@ use App\Http\Controllers\PurchaseController;
 use Illuminate\Support\Facades\AUth;
 use App\Http\Controllers\EmailVerificationController;
 use App\Http\Controllers\StripeController;
+use App\Http\Controllers\StripeWebhookController;
 
 /*
 |--------------------------------------------------------------------------
@@ -97,7 +98,7 @@ Route::post('/checkout',[StripeController::class,'checkout'])->name('stripe.chec
 Route::get('/success',[StripeController::class,'success'])->name('stripe.success');
 Route::get('/cancel',[StripeController::class,'cancel'])->name('stripe.cancel');
 
-
+Route::post('/stripe/webhook',[StripeWebhookController::class,'handleWebhook']);
 
 
 
