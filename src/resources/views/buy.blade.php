@@ -28,8 +28,8 @@
         <!-- <div class="select-inner"> -->
         <select class="select" name="payment_method" id="payment_method" onchange="this.form.submit()" >
             <option value="" disabled {{ empty(old('payment_method', $payment_method)) ? 'selected' : '' }}>選択してください</option>
-            <option value="コンビニ支払い" {{ old('payment_method', $payment_method) == 'コンビニ支払い' ? 'selected' : '' }}>コンビニ支払い</option>
-            <option value="カード支払い" {{ old('payment_method', $payment_method) == 'カード支払い' ? 'selected' : '' }}>カード支払い</option>
+            <option value="konbini" {{ old('payment_method', $payment_method) == 'konbini' ? 'selected' : '' }}>コンビニ支払い</option>
+            <option value="card" {{ old('payment_method', $payment_method) == 'card' ? 'selected' : '' }}>カード支払い</option>
     </select>
            
        
@@ -47,7 +47,8 @@
         </div>
     </form>
     {{--<form action="{{ route('purchase.store',['item_id' => $item->id]) }}" class="" method="post">--}}
-      <form action="{{ route('purchase.store') }}" method="post">  
+    {{--  <form action="{{ route('purchase.store') }}" method="post"> --}}
+    <form action="{{ route('stripe.checkout') }}" method="post"> 
     @csrf
      <input type="hidden" name="item_id" value="{{ $item->id }}">  
       <input type="hidden" name="payment_method" value="{{ $payment_method }}">
@@ -80,7 +81,16 @@
             </tr>
             <tr>
                 <th>支払い方法</th>
-                <td>{{$payment_method}}</td>
+                <td>
+                    @if($payment_method == 'card')
+                        カード支払い
+                    @elseif($payment_method == 'konbini')
+                        コンビニ支払い
+                    @else
+                        未選択
+                    @endif
+                </td>
+                {{--<td>{{$payment_method}}</td>--}}
             </tr>
             <!-- </div> -->
         </table>

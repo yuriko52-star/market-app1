@@ -11,6 +11,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PurchaseController;
 use Illuminate\Support\Facades\AUth;
 use App\Http\Controllers\EmailVerificationController;
+use App\Http\Controllers\StripeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -91,7 +92,10 @@ route::post('/purchase',[PurchaseController::class,'store'])->name('purchase.sto
 
 // Route::get('/mypage',[ProfileController::class,'index']);
  Route::get('/mypage',[ProfileController::class,'show'])->name('mypage');
+Route::post('/checkout',[StripeController::class,'checkout'])->name('stripe.checkout');
 
+Route::get('/success',[StripeController::class,'success'])->name('stripe.success');
+Route::get('/cancel',[StripeController::class,'cancel'])->name('stripe.cancel');
 
 
 

@@ -209,7 +209,8 @@ if ($purchase) {
 }
     */
     }
-    return redirect('/');
+    // return redirect('/');
+    return redirect()->route('stripe.checkout',[item_id => $item_id]);
     
     /*public function buyPage(Request $requet)
     {
