@@ -104,7 +104,8 @@
                 <div class="flex">
                   
                     <div class="image-file">
-                        <img src="{{ asset($comment->user->profile->img_url) }}" alt="" class="profile-img">
+                       <img src="{{ asset($comment->user->profile->img_url) }}" alt="" class="profile-img">
+                    
                     </div>
                         <label for="" class="user-name">{{$comment->user->name}}</label>
                 </div>
