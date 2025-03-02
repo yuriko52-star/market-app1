@@ -15,10 +15,15 @@ class ItemController extends Controller
     {
         $userId = Auth::id();
 
-        if ($request->query('tab') == 'mylist' && Auth::check()) {
+        if ($request->query('tab') == 'mylist') {
+
+         if (Auth::check()) {
         $items = Auth::user()->likedItems; // ユーザーが「いいね」したアイテムのみ取得
     } else {
         // ログインユーザーの出品アイテムを除外（未ログイン時はすべて取得）
+        $items = collect();
+        }
+    } else {
         if ($userId) {
             $items = Item::select('id', 'name', 'img_url')->where('user_id', '!=', $userId)->get();
         } else {
