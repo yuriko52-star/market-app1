@@ -22,7 +22,7 @@
                 <a href="/item/{{$item->id}}" class="image-card-link">
                 <img src="{{ asset($item->img_url) }}" alt="" class="image">
                 @if($item->isSold())
-                    <p>sold</p>
+                    <p>Sold</p>
                 @endif
                 </a>
        
