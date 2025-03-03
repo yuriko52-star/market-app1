@@ -19,7 +19,7 @@
         <div class="image-card-group">
             @foreach($items as $item)
             <div class="image-card">
-                <a href="/item/{{$item->id}}" class="image-card-link">
+                <a href="{{ route('item.show', ['item' =>$item->id]) }}" class="image-card-link">
                 <img src="{{ asset($item->img_url) }}" alt="" class="image">
                 @if($item->isSold())
                     <p>Sold</p>

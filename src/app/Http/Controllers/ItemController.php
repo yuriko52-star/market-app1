@@ -57,8 +57,8 @@ class ItemController extends Controller
 
     
 
-    public function show($itemId) 
-    {   $item = Item::with(['categories','condition'])->FindOrFail($itemId);
+    public function show(Item $item ) 
+    {   $item->load(['categories','condition']);
 
        
        

@@ -76,7 +76,7 @@ Route::get('/download-image', [ImageController::class, 'downloadImage']);
 
 Route::get('/', [ItemController::class, 'index'])->name('list');
 Route::get('/search',[ItemController::class,'search'])->name('item.search');
-Route::get('/item/{item_id}', [ItemController::class,'show']);
+Route::get('/item/{item}', [ItemController::class,'show'])->name('item.show');
 Route::get('/sell',[ItemController::class,'sellPage']);
 Route::get('/sell', [ItemController::class, 'create']);
 Route::post('/sell',[ItemController::class,'store'])->name('sell.store');
