@@ -16,7 +16,11 @@ class PurchaseController extends Controller
 {
     $user = auth()->user();
     $item = Item::findOrFail($item_id);
-    $profile = $user->profile;
+    $profile = $user->profile ?? (object) [
+         'address' => '',
+        'post_code' => '',
+        'building' => '',
+    ];
     $purchase = $user->purchases()->where('item_id', $item_id)->first();
 // dd($purchase);
 
@@ -34,9 +38,9 @@ class PurchaseController extends Controller
 public function updatePayment(Request $request)
 {
     $user = auth()->user();
-    //  dd($request->all());
+    
     $item_id = $request->input('item_id');
-    // $item_id = $request->input('item_id') ?? $request->route('item_id');
+
 
     if (!$item_id) {
         dd('Error: item_id is missing', $request->all());
@@ -119,6 +123,7 @@ public function updatePayment(Request $request)
     {
     
     $user = auth()->user();
+      
     // `purchases` テーブルに該当データがあるか確認
     $purchase = $user->purchases()->where('item_id', $item_id)->first();
 
@@ -138,11 +143,12 @@ public function updatePayment(Request $request)
             'shipping_address' => $request->input('shipping_address'),
             'shipping_post_code' => $request->input('shipping_post_code'),
             'shipping_building' => $request->input('shipping_building'),
-            'payment_method' => '',
+            'payment_method' => 'konbini',
         ]);
         $updatedPurchase = $user->purchases()->where('item_id', $item_id)->first();
     // dd($updatedPurchase); 
     }
+     
      return redirect()->route('purchase.show', ['item_id' => $item_id]);
     // return redirect()->route('purchase.show', ['item_id' => $item_id])->with('purchase',$purchase);
     // return redirect()->route('purchase.show', ['item_id' => $item_id])->with('purchase',$purchase);
@@ -210,7 +216,7 @@ if ($purchase) {
     */
     }
     // return redirect('/');
-    return redirect()->route('stripe.checkout',[item_id => $item_id]);
+    return redirect()->route('stripe.checkout',['item_id' => $item_id]);
     
     /*public function buyPage(Request $requet)
     {

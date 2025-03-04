@@ -74,7 +74,7 @@
     <div class="right-content">
         
         <table>
-            <!-- <div class="table__inner"> -->
+            
             <tr>
                 <th>商品代金</th>
                 <td>￥{{number_format($item->price)}}</td>
@@ -90,9 +90,9 @@
                         未選択
                     @endif
                 </td>
-                {{--<td>{{$payment_method}}</td>--}}
+                
             </tr>
-            <!-- </div> -->
+            
         </table>
         
 

@@ -83,4 +83,20 @@ class ListPageTest extends TestCase
       $response->assertSee('Sold');
 
     }
+
+    public function testPurchasedItemsAreShownOnMypage()
+    {
+      $user = User::factory()->create();
+      $item = Item::factory()->create();
+        
+      Purchase::factory()->create([
+            'user_id' => $user->id,
+            'item_id' => $item->id,
+      ]);
+
+      $response = $this->actingAs($user)->get(route('mypage', ['tab' => 'buy']));
+
+      $response->assertSee($item->name);
+      $response->assertSee($item->img_url);
+    }
 }
