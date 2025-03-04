@@ -26,7 +26,7 @@ class DetailPageTest extends TestCase
             'user_id' => $user_id,
             'img_url' => '/storage/images/user-profile.jpg',
         ]);
-        $category = Category::factory()->create();
+        $categories = Category::factory()->count(3)->create();
         $condition = Condition::factory()->create();
         //  $condition_id = $condition->id;
         $item = Item::factory()->create([
@@ -38,7 +38,7 @@ class DetailPageTest extends TestCase
             'condition_id' => $condition->id,
            
         ]);
-        $item->categories()->attach($category->id);
+        $item->categories()->attach($categories->pluck('id'));
         Like::factory()->count(3)->create([
             'item_id' => $item->id,
             // 'user_id' => $user->id,
@@ -57,7 +57,11 @@ class DetailPageTest extends TestCase
         $response->assertSee(number_format($item->price));
         $response->assertSee($item->description);
         $response->assertSee($condition->content);
-        $response->assertSee($category->name);
+        // $response->assertSee($category->name);
+
+        foreach ($categories as $category) {
+            $response->assertSee($category->name);
+        }
 
         $response->assertSee('3');
 
