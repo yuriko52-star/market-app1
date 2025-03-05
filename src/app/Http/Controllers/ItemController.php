@@ -101,6 +101,8 @@ class ItemController extends Controller
         $filename = uniqid() . '_' . $request->file('img_url')->getClientOriginalName();
         $request->file('img_url')->storeAs('public/images', $filename);
         $item->img_url = "/storage/images/$filename";
+
+        // dd($item->img_url);
     } 
         $item->save();
         if($request->has('category_ids')) {

@@ -123,7 +123,7 @@ public function updatePayment(Request $request)
     {
     
     $user = auth()->user();
-      
+     
     // `purchases` テーブルに該当データがあるか確認
     $purchase = $user->purchases()->where('item_id', $item_id)->first();
 
