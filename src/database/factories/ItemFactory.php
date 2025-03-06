@@ -19,7 +19,11 @@ class ItemFactory extends Factory
     {
         return [
             'name' => $this->faker->word,
-            'img_url' => $this->faker->imageUrl(),
+            'img_url' =>$this->faker->randomElement([
+                '/storage/images/test.jpg',
+                '/storage/images/testC.jpg',
+                '/storage/images/testD.jpg',
+            ]),
             'user_id' =>User::factory(),
             'condition_id'=>Condition::factory(),
             'brand_name' =>$this->faker->optional()->word,

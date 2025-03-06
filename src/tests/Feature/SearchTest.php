@@ -52,5 +52,55 @@ class SearchTest extends TestCase
         
     }
 
+
+public function testSearchQueryShouldPersistOnTheMylistPageWithoutOwnItems()
+{
+    
+    $user = User::factory()->create();
+
+    
+    $otherUser = User::factory()->create();
    
+    $otherItems = collect([
+        Item::factory()->create([
+        'user_id' => $otherUser->id,
+            'name' => 'テスト商品C',
+            'img_url' =>'/storage/images/testC.jpg',
+        ]),
+        Item::factory()->create([
+            'user_id' => $otherUser->id,
+            'name' => 'テスト商品D',
+            'img_url' => '/storage/images/testD.jpg',
+        ]),
+    ]);
+
+
+    
+    $ownItem = Item::factory()->create([
+        'user_id' => $user->id,
+        'name' => 'テスト商品1',
+        'img_url' => '/storage/images/test1.jpg',
+    ]);
+
+    
+    $response = $this->actingAs($user)->get(route('list.search', ['keyword' => 'テスト']));
+
+    
+    foreach ($otherItems as $item) {
+        $response->assertSee($item->name);
+        $response->assertSee($item->img_url);
+    }
+    $response = $this->actingAs($user)->get(route('list.search', ['keyword' => 'テスト']));
+
+
+    $response->assertDontSee($ownItem->name);
+    $response->assertDontSee($ownItem->img_url);
+    
+    $response->assertSee('href="http://localhost?tab=recommend&amp;keyword=%E3%83%86%E3%82%B9%E3%83%88"', false);
+    $response->assertSee('href="http://localhost/list/search?tab=mylist&amp;keyword=%E3%83%86%E3%82%B9%E3%83%88"', false);
+
 }
+}
+
+
+   

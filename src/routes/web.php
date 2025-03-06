@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
- use App\Http\Controllers\DebugController;
+//  use App\Http\Controllers\DebugController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ItemController;
@@ -31,7 +31,7 @@ use App\Http\Controllers\StripeWebhookController;
 */
 
 
-Route::get('/preview/{viewName}', [DebugController::class, 'show']);
+// Route::get('/preview/{viewName}', [DebugController::class, 'show']);
 
 Route::get('/register',[RegisterController::class,'showRegister'])->name('register.show');
 Route::post('/register',[RegisterController::class,'processRegister'])->name('register.process');
@@ -75,6 +75,8 @@ Route::get('/download-image', [ImageController::class, 'downloadImage']);
 
 
 Route::get('/', [ItemController::class, 'index'])->name('list');
+Route::get('/list/search', [ItemController::class, 'list'])->name('list.search'); // 検索結果保持用
+
 Route::get('/search',[ItemController::class,'search'])->name('item.search');
 Route::get('/item/{item}', [ItemController::class,'show'])->name('item.show');
 Route::get('/sell',[ItemController::class,'sellPage']);

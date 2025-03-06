@@ -33,24 +33,41 @@ class ItemController extends Controller
 
     return view('list', compact('items'));
 }
-
-
-
-       /* if ($userId) {
-             $items = Item::select('id','name','img_url')->where('user_id','!=',$userId)->get();
-        } else {
-            
-        $items = Item::select('id','name','img_url')->get();
-        }
-
-        return view ('list',compact('items'));
-        */
+public function list(Request $request)
+{
+  
+    $userId = Auth::id();
     
+    $tab = $request->query('tab', 'recommend');
+
+    
+    if ($request->filled('keyword')) {
+        session()->put('search_keyword', $request->input('keyword'));
+    }
+    $keyword = session('search_keyword');
+
+    
+    $query = Item::query();
+    if ($keyword) {
+        $query->where('name', 'LIKE', "%{$keyword}%");
+    }
+  if (!is_null($userId)) {
+        $query->where('user_id', '!=', $userId);
+    }
+        $items = $query->get();
+    return view('list', compact('items'));
+}
+
     public function search (Request $request)
      {
+         $userId = Auth::id();
         $keyword = $request->input('keyword');
 
-        $items = Item::where('name', 'LIKE', "%{$keyword}%")->get();
+        session()->put('search_keyword', $keyword);
+
+        $items = Item::where('name', 'LIKE', "%{$keyword}%")
+        ->where('user_id', '!=', $userId)
+        ->get();
 
         return view('list', compact('items'));
      }

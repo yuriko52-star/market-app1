@@ -9,8 +9,22 @@
     <div class="top-content">
         <nav>
             <ul>
-                <li><a href="{{ route('list') }}" class="page-title">おすすめ</a></li>
-                <li><a href="{{ route('list', ['tab' => 'mylist']) }}" class="page-title my-list">マイリスト</a></li>
+                 {{--<li><a href="{{ route('list') }}" class="page-title">おすすめ</a></li>
+               <li><a href="{{ route('list', ['tab' => 'mylist']) }}" class="page-title my-list">マイリスト</a></li>--}}
+                <li>
+                   <a href="{{ route('list', ['tab' => 'recommend', 'keyword' => session('search_keyword')]) }}" class="page-title">おすすめ</a>
+ 
+                </li>
+                <li>
+                    @if(session('search_keyword'))
+                    <a href="{{ route('list.search', ['tab' => 'mylist', 'keyword' => session('search_keyword')]) }}" class="page-title my-list">マイリスト</a>
+
+                        {{--<a href="{{ route('list.search', ['tab' => 'mylist']) }}?keyword={{ session('search_keyword') }}" class="page-title my-list">マイリスト</a>
+                            --}}
+                    @else
+                        <a href="{{ route('list', ['tab' => 'mylist']) }}" class="page-title my-list">マイリスト</a>
+                    @endif
+                </li>
             </ul>
         </nav>
     </div>
