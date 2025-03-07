@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\ServiceProvider;
 // use Illuminate\Support\Str;
 use Laravel\Fortify\Fortify;
-// use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Hash;
 // use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Laravel\Fortify\Http\Requests\LoginRequest as FortifyLoginRequest;
@@ -47,8 +47,6 @@ class FortifyServiceProvider extends ServiceProvider
          return view('auth.register');
         });
 
-
-        // Fortifyのメール認証画面を設定
         Fortify::verifyEmailView(function () {
         return view('auth.verify-email');
         });
@@ -59,11 +57,25 @@ class FortifyServiceProvider extends ServiceProvider
             return response()->view('auth.verify-email');
         }
         );
-
-
-
          Fortify::loginView(function () { 
             return view('auth.login'); 
+        });
+
+        Fortify::authenticateUsing(function (Request $request) {
+            $user = User::where('email', $request->email)->first();
+
+            if($user && Hash::check($request->password, $user->password)) {
+                return $user;
+            }
+            return null;
+        });
+
+
+        Fortify::redirects('login', function ($request) {
+            if ($request->user()->hasVerifiedEmail()) {
+                return route('list');
+            }
+            return route('verification.notice');
         });
 
         RateLimiter::for('login', function (Request $request) {
