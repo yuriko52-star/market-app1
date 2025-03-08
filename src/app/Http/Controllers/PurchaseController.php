@@ -13,7 +13,11 @@ use Illuminate\Support\Facades\Auth;
 class PurchaseController extends Controller
 {
     public function show($item_id)
+    
 {
+ if (!auth()->check()) {
+    return redirect()->route('login');
+        }
     $user = auth()->user();
     $item = Item::findOrFail($item_id);
     $profile = $user->profile ?? (object) [

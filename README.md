@@ -59,6 +59,16 @@
 4. コンテナ再起動  
     docker-compose down  
     docker-compose up -d  
+##  stripe決済の設定  
+    composer require stripe/stripe-php  
+    config/services.phpに追加  
+    return [  
+        'stripe' => [  
+            'key' => env('STRIPE_KEY'),  
+            'secret' => env('STRIPE_SECRET'),  
+        ],  
+    ];  
+    
 
 
 
@@ -70,6 +80,9 @@
 
 - メール認証(MailHog): http://localhost:8025/  
 
+## ER図  
+  
+![ER図](erd.png)  
 
 ## 使用技術（実行環境）  
  - PHP7.4.9  
