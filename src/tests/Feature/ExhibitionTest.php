@@ -29,7 +29,7 @@ class ExhibitionTest extends TestCase
     */
     public function testAuthenticatedUserCanExhibitItem()
     {
-        //  Storage::fake('public');
+       
 
         $user = User::factory()->create();
         $category = Category::factory()->create();

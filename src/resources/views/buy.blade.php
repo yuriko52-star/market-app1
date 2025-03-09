@@ -7,12 +7,12 @@
 @section('content')
 
 <div class="all-contents">
-    <!-- <form action="" class=""> -->
+   
     <div class="left-content">
         <div class="item">
             <div class="image-card">
              <img src="{{ asset($item->img_url) }}" alt="" class="item-img">
-             <!-- <p class="img">商品画像</p> -->
+           
              </div>
             <div class="item-info">
              <label for="" class="item-name">{{ $item->name }}</label>
@@ -25,7 +25,7 @@
         <div class="pay-method">
         <label for="payment_method" class="label-title">支払い方法</label>
        
-        <!-- <div class="select-inner"> -->
+        
         <select class="select" name="payment_method" id="payment_method" onchange="this.form.submit()" >
             <option value="" disabled {{ empty(old('payment_method', $payment_method)) ? 'selected' : '' }}>選択してください</option>
             <option value="konbini" {{ old('payment_method', $payment_method) == 'konbini' ? 'selected' : '' }}>コンビニ支払い</option>
@@ -43,11 +43,10 @@
             {{$message}}
             @enderror
         </p>
-        <!-- </div> -->
+        
         </div>
     </form>
-    {{--<form action="{{ route('purchase.store',['item_id' => $item->id]) }}" class="" method="post">--}}
-    {{--  <form action="{{ route('purchase.store') }}" method="post"> --}}
+    
     <form action="{{ route('stripe.checkout') }}" method="post"> 
     @csrf
      <input type="hidden" name="item_id" value="{{ $item->id }}">  
@@ -60,14 +59,9 @@
          <p class="address"><span>〒</span>{{$shipping_post_code}}</p>
          <p class="address">{{$shipping_address}}</p>
          <p class="address">{{$shipping_building}}</p>
-        
-         {{--   <input type="hidden" name="shipping_address" value="{{ auth()->user()->profile->address }}">
-            <input type="hidden" name="shipping_post_code" value="{{ auth()->user()->profile->post_code }}">
-            <input type="hidden" name="shipping_building" value="{{  auth()->user()->profile->building }}">--}}
-             <input type="hidden" name="shipping_address" value="{{ $shipping_address }}">
+            <input type="hidden" name="shipping_address" value="{{ $shipping_address }}">
             <input type="hidden" name="shipping_post_code" value="{{ $shipping_post_code }}">
             <input type="hidden" name="shipping_building" value="{{ $shipping_building }}">
-  
         </div>
     </div>
 
@@ -100,7 +94,7 @@
             <button class="button" type="submit">購入する</button>
         </div>
     </div>
-    <!-- </form> -->
+    
 </div>
 </form>
 @endsection

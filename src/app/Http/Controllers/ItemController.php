@@ -13,14 +13,14 @@ class ItemController extends Controller
 {
     public function index(Request $request) 
     {
-        $userId = Auth::id();
+       $userId = Auth::id();
 
         if ($request->query('tab') == 'mylist') {
 
          if (Auth::check()) {
-        $items = Auth::user()->likedItems; // ユーザーが「いいね」したアイテムのみ取得
+        $items = Auth::user()->likedItems; 
     } else {
-        // ログインユーザーの出品アイテムを除外（未ログイン時はすべて取得）
+        
         $items = collect();
         }
     } else {
@@ -33,42 +33,16 @@ class ItemController extends Controller
 
     return view('list', compact('items'));
 }
-public function list(Request $request)
-{
+
   
-    $userId = Auth::id();
-    
-    $tab = $request->query('tab', 'recommend');
 
-    
-    if ($request->filled('keyword')) {
-        session()->put('search_keyword', $request->input('keyword'));
-    }
-    $keyword = session('search_keyword');
-
-    
-    $query = Item::query();
-    if ($keyword) {
-        $query->where('name', 'LIKE', "%{$keyword}%");
-    }
-  if (!is_null($userId)) {
-        $query->where('user_id', '!=', $userId);
-    }
-        $items = $query->get();
-    return view('list', compact('items'));
-}
 
     public function search (Request $request)
      {
-         $userId = Auth::id();
+        
         $keyword = $request->input('keyword');
-
         session()->put('search_keyword', $keyword);
-
-        $items = Item::where('name', 'LIKE', "%{$keyword}%")
-        ->where('user_id', '!=', $userId)
-        ->get();
-
+        $items = Item::where('name', 'LIKE', "%{$keyword}%")->get();
         return view('list', compact('items'));
      }
 
@@ -89,7 +63,7 @@ public function list(Request $request)
     }
     public function create()
     {
-        //  dd(Category::all()); // デバッグ用
+        
 
         $user = auth()->user();
         $item = new Item();
@@ -100,11 +74,10 @@ public function list(Request $request)
     }
     public function store(ExhibitionRequest $request)
     {   
-        if (!auth()->check()) {
-    return redirect()->route('login');
-        }
-        //  $user = auth()->user();
-        //  $item->user_id = $user->id; 
+        $user = auth()->user();
+
+    
+    
          $user_id = auth()->id();
         $item = new Item();
         $item->user_id = $user_id;
@@ -119,7 +92,7 @@ public function list(Request $request)
         $request->file('img_url')->storeAs('public/images', $filename);
         $item->img_url = "/storage/images/$filename";
 
-        // dd($item->img_url);
+        
     } 
         $item->save();
         if($request->has('category_ids')) {

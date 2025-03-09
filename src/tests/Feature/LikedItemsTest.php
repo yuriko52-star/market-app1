@@ -46,8 +46,7 @@ class LikedItemsTest extends TestCase
             $response->assertSee($item->name);
             $response->assertSee($item->img_url);
         }
-        // dd($response->getContent());
-        // dd($notLikedItem);
+        
         $response->assertDontSeeText($notLikedItem->name);
         $response->assertDontSeeText($notLikedItem->img_url);
     }

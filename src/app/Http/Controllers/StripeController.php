@@ -22,44 +22,36 @@ class StripeController extends Controller
     $item = Item::findOrFail($request->item_id);
     $paymentMethod =$request->input('payment_method');
 
-    // $store = $request->input('store','famipay');
-
-    // $session = Session::create([
     $sessionData = [
-
-    
-        'payment_method_types' => [$paymentMethod],
-        'line_items' => [[
+            'payment_method_types' => [$paymentMethod],
+            'line_items' => [[
             'price_data' => [
                 'currency' => 'JPY',
                 'product_data' => ['name' => $item->name],
                 'unit_amount' => $item->price,
-            ],
+                ],
             'quantity' => 1,
         ]],
         'mode'=> 'payment',
         'success_url' => route('stripe.success',[
             'status' => $paymentMethod === 'konbini' ? 'pending' : 'success',
-            'payment_method' => $paymentMethod // 🔹 どの支払い方法か分かるようにする
+            'payment_method' => $paymentMethod 
         ]),
         'cancel_url' => route('stripe.cancel'),
-    // ]);
-    ];
-
-    if ($paymentMethod === 'konbini') {
-        $sessionData['payment_method_options'] = [
-            'konbini' => []
-                
         ];
-        
-    }
 
-    // 🔹 Stripe セッションを作成
+        if ($paymentMethod === 'konbini') 
+        {
+            $sessionData['payment_method_options'] = [
+            'konbini' => []
+            ];
+        }
+
     $session = Session::create($sessionData);
     return redirect($session->url);
+    } 
 
-   } 
-   public function success()
+    public function success()
    {
 
     return view('success');

@@ -9,22 +9,16 @@
     position: relative;
     display: flex;
     margin-bottom: 60px;
-    /* align-items: center; */
 }
 
-/* #fileInput { 
-    display: none;
-}
-    */
+
 #previewArea {
 
     width: 150px;
     height: 150px;
     border-radius: 50%;
     background-color: #d9d9d9;
-    /* text-align: left; */
     margin-right: 400px;
-
 }
 .img {
     width: 150px;
@@ -32,7 +26,6 @@
     border-radius: 50%;
 }
 .image-btn {
-
     transform: translate(-350px, 50px);
     width: 130px;
     height: 30px;
@@ -46,14 +39,12 @@
     font-size: 15px;
     font-weight: 700;
     cursor: pointer;
-
 }
 
 h1 {
     font-family: Inter;
     font-size: 36px;
     font-weight: 700;
-
 }
 
 .label-title {
@@ -62,7 +53,6 @@ h1 {
     font-size: 24px;
     font-weight: 700;
     margin: 0;
-
 }
 
 .text {
@@ -71,7 +61,6 @@ h1 {
     border: 1px solid #5f5f5f;
     border-radius: 4px;
     margin-bottom: 20px;
-
 }
 
 .update-btn {
@@ -82,11 +71,9 @@ h1 {
     background-color: #ff5555;
     color: #fff;
     cursor: pointer;
-    /* margin-top: 80px; */
     font-family: Inter;
     font-size: 26px;
     font-weight: 700;
-
 }
 
 .link {
@@ -100,5 +87,4 @@ h1 {
 .form_error {
     color: red;
     text-align: left;
-
 }

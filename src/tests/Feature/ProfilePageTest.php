@@ -35,9 +35,9 @@ class ProfilePageTest extends TestCase
             'address' => '東京都渋谷区',
             'building' => '渋谷タワー10F',
         ]);
-         $response = $this->actingAs($user)->get(route('profile.edit', $user->id));
-          $response->assertStatus(200);
-          $response->assertSee('桃太郎侍');
+        $response = $this->actingAs($user)->get(route('profile.edit', $user->id));
+        $response->assertStatus(200);
+        $response->assertSee('桃太郎侍');
         $response->assertSee('test-user.jpg'); 
         $response->assertSee('123-4567'); 
         $response->assertSee('東京都渋谷区'); 

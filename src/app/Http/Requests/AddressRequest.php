@@ -28,7 +28,6 @@ class AddressRequest extends FormRequest
             'post_code' =>['required','regex:/^\d{3}-\d{4}$/'],
             'address'=> ['required'],
             'building' => ['required']
-            
         ];
     }
     public function messages() 
@@ -40,7 +39,5 @@ class AddressRequest extends FormRequest
             'address.required' => '住所を入力してください',
             'building.required' => '建物名を入力してください',
         ];
-        
-
     }
 }

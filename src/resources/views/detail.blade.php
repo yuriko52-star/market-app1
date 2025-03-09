@@ -12,7 +12,7 @@
         <div class="image-card">
            
              <img src="{{ asset($item->img_url)}}" alt="" class="item-img">
-             <!-- <p class="img">商品画像</p> -->
+            
         </div>
     </div>
 
@@ -21,21 +21,21 @@
             {{$item->name}}
         </label>
         <p class="brand-name">{{$item->brand_name}}</p>
-        <!--  -->
+       
         <p class="item-price"><span>￥</span>{{ number_format($item->price) }}<span>（税込）</span>
         </p>
         <div class="flex">
             <div class="likes">
        @php
         $liked = false;
-        $likeCount = $item->likedUsers()->count(); // データベースの「いいね」数を取得
+        $likeCount = $item->likedUsers()->count();
 
         if (session()->has('guest_likes')) {
         $guestLikes = session('guest_likes');
         if (in_array($item->id, $guestLikes)) {
-            $liked = true; // 未ログインユーザーが「いいね」済みなら `liked` クラスを適用
+            $liked = true;  
         }
-        $likeCount += count($guestLikes); // セッションの「いいね」数を合計
+        $likeCount += count($guestLikes); 
         }
         if (Auth::check()) {
         $liked = \App\Models\Like::where('user_id', Auth::id())->where('item_id', $item->id)->exists();
@@ -70,12 +70,7 @@
             <label for="" class="section-title">商品説明
             </label>
             <p class="description">{{$item->description}}</p>
-            
-            <!-- <p class="description">新品<br> -->
-            <!-- 商品の状態は良好です。傷もありません。</p> -->
             <p class="description">購入後、即発送いたします。</p>
-
-            
         </section>
 
         <section class="item-info">
@@ -84,8 +79,7 @@
                 <dt>カテゴリー</dt>
                 @foreach($item->categories as $category)
                 <dd class="category">{{$category->name}}</dd>
-                <!-- <dd class="category">メンズ</dd> -->
-                 @endforeach
+                @endforeach
             </dl>
             <dl>
                 <dt>商品の状態</dt>
@@ -95,11 +89,11 @@
             </dl>
         </section>
         <section class="comments-form">
-            {{--@if(Auth::check())--}}
+            
             
             <form action="{{ route('comment.store',['item_id' => $item->id]) }}" class="" method="post">
                 @csrf
-                <label for="" class="comment-title">コメント（{{ $item->comments->count()}} ）</label>
+                <label for="" class="comment-title">コメント({{ $item->comments->count()}} )</label>
                 @foreach($item->comments as $comment)
                 <div class="flex">
                   
@@ -124,7 +118,6 @@
                 </div>
                 
             </form>
-            {{--@endif--}}
         </section>
     </div>
 </div>

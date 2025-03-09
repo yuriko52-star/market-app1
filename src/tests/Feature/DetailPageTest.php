@@ -16,7 +16,18 @@ use App\Models\Condition;
 class DetailPageTest extends TestCase
 {
     use RefreshDatabase;
+/**
+     * A basic feature test example.
+     *
+     * @return void
+     */
+    /*public function test_example()
+    {
+        $response = $this->get('/');
 
+        $response->assertStatus(200);
+    }
+        */
     public function testDetailPageDisplayCorrectInformation()
     {
         $user = User::factory()->create();
@@ -28,7 +39,7 @@ class DetailPageTest extends TestCase
         ]);
         $categories = Category::factory()->count(3)->create();
         $condition = Condition::factory()->create();
-        //  $condition_id = $condition->id;
+        
         $item = Item::factory()->create([
             'name' => 'テスト商品',
             'brand_name' => 'テストブランド',
@@ -41,7 +52,7 @@ class DetailPageTest extends TestCase
         $item->categories()->attach($categories->pluck('id'));
         Like::factory()->count(3)->create([
             'item_id' => $item->id,
-            // 'user_id' => $user->id,
+            
         ]);
         $comments = Comment::factory()->count(2)->create([
             'item_id' => $item->id,
@@ -57,8 +68,7 @@ class DetailPageTest extends TestCase
         $response->assertSee(number_format($item->price));
         $response->assertSee($item->description);
         $response->assertSee($condition->content);
-        // $response->assertSee($category->name);
-
+        
         foreach ($categories as $category) {
             $response->assertSee($category->name);
         }
@@ -76,16 +86,5 @@ class DetailPageTest extends TestCase
 
         
     }
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
-    /*public function test_example()
-    {
-        $response = $this->get('/');
-
-        $response->assertStatus(200);
-    }
-        */
+    
 }

@@ -7,18 +7,16 @@
 @section('content')
 <div class="content">
     <div class="top-content">
-         <form action="" class="">
+        
             
     <div class="image-file">
-        <!-- <input type="text"  class="text-image"> -->
-        <!-- <div id="previewArea"> -->
+        
             <img src="{{ asset($user->profile->img_url) }}" alt="" class="profile_img">
             
-        <!-- </div> -->
+       
         <label class="top-title">{{$user->name}}</label>
         <a href="{{ route('profile.edit' ,Auth::user()->id) }} " class="update-btn">プロフィールを編集</a>
-        <!-- <button class="update-btn" type="submit"> -->
-        <!-- </button> -->
+        
     </div>
   
         <nav>
@@ -40,10 +38,9 @@
             @foreach($items as $buyItem)
             <div class="image-card">
                  
-            <!-- <a href="" class="image-card-link"> -->
+            
                 <img src="{{ asset($buyItem->img_url) }}" alt="" class="image">
-                <!-- <p>商品画像</p> -->
-            <!-- </a> -->
+                
        
             <label for="" class="image-card-name">{{$buyItem->name}}</label>
             </div>
@@ -53,10 +50,9 @@
             @foreach($items as $sellItem)
             <div class="image-card">
                  
-            <!-- <a href="" class="image-card-link"> -->
+           
                 <img src="{{ asset($sellItem->img_url) }}" alt="" class="image">
-                <!-- <p>商品画像</p> -->
-            <!-- </a> -->
+                
        
             <label for="" class="image-card-name">{{$sellItem->name}}</label>
             </div>

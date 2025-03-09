@@ -71,7 +71,7 @@ class ListPageTest extends TestCase
         'user_id' => $seller->id,
       ]);
 
-      // $purchase = $this->get(route('list'));
+      
       Purchase::factory()->create([
         'user_id' => $buyer->id,
         'item_id' => $item->id,

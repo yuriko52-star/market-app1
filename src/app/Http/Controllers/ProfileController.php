@@ -21,31 +21,10 @@ class ProfileController extends Controller
   }
     public function showProfile() {
          $user = Auth::user();
-           $profile = $user->profile ?? null; // プロフィールがある場合のみ取得
+           $profile = $user->profile ?? null; 
     
-       /* $profile = $user->profile ?? $user->profile()->create([
-          'img_url' => '',
-          'post_code' => '',
-          'address' => '',
-          'building' => '',
-        ]);
-      */
-        // dd($profile);
-        
-       /* if (!$user->profile) {
-        $profile = $user->profile()->create([
-            'img_url' => '',
-            'post_code' => '',
-            'address' => '',
-            'building' => '',
-        ]);
-        */
-        // $user->setRelation('profile', $profile);
-      return view('profile',compact('user','profile'));
+       return view('profile',compact('user','profile'));
     }
-    // dd($user->profile);
-      //  return view('profile',compact('user'));
-      
     
     public function create() {
       $profile = new Profile();
@@ -53,42 +32,10 @@ class ProfileController extends Controller
       return view('profile.create',compact('profile'));
     
     }
-    /*public function storeProfileAddress(Request $request) 
-    {$profile = Profile::firstOrCreate(
-        ['user_id' => Auth::id()], // 条件
-        ['post_code' => '', 'address' => '', 'building' => '', 'img_url' => ''] // 初期値
-    );
-        // $profile = Profile::where('user_id', Auth::id())->first();
-
-
-      // $profile = new Profile();
-      // $profile->user_id = Auth::id();
-      $profile->post_code = $request->post_code;
-      $profile->address = $request->address;
-      $profile->building = $request->building;
-      $profile->save();
-
-     return redirect()->route('list');
-    }
-    
-
-    public function storeProfileImage(Request $request) 
-    {   \Log::info('storeProfileImage メソッドが実行されました');
-
-    //  dd($request->all());
-        $profile = Profile::where('user_id', Auth::id())->first();
-        if ($request->hasFile('img_url') && $request->file('img_url')->isValid()) {
-          $filename = uniqid() . '_' . $request->file('img_url')->getClientOriginalName();
-          $request->file('img_url')->storeAs('images', $filename,'public');
-          $profile->img_url = $filename;
-        } 
-        $profile->save();
-        return redirect()->route('list');
-    }
-    */
+   
     public function store(ProfileRequest $profileRequest, AddressRequest $addressRequest) 
     {
-      //  dd($profileRequest->all());
+      
       $profile = new Profile();
       $profile->user_id = Auth::id();
       $profile->post_code  = $addressRequest->post_code;
@@ -103,37 +50,28 @@ class ProfileController extends Controller
         $profile->save();
      return redirect()->route('list');
     }
-    /*public function index()
-     {
-      $user = Auth::user();
-      return view('mypage');
-    }
-      */
-
-
+    
     public function show(Request $request) 
     {
        $user = Auth::user();
       
         $tab = $request->query('tab');
         
-
-          $items = collect();
+        $items = collect();
       if($tab === 'buy')
       {
-        
-         $items = $user->buyItems()->get();
-      }elseif($tab === 'sell') {
+        $items = $user->buyItems()->get();
+      }elseif($tab === 'sell') 
+      {
         $items = $user->sellItems()->get();
       }
-    //  dd($tab,$items);
+    
       return view('mypage',compact('user','items','tab'));
     }
   public function edit($userId)
   {
-    // dd($user);
     $user = User::find($userId);
-    //  $user = auth()->user();
+   
     return view('profile',compact('user'));
   }
   
@@ -164,8 +102,7 @@ class ProfileController extends Controller
         $user->profile->update($validated);
     }
 
-    // return redirect()->route('list');
-     return redirect()->route('profile.edit' ,$user->id);
+    return redirect()->route('profile.edit' ,$user->id);
   }
 
 }

@@ -5,11 +5,7 @@
     margin: 0 auto;
 }
 
-/*body {
 
-     margin: 0 auto; 
- } 
-*/
 .header {
     background-color: #000;
     height: 85px;
@@ -28,23 +24,19 @@
 }
 .header__logo {
    display: block;
-    /* width: 30vw; */
     width: 370px;
 }
 img {
     width: 100%;
 }
 .search-form__input {
-    
     width: 30vw;
     padding: 10px 20px;
     margin-left: 2%;
     height: 25px ;
     border-radius: 5px;
     margin-bottom: 5px;
-    }
-
-
+}
 
 input::placeholder {
     color: #000 ;
@@ -58,23 +50,15 @@ input::placeholder {
 
 .header-nav {
     display: flex;
-        justify-content: center;
-        width: 35vw;
-        margin-left: 2%;
-        align-items: center;
+    justify-content: center;
+    width: 35vw;
+    margin-left: 2%;
+    align-items: center;
 }
 li {
     list-style: none;
-   
+}
 
-}
-/*.header-btn-group {
-    display: flex;
-     justify-content: center; 
-    width: 30vw;
-     margin-left: 2%;
-}
-*/
 
 .btn {
     color: #fff;
@@ -83,8 +67,6 @@ li {
     font-family: Inter;
     font-weight: 400;
     width: 135px;
-    /* font-size: 24px; */
-
     cursor: pointer;
 }
 .header-nav-link {
@@ -93,8 +75,8 @@ li {
     display: block;
     align-items: center;
     font-family: Inter;
-        font-weight: 400;
-        text-align: center;
+    font-weight: 400;
+    text-align: center;
 }
 .sell-btn {
     color: #000;
@@ -105,7 +87,6 @@ li {
     display: inline-block;
     align-items: center;
     text-align: center;
-    /* text-decoration: none; */
 }
 
 @media screen and (min-width: 1400px) and (max-width: 1540px)
@@ -116,10 +97,8 @@ li {
     .header-nav-link {
         font-size: 24px;
         margin-right: 20px;
-
     }
     .btn {
-       
         font-size: 24px;
         width: 135px;
         padding-top: 5px;
@@ -131,9 +110,7 @@ li {
         width: 90px;
         margin-bottom: 10px;
         padding-top: 5px;
-
     }
-
 }
 
 
@@ -145,11 +122,9 @@ li {
   .search-form__input {
          width: 200px; 
          display: block; 
-  }         
+    }         
     input::placeholder {
-    
-    font-size: 20px;
-    
+         font-size: 20px;
     }
 
     .header-nav-link {
@@ -163,12 +138,9 @@ li {
     .logout-btn {
         margin-right: 20px;
     }
-
-    
-
     .sell-btn {
         width: 60px;
-         margin-right: 20px; 
-         padding-top: 5px;
+        margin-right: 20px; 
+        padding-top: 5px;
     }
 }

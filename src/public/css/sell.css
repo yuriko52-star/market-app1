@@ -11,38 +11,21 @@ h1 {
     font-weight: 700;
 
 }
-/* .image-file { */
-    /* position: relative; */
-    /* display: flex; */
-    /* margin-bottom: 60px; */
-    /* align-items: center; */
-/* } */
 
-/* #fileInput { 
-    display: none;
-}
-    */
 #previewArea {
-
     width: 680px;
     height: 150px;
     border-radius: 4px;
     border: 1px dotted #5f5f5f;
     position: relative;
-    /* text-align: left; */
-    /* margin-right: 400px; */
-
 }
 
 .image-btn {
-
     transform: translate(250px, 40px);
     display: block;
     width: 165px;
-    /* height: 43px; */
     padding-top: 5px ;
     border-radius: 10px;
-    
     background-color: #fff;
     color: #ff5655;
     border: 2px solid #ff5555;
@@ -50,78 +33,52 @@ h1 {
     font-size: 16px;
     font-weight: 700;
     cursor: pointer;
-
 }
-
-
-
 .label {
     display: block;
     font-family: Inter;
-        font-size: 24px;
-        font-weight: 700;
-        
-        text-align: left;
-       
+    font-size: 24px;
+    font-weight: 700;
+    text-align: left;
 }
 .section-title {
     font-family: Inter;
-        font-size: 30px;
-        font-weight: 700;
-       color: #5f5f5f;
-        text-align: left;
-        border-bottom: 1px solid #5f5f5f;
+    font-size: 30px;
+    font-weight: 700;
+    color: #5f5f5f;
+    text-align: left;
+    border-bottom: 1px solid #5f5f5f;
 }
-/* ボタン全体のコンテナ */
+
 .button-container {
     display: flex;
     flex-wrap: wrap;
-    /* 折り返し設定 */
-    /* justify-content: space-between; */
     gap: 10px;
-    /* ボタン間のスペース */
     width: 680px;
-    /* 全体の横幅 */
-     margin: 30px auto; 
-    /* センター寄せ */
+    margin: 30px auto; 
 }
 .category-checkbox {
     display: none;
 }
-/* ボタンスタイル */
+
 .category-button {
     display: inline-block;
-   /* margin: 5px auto 20px; */
     min-width: 52px;
-    /* max-width: 141px; */
-    /* flex: 1 1 calc(100% / 6 - 10px); */
-    /* 横6個並ぶ設定 (間隔を考慮) */
     text-align: center;
     margin-bottom: 30px;
-
-     padding: 10px  15px 0; 
+    padding: 10px  15px 0; 
     height: 22px;
     border: 2px solid #ff5655;
-    /* ボタンの枠線 */
     background-color: #fff;
-    /* ボタンの背景色 */
     color: #ff5655;
     font-family: Inter;
-        font-size: 15px;
-        font-weight: 500;
-        
-        line-height: 18.15px;
-            
-       
-        
-    /* テキストの色 */
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 18.15px;
     border-radius: 20px;
-    /* 角を丸める */
     cursor: pointer;
-    /* ホバー時のカーソル */
     font-size: 16px;
     transition: background-color 0.3s, color 0.3s;
-    /* アニメーション効果 */
 }
 .category-checkbox:checked+label {
     background-color: #ff5655;
@@ -129,138 +86,59 @@ h1 {
 }
 
 .select {
-    /* margin-left: 80px; */
     width: 680px;
     height: 45px;
-    /* background-color: #eaeaea; */
     color: #5f5f5f;
     border: 1px solid #5f5f5f;
     margin-bottom: 50px;
 }
-/*.checkmark-option
-{
-    background-repeat: no-repeat;
-        background-position: left center;
-        background-size: 16px;
-        padding-left: 25px;
-}
-        */
+
 .checkmark-select {
     background-image: url('/images/Vector 1 (Stroke).svg');
     background-size: contain;
     background-repeat: no-repeat;
-        background-position: left center;
-        padding-left: 25px;
-        /* ✔ のスペースを
-        /* ✔の画像 */
-}
-/*.checkmark-select {
-    appearance: none;
-    /* デフォルトの矢印を削除 
-    background-color: white;
-    border: 2px solid #ff5655;
-    padding: 8px;
-    font-size: 16px;
-    width: 250px;
-    cursor: pointer;
-}
-    */
-/*.checkmark-select option.selected-option {
-    background-image: url('/images/Vector1(Stroke).png');
-    /* ✔ の画像 
-    background-repeat: no-repeat;
     background-position: left center;
     padding-left: 25px;
-    /* ✔ の画像のスペース確保 
-}*/
+}
 
- セレクトボックスをカスタマイズ 
 .select-wrapper {
     position: relative;
-    /* display: inline-block; */
-display: flex;
+    display: flex;
     align-items: center;
-
 }
 .checkmark {
     font-size: 18px;
     color: #ff5655;
     margin-right: 10px;
-    /* `select` との間隔 */
     display: none;
-    /* 初期状態では非表示 */
 }
 
-/* `select` の値が選択されたら ✔ を表示 */
+
 .select-wrapper select:valid+.checkmark {
     display: block;
 }
 
-/* 矢印の代わりにチェックマークを表示 */
-/*.select-wrapper:after {
-    content: "✔";
-    /* チェックマーク 
-    position: absolute;
-    left: 15px;
-    
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 18px;
-    color: #ff5655;
-    pointer-events: none;
-    /* クリックできないようにする 
-    opacity: 0;
-    /* 初期状態では非表示 
-}
-
- /*選択されたらチェックマークを表示 
-.select-wrapper select:valid+ .select-wrapper:after {
-    opacity: 1;
-    /* ✔ を表示 
-}
-/*.checkmark {
-    position: absolute;
-    left: 10px;
-    /* 左側に配置 
-    font-size: 18px;
-    color: #ff5655;
-    /* ✔の色 
-}
-    */
-    
 option {
     background-color: #5f5f5f;
     border: 1.5px solid #5f5f5f;
     color: #eaeaea;
     font-family: Inter;
-        font-size: 14px;
-        font-weight: 600;
-        
+    font-size: 14px;
+    font-weight: 600;
 }
-/* option .default { 
-    
-        font-size: 16px;
-        font-weight: 700;
-        
-        text-align: left;
-        
-}
-        */
+
 .input{
-   
     border-radius: 4px;
     border:1px solid  #5f5f5f;
     text-align: left;
     appearance: none;
     width: 670px;
-        height: 45px;
-        font-family: Inter;
-        font-size: px;
-        font-weight: 700;
-    
-        text-align: left;
-        margin-bottom: 50px;
-        
+    height: 45px;
+    font-family: Inter;
+    font-size: px;
+    font-weight: 700;
+    text-align: left;
+    margin-bottom: 50px;
 }
 
 .textarea {
@@ -280,11 +158,11 @@ option {
     border-radius: 5px ;
     color: #fff;
     font-family: Inter;
-        font-size: 26px;
-        font-weight: 700;
-        border: none;
-        text-align: center;
-       cursor: pointer;
+    font-size: 26px;
+    font-weight: 700;
+    border: none;
+    text-align: center;
+    cursor: pointer;
 }
 .form_error {
     color: red;

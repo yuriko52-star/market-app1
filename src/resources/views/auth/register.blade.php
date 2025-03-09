@@ -7,10 +7,6 @@
 @section('content')
 <div class="content">
     <h1>会員登録</h1>
-    
-
-
-
     <form action="{{ route('register.process') }}" class="" method="post" novalidate>
         @csrf
     <label for="" >
@@ -55,15 +51,9 @@
            {{ $message}}
            @enderror
           </p>
-    
-    
-
-       
-    
-    <div class="">
-        
-    <button class="register-btn" type="submit">登録する</button>
-    </div>
+        <div>
+        <button class="register-btn" type="submit">登録する</button>
+        </div>
     </form>
     <a href="/login" class="link">ログインはこちら</a>
 </div>

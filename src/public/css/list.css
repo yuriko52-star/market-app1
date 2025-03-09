@@ -1,14 +1,12 @@
 .content {
     margin: 0 auto;
-    /* padding: 0 20px; */
 }
 
 .top-content {
-    /* display: flex; */
     margin-top: 60px;
     border-bottom: 2px solid #5f5f5f;
-
 }
+
 .top-content  ul {
     display: flex;
 }
@@ -35,31 +33,24 @@
 
 .my-list {
     color: #ff0000;
-
 }
 
 .under-content {
-    
-    /* justify-content: flex-start; */
-    /* margin-left: 120px; */
     position: relative;
-    /* gap: 50px; */
     margin: 0 4% 0;
 }
 .image-card-group {
     position: absolute;
     display: flex;
-       left:  4%;
-      /* transform: translate(-50px -50px); */
-        flex-wrap: wrap;
+    left:  4%;
+    flex-wrap: wrap;
     gap: 25px;
-        justify-content: flex-start;
-        margin-top: 80px;
+    justify-content: flex-start;
+    margin-top: 80px;
 }
 .image-card-link {
     display: inline-block;
     position: relative;
-
     width: 290px;
     border-radius: 4px;
     height: 280px;
@@ -73,16 +64,11 @@ p {
     font-weight: 400;
     background-color: red;
     color: white;
-
     position: absolute;
     top: 40%;
-    /* 縦方向の中央 */
     left: 50%;
-    /* 横方向の中央 */
     transform: translate(-50%, -50%);
-    /* 完全に中央に配置 */
     text-align: center;
-    /* テキストの中央揃え */
 }
 
 .image-card-name {
@@ -90,32 +76,22 @@ p {
     font-family: Inter;
     font-size: 25px;
     font-weight: 400;
-
 }
 @media screen and (min-width: 1400px) and (max-width: 1540px) {
 
     .under-content {
          margin-left :2%; 
-        /* text-align: center; */
-        
     }
 }
 @media screen and (min-width: 768px) and (max-width: 850px) {
   
-   .image-card-group { 
-    margin: 80px auto;
-    
-   
-   } 
-  .image-card {
-    width: 45%;
-  }
-
-
-    .page-title {
-
-        font-size: 20px;
-
+    .image-card-group { 
+         margin: 80px auto;
+    } 
+    .image-card {
+         width: 45%;
     }
-
+    .page-title {
+    font-size: 20px;
+    }
 }

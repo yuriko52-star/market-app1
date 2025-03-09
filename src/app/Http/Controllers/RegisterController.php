@@ -22,10 +22,6 @@ class RegisterController extends Controller
 
       Auth::login($user);
       Session::put('user_id', $user->id);
-
-      //  return redirect()->route('profile.show');
-      return redirect('/email/verify');
+    return redirect('/email/verify');
     }
-    
-   
 }

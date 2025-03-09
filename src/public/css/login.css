@@ -4,10 +4,7 @@
 .header-nav {
     display: none;
 }
-/*.header-btn-group {
-    display: none;
-}
-    */
+
 .content {
     width: 680px;
     margin: 0 auto;
@@ -19,7 +16,6 @@ h1 {
     font-family: Inter;
     font-size: 36px;
     font-weight: 700;
-
 }
 
 .label-title {
@@ -28,7 +24,6 @@ h1 {
     font-size: 24px;
     font-weight: 700;
     margin: 0;
-
 }
 
 .text {
@@ -51,7 +46,6 @@ h1 {
     font-family: Inter;
     font-size: 26px;
     font-weight: 700;
-
 }
 
 .link {

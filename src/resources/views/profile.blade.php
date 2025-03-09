@@ -7,9 +7,7 @@
 @section('content')
 <div class="content">
     <h1>プロフィール設定</h1>
-    <!-- {{--@if($user->profile)--}} -->
-    <!-- {{--@if(isset($user->profile) && $user->profile->exists)--}} -->
-    <!-- {{--@if(isset($user))--}} -->
+    
 @if(!empty($user->profile) && $user->profile->id)
       @php $isEdit = true; @endphp
 @else
@@ -18,25 +16,19 @@
 <form action="{{ $isEdit ? route('profile.update', $user->profile->id) : route('profile.store') }}" method="post" enctype="multipart/form-data">
     @csrf
     @if($isEdit)
-        @method('PATCH')  <!-- 編集時のみ PATCH を使用 -->
+        @method('PATCH')  
     @endif
 
 
-   {{-- <form action="{{ route('profile.update',$user->profile->id)}}" method="post" enctype="multipart/form-data">
-        @method('PATCH')
-    @else
-    <form action="{{ route('profile.store') }}" class="" method="post" enctype="multipart/form-data">
-    @endif
-        @csrf--}}
+   
     <div class="image-file">
         <input type="file" id="fileInput" style="display: none;" accept="image/*" name="img_url">
         <div id="previewArea">
-           <!-- {{-- @if(isset($user) && $user->profile->img_url)--}} -->
-           <!-- {{--@if(isset($profile->img_url))--}} -->
+          
            @if(!empty($user->profile) && !empty($user->profile->img_url))
             <img src="{{ asset($user->profile->img_url)}}" alt="" class="img">
             @else
-            <!-- {{--<img src="{{ asset('storage/images/default-profile.png') }}" alt="" class="img">--}} -->
+            
             <img src="" alt="" class="img">
             @endif
            

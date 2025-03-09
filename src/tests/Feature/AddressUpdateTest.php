@@ -70,7 +70,7 @@ class AddressUpdateTest extends TestCase
              'shipping_address' => '東京都新宿区',
              'shipping_post_code' => '147-2583',
              'shipping_building' => '新宿ビル6階',
-              'payment_method' => 'card',
+             'payment_method' => 'card',
         ]);
     }
 }

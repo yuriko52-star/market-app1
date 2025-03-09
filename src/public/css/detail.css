@@ -26,14 +26,9 @@
     font-weight: 400;
     position: absolute;
     top: 40%;
-    /* 縦方向の中央 */
     left: 50%;
-    /* 横方向の中央 */
     transform: translate(-50%, -50%);
-    /* 完全に中央に配置 */
     text-align: center;
-    /* テキストの中央揃え */
-
 }
 .right-content {
     width: 50%;
@@ -41,39 +36,36 @@
 }
 .page-title {
     font-family: Inter;
-        font-size: 45px;
-        font-weight: 700;
-      display: block; 
-        text-align: left;
-        color: #000;
-        /* padding-top: 20px; */
+    font-size: 45px;
+    font-weight: 700;
+    display: block; 
+    text-align: left;
+    color: #000;
 }
 .brand-name {
     font-family: Inter;
-        font-size: 20px;
-        font-weight: 400;
-       margin-top: 0;
-        text-align: left;
-        
+    font-size: 20px;
+    font-weight: 400;
+    margin-top: 0;
+    text-align: left;
 }
 .item-price {
     font-family: Inter;
-        font-size: 45px;
-        font-weight: 400;
-       margin-top: 0;
-        text-align: left;
+    font-size: 45px;
+    font-weight: 400;
+    margin-top: 0;
+    text-align: left;
 }
 span {
     font-family: Inter;
-        font-size: 30px;
-        font-weight: 400;
+    font-size: 30px;
+    font-weight: 400;
 }
 .flex {
     display: flex;
     margin-left: 30px;
 }
 .likes-icon {
-    
     border: none;
     background-color: #fff;
     padding-right: 30px;
@@ -84,12 +76,6 @@ span {
     width: 40px;
     height: 40px;
 }
-/* .likes-img.liked { */
-    /* background-color: gold; */
-    /* いいねしたときの背景色 */
-    /* border: 2px solid orange; */
-    /* filter: grayscale(0%) invert(43%) sepia(100%) saturate(500%) hue-rotate(40deg); */
-/* } */
 .likes-overlay {
     position: absolute;
     top: 0;
@@ -97,15 +83,11 @@ span {
     width: 100%;
     height: 100%;
     background-color: yellow;
-    /* いいね時の色 */
     mask-image: url('/images/星アイコン8.png');
-    /* マスクを適用 */
-    /* -webkit-mask-image: url('/images/星アイコン8.png'); */
-    /* Safari 用 */
     mask-size: cover;
-        -webkit-mask-size: cover;
-            opacity: 0;
-            transition: opacity 0.3s;
+    -webkit-mask-size: cover;
+    opacity: 0;
+    transition: opacity 0.3s;
 }
 
 .likes-overlay.liked {
@@ -131,53 +113,44 @@ span {
 }
 .section-title {
     font-family: Inter;
-        font-size: 36px;
-        font-weight: 700;
-       
-        text-align: left;
+    font-size: 36px;
+    font-weight: 700;
+    text-align: left;
 }
 .comment-title {
     color: #5f5f5f;
     font-family: Inter;
-        font-size: 36px;
-        font-weight: 700;
-        
-        text-align: left;
-        
+    font-size: 36px;
+    font-weight: 700;
+    text-align: left;
 }
 .description {
     font-family: Inter;
-        font-size: 24px;
-        font-weight: 400;
-        
-        text-align: left;
-        
+    font-size: 24px;
+    font-weight: 400;
+    text-align: left;
 }
 
 dl {
     display: flex;
 }
-dt   {
+dt {
     font-family: Inter;
-        font-size: 24px;
-        font-weight: 700;
-        
-        text-align: left;
-      
+    font-size: 24px;
+    font-weight: 700;
+    text-align: left;
 }
-
-    
 
 dd {
     font-family: Inter;
-        font-size: 20px;
-        font-weight: 400;
-        width: 101.99px;
-            height: 30px;
-        background-color: #d9d9d9;    
-            border-radius: 15px ;
-            border: none;
-            text-align: center;
+    font-size: 20px;
+    font-weight: 400;
+    width: 101.99px;
+    height: 30px;
+    background-color: #d9d9d9;    
+    border-radius: 15px ;
+    border: none;
+    text-align: center;
 } 
 .condition {
     background-color: #fff;
@@ -186,64 +159,54 @@ dd {
     margin-left: 40px;
 } 
 .flex {
-    /* position: relative; */
     display: flex;
-    
     margin-left: 0 ; 
     align-items: center;
-    
 }
 .profile-img {
-
     width: 70px;
     height: 70px;
     border-radius: 50%;
     background-color: #d9d9d9;
     border: none;
-     margin-left: 0; 
-    /* margin-right: 80px; */
+    margin-left: 0; 
     margin-top: 20px;
-
 }
 .user-name {
     font-family: Inter;
-        font-size: 30px;
-        font-weight: 700;
-      margin-left: 20px;
-      align-items: center;
-      display: inline-block;
-      padding-top: 20px;
+    font-size: 30px;
+    font-weight: 700;
+    margin-left: 20px;
+    align-items: center;
+    display: inline-block;
+    padding-top: 20px;
 }
 .comment-input {
     font-family: Inter;
-        font-size: 20px;
-        font-weight: 300;
-       
-        text-align: left;
-        width: 570px;
-            height: 20px;
-        background-color: #d9d9d9;   
-            border-radius: 5px;
-            align-items: center;
-            padding-top: 25px;
-            padding-bottom: 25px;
-        
+    font-size: 20px;
+    font-weight: 300;
+    text-align: left;
+    width: 570px;
+    height: 20px;
+    background-color: #d9d9d9;   
+    border-radius: 5px;
+    align-items: center;
+    padding-top: 25px;
+    padding-bottom: 25px;
 }
 .label {
     font-family: Inter;
-        font-size: 28px;
-        font-weight: 700;
-        display: block;
-        text-align: left;
-        margin-top: 30px;
-       
+    font-size: 28px;
+    font-weight: 700;
+    display: block;
+    text-align: left;
+    margin-top: 30px;
 }
 .textarea {
     width: 570px;
     height: 246px;
     border:2px solid  #5f5f5f;
     border-radius: 5px;
-    /* margin-bottom: 30px; */
     font-size: 20px;
 }
 .form_error {
@@ -258,118 +221,94 @@ dd {
     }
     .condition {
         width: 220px;
-      
     }
 }
+
 @media screen and (min-width: 768px) and (max-width: 850px) {
     .all-contents {
         margin: 80px 20px;
     }
-        .image-card {
-            /* width: 350px; */
-            /* height: 350px; */
-            
-            margin-left: 0;
-    
-    
-        }
+    .image-card {
+        margin-left: 0;
+    }
     .right-content {
         margin-left: 20px;
     }
-.page-title,
-.item-price {
-    font-size: 35px;
-}
-.brand-name {
-    margin-bottom: 0;
-}
-.item-price {
-    margin-bottom: 20px;
-}
+    .page-title,
+    .item-price {
+        font-size: 35px;
+    }
+    .brand-name {
+        margin-bottom: 0;
+    }
+    .item-price {
+        margin-bottom: 20px;
+    }
 
-span {
-    font-size: 28px;
-}
-.likes-img ,
-.comments-img{
-    width: 30px;
-    height: 30px;
-}
+    span {
+        font-size: 28px;
+    }   
+    .likes-img ,
+    .comments-img{
+        width: 30px;
+        height: 30px;
+    }
 
-
-.likes-img-wrapper {
-    position: relative;
-    width: 37px;
-    height: 30px;
-} 
-.likes-icon {
-   /* padding-left: 0; */
-   /* padding-right: 40px; */
-   padding: 0;
-   margin-right: 10px;
-}
-.likes-overlay {
-    position: absolute;
+    .likes-img-wrapper {
+        position: relative;
+        width: 37px;
+        height: 30px;
+    } 
+    .likes-icon {
+        padding: 0;
+        margin-right: 10px;
+    }
+    .likes-overlay {
+        position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
-        /* border-color: yellow; */
         background-color: yellow;
-        /* 星の色 */
-        /* mask-image: url('/images/星アイコン8.png'); */
-        /* -webkit-mask-image: url('/images/星アイコン8.png'); */
-        /* Safari 用 */
-        /* mask-size: contain; */
-        /* `contain` に変更 */
-        /* -webkit-mask-size: contain; */
         mask-position: center;
-        /* -webkit-mask-position: center; */
         mask-repeat: no-repeat;
         -webkit-mask-repeat: no-repeat;
-        /* mask-composite: destination-in; */
-            /* -webkit-mask-composite: destination-in; */
-        /* opacity: 0; */
-        /* transition: opacity 0.3s; */
-    mask-size: 80%;
-    /* 画面サイズに応じて縮小 */
-    -webkit-mask-size: 80%;
-}
-.count {
-    margin-left: 7px;
-}
+        mask-size: 80%;
+        -webkit-mask-size: 80%;
+    }
+    .count {
+        margin-left: 7px;
+    }
 
-.button {
-    width: 330px;
-    height: 40px;
-    font-size: 25px;
-}
-dt {
-    font-size: 18px;
-}
-.description {
-    font-size:20px;
-}
-.category {
-    font-size: 13px;
-    width: 85px;
-    padding-top: 5px;
-    height: 20px;
-}
-.condition {
-    width: 200px;
-}
-.section-title,
-.comment-title {
-    font-size: 30px;
-}
-/* .image-file { */
-    /* justify-content: center; */
-/* } */
-.comment-input,
-.textarea {
-    width: 330px;
-    font-size: 18px;
-}
+    .button {
+        width: 330px;
+        height: 40px;
+        font-size: 25px;
+    }
+    dt {
+        font-size: 18px;
+    }
+    .description {
+        font-size:20px;
+    }
+    .category {
+        font-size: 13px;
+        width: 85px;
+        padding-top: 5px;
+        height: 20px;
+    }
+    .condition {
+        width: 200px;
+    }
+    .section-title,
+    .comment-title {
+        font-size: 30px;
+    }
+
+    .comment-input,
+    .textarea {
+        width: 330px;
+        font-size: 18px;
+    }
 }
 

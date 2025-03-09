@@ -35,9 +35,7 @@ class UserProfileTest extends TestCase
             'user_id' => $user->id,
             'img_url' => '/storage/images/test-user.jpg',
         ]);
-        // $user->profile()->create([
-            // 'img_url' => '/storage/images/test-user.jpg',
-        // ]);
+        
 
         $response = $this->actingAs($user)->get(route('mypage'));
 

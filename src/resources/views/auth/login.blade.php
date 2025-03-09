@@ -5,8 +5,7 @@
 @endsection
 
 @section('content')
-<!-- <div class="container"> -->
-    <!-- あとでつけるかも -->
+
     <div class="content">
     <h1>ログイン</h1>
     <form action="/login" class="" method="post" novalidate >
@@ -36,6 +35,5 @@
     </form>
     <a href="/register" class="link">会員登録はこちら</a>
     </div>
-<!-- </div> -->
- <!-- あとでつけるかも -->
+
 @endsection
