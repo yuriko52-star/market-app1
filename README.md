@@ -23,11 +23,19 @@
     php artisan migrate  
 6. シーディングの実行  
     php artisan db:seed  
-## ユーザーのダミーデータ  
+7.  シンボリックリンク  
+    php artisan storage:link  
+
+## ユーザーのダミーデータ（管理者）  
+
     1. メールアドレス:nobu@gmail.com  
     　　パスワード：nobunobunobu  
     2. メールアドレス：hurudanuki@gmail.com  
         パスワード：ponponpon  
+## 一般ユーザーのダミーデータ  
+        メールアドレス:seneka@roma.com  
+        パスワード:senekaseneka  
+        
 
 ##  メール認証  
 1. docker-compose.ymlに追加  
@@ -68,6 +76,52 @@
             'secret' => env('STRIPE_SECRET'),  
         ],  
     ];  
+    .envに STRIPE＿KEYとSTRIPE＿SECRETを貼り付ける  
+## テスト  
+1. docker-compose exec mysql bash  
+2. テスト用データーベースの用意  
+    mysql -u root -p  
+    > CREATE DATABASE demo_test  
+3. テスト用.envファイル作成と編集  
+
+    $ cp .env .env.testing 
+        APP_NAME=Laravel  
+        APP_ENV=test  
+        APP_KEY=  
+        APP_DEBUG=true  
+        APP_URL=http://localhost  
+
+        DB_CONNECTION=mysql  
+        DB_HOST=mysql  
+        DB_PORT=3306  
+        DB_DATABASE=demo_test  
+        DB_USERNAME=root  
+        DB_PASSWORD=root  
+4. テスト用アプリケーションキーの作成  
+    php artisan key:generate --env=testing  
+    php artisan config:clear  
+5. マイグレーション  
+    php artisan migrate --env=testing  
+## クローン  
+1. cd coachtech laravel  
+2. git clone git@github.com:yuriko52-star/flea-market-app1.git  
+3. mv flea-market-app1 app-check1  
+4. cd app-check1  
+5. git remote set-url origin git@github.com:yuriko52-star/app-check1.git  
+6. git remote -v  
+7. git add .  
+8. git commit -m "コメント"  
+9. git push origin main  
+10. docker-compose up -d --build  
+11. composer install  
+12. cp .env.example .env  
+13. .envに環境変数を追加(上記参照)  
+14. php artisan key:generate  
+15. php artisan migrate  
+16. php artisan db:seed  
+17. php artisan storage:link 
+18. メール認証　docker-compose.ymlのcontainer_nameを修整  
+19. あとは上記参照（config/services.phpの追加、3. テスト用.envファイル作成と編集　4. テスト用アプリケーションキーの作成 は不要）　 
     
 
 
