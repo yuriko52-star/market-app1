@@ -81,10 +81,11 @@
 1. docker-compose exec mysql bash  
 2. テスト用データーベースの用意  
     mysql -u root -p  
-    > CREATE DATABASE demo_test  
+    > CREATE DATABASE demo_test;  
+      
 3. テスト用.envファイル作成と編集  
 
-    $ cp .env .env.testing 
+    $ cp .env .env.testing  
         APP_NAME=Laravel  
         APP_ENV=test  
         APP_KEY=  
@@ -103,7 +104,7 @@
 5. マイグレーション  
     php artisan migrate --env=testing  
 ## クローン  
-1. cd coachtech laravel  
+1. cd coachtech/laravel    
 2. git clone git@github.com:yuriko52-star/flea-market-app1.git  
 3. mv flea-market-app1 app-check1  
 4. cd app-check1  
@@ -112,16 +113,15 @@
 7. git add .  
 8. git commit -m "コメント"  
 9. git push origin main  
-10. docker-compose up -d --build  
-11. composer install  
-12. cp .env.example .env  
-13. .envに環境変数を追加(上記参照)  
-14. php artisan key:generate  
-15. php artisan migrate  
-16. php artisan db:seed  
-17. php artisan storage:link 
-18. メール認証　docker-compose.ymlのcontainer_nameを修整  
-19. あとは上記参照（config/services.phpの追加、3. テスト用.envファイル作成と編集　4. テスト用アプリケーションキーの作成 は不要）　 
+10. メール認証　docker-compose.ymlのcontainer_nameを修整    
+11. docker-compose up -d --build  
+12. composer install  
+13. cp .env.example .env  
+14. .envに環境変数を追加(上記参照)  
+15. php artisan key:generate  
+16. php artisan migrate  
+17. php artisan db:seed  
+18. あとは上記参照（config/services.phpの追加、3. テスト用.envファイル作成と編集　4. テスト用アプリケーションキーの作成 は不要）　 
     
 
 
