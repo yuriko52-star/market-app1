@@ -110,8 +110,9 @@ class PurchaseController extends Controller
             ]);
             $updatedPurchase = $user->purchases()->where('item_id', $item_id)->first();
         }
-     
-        return redirect()->route('purchase.show', ['item_id' => $item_id]);
+       
+         return redirect()->route('purchase.show', ['item_id' => $item_id]);
+        
     }
     
     public function store(PurchaseRequest $request) 

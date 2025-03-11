@@ -144,6 +144,9 @@ return [
             'required' => 'コメントを入力してください',
             'max' => 'コメントは255文字以内で入力してください',
         ] ,
+        'payment_method' =>[
+            'required' => '支払い方法を選択してください',
+        ]
          
             
 
@@ -165,5 +168,6 @@ return [
         'email' =>'メールアドレス',
          'password' => 'パスワード',
          'comment' => 'コメント',
+         'payment_method' => '支払い方法',
     ],
 ];
