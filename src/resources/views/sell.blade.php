@@ -57,11 +57,11 @@
                 </option>
                 @endforeach
                 </select>
-               <p class="form_error">
+               <div class="form_error">
                     @error('condition_id')
                     {{$message}}
                     @enderror
-                </p>
+                </div>
             </div>
              
         </section>

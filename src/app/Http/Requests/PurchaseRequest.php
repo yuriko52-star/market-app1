@@ -27,11 +27,5 @@ class PurchaseRequest extends FormRequest
             'payment_method' => 'required',
         ];
     }
-    /*public function messages()
-    {
-        return [
-            'payment_method.required' => '支払い方法を選択してください',
-        ];
-    }
-        */
+    
 }

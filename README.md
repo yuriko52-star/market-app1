@@ -121,7 +121,8 @@
 15. php artisan key:generate  
 16. php artisan migrate  
 17. php artisan db:seed  
-18. あとは上記参照（config/services.phpの追加、3. テスト用.envファイル作成と編集　4. テスト用アプリケーションキーの作成 は不要）　 
+18. php artisan storage:link  
+19. あとは上記参照（config/services.phpの追加、3. テスト用.envファイル作成と編集　4. テスト用アプリケーションキーの作成 は不要）　 
     
 
 

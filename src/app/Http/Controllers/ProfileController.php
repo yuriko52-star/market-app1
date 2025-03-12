@@ -51,6 +51,8 @@ class ProfileController extends Controller
      return redirect()->route('list');
     }
     
+
+    
     public function show(Request $request) 
     {
        $user = Auth::user();
@@ -104,5 +106,6 @@ class ProfileController extends Controller
 
     return redirect()->route('profile.edit' ,$user->id);
   }
+    
 
 }
