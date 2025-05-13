@@ -60,15 +60,11 @@ class ProfileController extends Controller
         $tab = $request->query('tab');
         
          $items = collect();
-      
+         $items = collect();
        /* $items = $user->buyItems()->get();
         */
         if ($tab === 'buy') {
           $items = $user->purchases()
-              ->where(function ($query) {
-                  $query->where('isPaid', true) // 支払い済み（カード）
-                    ->orWhere('payment_method', 'konbini'); // コンビニ支払い
-              })
               ->with('item')
               ->get()
               ->pluck('item');

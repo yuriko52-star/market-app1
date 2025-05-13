@@ -30,14 +30,7 @@
                 <a href="{{ route('item.show', ['item' =>$item->id]) }}" class="image-card-link">
                 <img src="{{ asset($item->img_url) }}" alt="" class="image">
                 @if($item->purchase)
-                {{--@if ($item->purchase->isPaid )--}}
-                <p>Sold</p>
-                    {{--@else
-                        <p class="waiting">sold</p>  
-                     @if ($item->purchase->isPaid || $item->purchase->payment_method === 'konbini')       <p>Sold</p> 
-                     @else 
-                        <p class="waiting">sold</p> 
-                    @endif--}}
+                    <p>Sold</p>
                 @endif
                 </a>
        

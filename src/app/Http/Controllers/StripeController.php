@@ -13,30 +13,30 @@ class StripeController extends Controller
 {
    public function checkout(Request $request)
    {
-    $request->validate([
+    Stripe::setApiKey(config('services.stripe.secret'));
+    /*$request->validate([
             'item_id' => 'required|exists:items,id',
             'payment_method' => 'required|in:card,konbini',
             'shipping_address' => 'required',
             'shipping_post_code' => 'required',
         ]);
+    */
     $user = auth()->user();
      $item = Item::findOrFail($request->item_id);
+     $paymentMethod = session('payment_method');
     $purchase = Purchase::updateOrCreate(
         ['user_id' => $user->id, 'item_id' => $item->id],
         [
-            'payment_method' => $request->input('payment_method'),
-            'shipping_address' => $request->input('shipping_address'),
-            'shipping_post_code' => $request->input('shipping_post_code'),
-            'shipping_building' => $request->input('shipping_building'),
-            'isPaid' => false
+            'payment_method' => $paymentMethod,
+            'shipping_address' => session('shipping_address'),
+            'shipping_post_code' => session('shipping_post_code'),
+            'shipping_building' => session('shipping_building'),
+            
         ]
     );
-    Stripe::setApiKey(config('services.stripe.secret'));
-
    
-     $paymentMethod =$request->input('payment_method');
-
-    $sessionData = [
+// Stripe チェックアウトセッションを作成
+   $sessionData = [
              'payment_method_types' => [$paymentMethod],
             // 'payment_method_types' => ['card', 'konbini'],
             'line_items' => [[
@@ -85,7 +85,7 @@ class StripeController extends Controller
             Log::warning("購入データが見つかりません - isPaid を更新できません");
         }
         */
-        $purchase->isPaid = true;
+        
         $purchase->save();
 
         return view('success');

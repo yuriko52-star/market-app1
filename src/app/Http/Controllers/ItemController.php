@@ -13,46 +13,35 @@ class ItemController extends Controller
 {
     public function index(Request $request) 
     {
-       $userId = Auth::id();
-       $tab = $request->query('tab');
-
-        if ($tab == 'mylist') {
-
-         if (Auth::check()) {
-        $items = Auth::user()->likedItems()->with(['purchase' => function($query) {
-            $query->where('isPaid', true)
-                ->orWhere('payment_method', 'konbini');
-        }])
-        ->get(); 
-    } else {
-        $items = collect();
-        }
-    } else {
-        if ($userId) {
-            $items = Item::select('id', 'name', 'img_url')
-            ->where('user_id', '!=', $userId)
-            ->with(['purchase' => function($query) {
-                $query->where('isPaid',true)
-                ->orWhere('payment_method', 'konbini');
-            }])
-            ->get();
-        } else {
-            $items = Item::select('id', 'name', 'img_url')
-            ->with(['purchase' => function($query) {
-                $query->where('isPaid', true)
-                ->orWhere('payment_method', 'konbini');
-            }])
-            ->get();
-        }
-    }
-
-    return view('list', compact('items', 'tab'));
-}
-
-  
-
-
-    public function search (Request $request)
+        
+            $userId = Auth::id();
+            $tab = $request->query('tab');
+     
+             if ($tab == 'mylist') {
+     
+              if (Auth::check()) {
+             $items = Auth::user()->likedItems()->with('purchase' )
+                ->get(); 
+         } else {
+             $items = collect();
+             }
+         } else {
+             if ($userId) {
+                 $items = Item::select('id', 'name', 'img_url')
+                 ->where('user_id', '!=', $userId)
+                 ->with('purchase')
+                 ->get();   
+            } else {
+                 $items = Item::select('id', 'name', 'img_url')
+                 ->with('purchase')
+                ->get();
+             }
+         }
+     
+         return view('list', compact('items', 'tab'));
+     }
+     
+     public function search (Request $request)
      {
         
         $keyword = $request->input('keyword');

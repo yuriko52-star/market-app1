@@ -62,8 +62,9 @@ Route::post('/items/{item_id}/comment',[CommentController::class,'store'])->name
 
  Route::get('/purchase/address/{item_id}',[PurchaseController::class,'editAddress'])->name('purchase.address');
 Route::post('/purchase/address/{item_id}', [PurchaseController::class, 'updateAddress'])->name('purchase.address.update');
-Route::post('/purchase/update-payment',[PurchaseController::class,'updatePayment'])->name('purchase.updatePayment');
-// route::post('/purchase',[PurchaseController::class,'store'])->name('purchase.store');
+
+Route::post('/purchase/selectpayment',[PurchaseController::class,'selectPayment'])->name('purchase.selectPayment');
+
 Route::get('/mypage',[ProfileController::class,'show'])->name('mypage');
 Route::post('/checkout',[StripeController::class,'checkout'])->name('stripe.checkout');
 
