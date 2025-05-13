@@ -66,10 +66,15 @@ ul {
     font-weight: 700;
     color: #5f5f5f;
 }
-
-.sell-items {
+.active-tab {
     color: #ff0000;
+    }
+
+.sell-items:hover,
+.buy-items:hover {
+    opacity: 0.8;
 }
+    
 
 .under-content {
     margin: 80px 0;

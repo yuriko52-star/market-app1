@@ -7,7 +7,7 @@
 @section('content')
 
 <div class="all-contents">
-   
+
     <div class="left-content">
         <div class="item">
             <div class="image-card">
@@ -19,19 +19,26 @@
              <p class="item-price"><span>￥</span>{{number_format($item->price)}}</p>
              </div>
         </div>
-    <form action="{{route('purchase.updatePayment') }}" method="post">
+     <form action="{{route('purchase.updatePayment') }}" method="post">
     @csrf
         <input type="hidden" name="item_id" value="{{ $item->id}}">
         <div class="pay-method">
         <label for="payment_method" class="label-title">支払い方法</label>
        
         
-        <select class="select" name="payment_method" id="payment_method" onchange="this.form.submit()" >
+        {{--<select class="select" name="payment_method" id="payment_method"  >
             <option value="" disabled {{ empty(old('payment_method', $payment_method)) ? 'selected' : '' }}>選択してください</option>
             <option value="konbini" {{ old('payment_method', $payment_method) == 'konbini' ? 'selected' : '' }}>コンビニ支払い</option>
             <option value="card" {{ old('payment_method', $payment_method) == 'card' ? 'selected' : '' }}>カード支払い</option>
-    </select>
-           
+    </select>--}}
+
+
+    <select class="select" name="payment_method" id="payment_method" onchange="this.form.submit()">
+    <option value="" disabled {{ empty($payment_method) ? 'selected' : '' }}>選択してください</option>
+    <option value="konbini" {{ $payment_method == 'konbini' ? 'selected' : '' }}>コンビニ支払い</option>
+    <option value="card" {{ $payment_method == 'card' ? 'selected' : '' }}>カード支払い</option>
+</select>
+
        
         <style>
             select:focus option[value=""] {
@@ -45,8 +52,8 @@
         </p>
         
         </div>
-    </form>
-    
+     </form> 
+     {{-- <form action="{{ route('purchase.store') }}" method="post">   --}}
     <form action="{{ route('stripe.checkout') }}" method="post"> 
     @csrf
      <input type="hidden" name="item_id" value="{{ $item->id }}">  

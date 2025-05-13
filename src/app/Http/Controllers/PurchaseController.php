@@ -32,6 +32,8 @@ class PurchaseController extends Controller
             'post_code' => '',
             'building' => '',
         ];
+        // これを追加
+        $payment_method = session('payment_method', '');
         $purchase = $user->purchases()->where('item_id', $item_id)->first();
 
 
@@ -50,23 +52,25 @@ class PurchaseController extends Controller
         $user = auth()->user();
     
         $item_id = $request->input('item_id');
+        // これも追加
+        $payment_method = $request->input('payment_method');
 
-
-       
-
-        $purchase = $user->purchases()->where('item_id',$request->input('item_id'))->first();
+        
+        $purchase = $user->purchases()->where('item_id',$item_id)->first();
  
         if($purchase) {
             $purchase->update([
-                'payment_method' => $request->input('payment_method'),
+                'payment_method' => $payment_method,
+                'isPaid' => false // 常に未決済として保存
             ]);
         } else {
             $purchase = $user->purchases()->create([
                 'item_id' => $item_id,
-                'payment_method' => $request->input('payment_method'),
+                'payment_method' => $payment_method,
                 'shipping_address' => $user->profile->address,
                 'shipping_post_code' => $user->profile->post_code,
                 'shipping_building' => $user->profile->building,
+                 'isPaid' => false,
             ]);
         }
             return redirect()->route('purchase.show', ['item_id' => $item_id]);
@@ -115,7 +119,7 @@ class PurchaseController extends Controller
         
     }
     
-    public function store(PurchaseRequest $request) 
+   /* public function store(PurchaseRequest $request) 
     {
         $user = auth()->user(); 
         $item_id = $request->input('item_id');
@@ -151,4 +155,5 @@ class PurchaseController extends Controller
     
             return redirect()->route('stripe.checkout',['item_id' => $item_id]);
     }
+            */
 }

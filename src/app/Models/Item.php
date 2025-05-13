@@ -22,7 +22,7 @@ class Item extends Model
         return $this->hasMany(Like::class);
     }
     public function purchase() {
-        return $this->hasOne(Purchase::class);
+        return $this->hasOne(Purchase::class, 'item_id');
     }
     public function categories() {
         return $this->belongsToMany(Category::class,'category_item','item_id','category_id');

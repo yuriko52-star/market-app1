@@ -12,9 +12,11 @@
                 
                 <li>
                   
-                    <a href="{{ route('list') }}" class="page-title">おすすめ</a>
+                    <a href="{{ route('list',['tab' => 'recommend']) }}" class="page-title {{ $tab == 'recommend' ? 'active-tab': '' }}">おすすめ</a>
                     <li>
-                    <a href="{{ route('list', ['tab' => 'mylist']) }}" class="page-title my-list">マイリスト</a>
+                    @if(Auth::check())
+                    <a href="{{ route('list', ['tab' => 'mylist']) }}" class="page-title {{$tab == 'mylist' ? 'active-tab' : '' }}">マイリスト</a>
+                    @endif
    
                 </li>
             </ul>
@@ -27,8 +29,15 @@
             <div class="image-card">
                 <a href="{{ route('item.show', ['item' =>$item->id]) }}" class="image-card-link">
                 <img src="{{ asset($item->img_url) }}" alt="" class="image">
-                @if($item->isSold())
-                    <p>Sold</p>
+                @if($item->purchase)
+                {{--@if ($item->purchase->isPaid )--}}
+                <p>Sold</p>
+                    {{--@else
+                        <p class="waiting">sold</p>  
+                     @if ($item->purchase->isPaid || $item->purchase->payment_method === 'konbini')       <p>Sold</p> 
+                     @else 
+                        <p class="waiting">sold</p> 
+                    @endif--}}
                 @endif
                 </a>
        

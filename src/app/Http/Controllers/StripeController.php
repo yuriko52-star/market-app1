@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Stripe\Stripe;
 use Stripe\Checkout\Session;
 use App\Models\Item;
+use App\Models\Purchase;
+use Illuminate\Support\Facades\Log;
 
 class StripeController extends Controller
 {
@@ -17,13 +19,26 @@ class StripeController extends Controller
             'shipping_address' => 'required',
             'shipping_post_code' => 'required',
         ]);
+    $user = auth()->user();
+     $item = Item::findOrFail($request->item_id);
+    $purchase = Purchase::updateOrCreate(
+        ['user_id' => $user->id, 'item_id' => $item->id],
+        [
+            'payment_method' => $request->input('payment_method'),
+            'shipping_address' => $request->input('shipping_address'),
+            'shipping_post_code' => $request->input('shipping_post_code'),
+            'shipping_building' => $request->input('shipping_building'),
+            'isPaid' => false
+        ]
+    );
     Stripe::setApiKey(config('services.stripe.secret'));
 
-    $item = Item::findOrFail($request->item_id);
-    $paymentMethod =$request->input('payment_method');
+   
+     $paymentMethod =$request->input('payment_method');
 
     $sessionData = [
-            'payment_method_types' => [$paymentMethod],
+             'payment_method_types' => [$paymentMethod],
+            // 'payment_method_types' => ['card', 'konbini'],
             'line_items' => [[
             'price_data' => [
                 'currency' => 'JPY',
@@ -33,28 +48,47 @@ class StripeController extends Controller
             'quantity' => 1,
         ]],
         'mode'=> 'payment',
+        
         'success_url' => route('stripe.success',[
-            'status' => $paymentMethod === 'konbini' ? 'pending' : 'success',
+            // 'status' => $paymentMethod === 'konbini' ? 'pending' : 'success',
+            'item_id' => $item->id,
             'payment_method' => $paymentMethod 
         ]),
         'cancel_url' => route('stripe.cancel'),
         ];
+        
 
-        if ($paymentMethod === 'konbini') 
-        {
-            $sessionData['payment_method_options'] = [
-            'konbini' => []
-            ];
-        }
-
-    $session = Session::create($sessionData);
-    return redirect($session->url);
+        $session = Session::create($sessionData);
+        return redirect($session->url);
     } 
 
-    public function success()
+    public function success(Request $request)
    {
+    
+    $user = auth()->user();
+    $item_id = $request->query('item_id');
+     $payment_method = $request->query('payment_method');
+    //  Log::info("Success メソッド - User ID: {$user->id}, Item ID: {$item_id}, Payment Method: {$payment_method}");
+    $purchase = Purchase::where('user_id', $user->id)
+            ->where('item_id', $item_id)
+            ->first();
 
-    return view('success');
+        /*if ($purchase) {
+            if ($payment_method === 'konbini') {
+            $purchase->update(['isPaid' => true, 'status' => 'pending']);
+            Log::info("コンビニ決済 - isPaid を true に更新（支払い待ち) ");
+         } else {
+            $purchase->update(['isPaid' => true]);
+            Log::info("カード決済 - isPaid を true に更新");
+         }
+        }else {
+            Log::warning("購入データが見つかりません - isPaid を更新できません");
+        }
+        */
+        $purchase->isPaid = true;
+        $purchase->save();
+
+        return view('success');
    }
 
    public function cancel()

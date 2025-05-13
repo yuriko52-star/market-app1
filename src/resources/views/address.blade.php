@@ -7,8 +7,8 @@
 @section('content')
 <div class="content">
     <h1>住所の変更</h1>
-    <form action="{{ route('purchase.address.update',['item_id' => $item_id]) }}" method="post">
-    @csrf
+        <form action="{{ route('purchase.address.update',['item_id' => $item_id]) }}" method="post">
+        @csrf
     <label for="" >
         <h2 class="label-title">郵便番号</h2>
     </label>
@@ -27,6 +27,6 @@
     <div class="">
     <button type="submit" class="update-btn">更新する</button>
     </div>
-    </form>
+        </form>
 </div>
 @endsection

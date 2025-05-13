@@ -59,10 +59,19 @@ class ProfileController extends Controller
       
         $tab = $request->query('tab');
         
-        $items = collect();
-      if($tab === 'buy')
-      {
-        $items = $user->buyItems()->get();
+         $items = collect();
+      
+       /* $items = $user->buyItems()->get();
+        */
+        if ($tab === 'buy') {
+          $items = $user->purchases()
+              ->where(function ($query) {
+                  $query->where('isPaid', true) // 支払い済み（カード）
+                    ->orWhere('payment_method', 'konbini'); // コンビニ支払い
+              })
+              ->with('item')
+              ->get()
+              ->pluck('item');
       }elseif($tab === 'sell') 
       {
         $items = $user->sellItems()->get();
@@ -70,12 +79,13 @@ class ProfileController extends Controller
     
       return view('mypage',compact('user','items','tab'));
     }
-  public function edit($userId)
-  {
-    $user = User::find($userId);
+
+      public function edit($userId)
+    {
+      $user = User::find($userId);
    
-    return view('profile',compact('user'));
-  }
+      return view('profile',compact('user'));
+    }
   
   public function update(ProfileRequest $profileRequest,AddressRequest $addressRequest ,User $user)
   {
@@ -95,9 +105,7 @@ class ProfileController extends Controller
       $validated['img_url'] = "/storage/images/$filename";
 
     }
-    $user->profile->update($validated);
-    
-
+   
     if (!$user->profile) {
         $user->profile()->create($validated);
     } else {

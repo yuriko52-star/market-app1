@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 class CommentController extends Controller
 {
     public function store (CommentRequest $request,  $item_id) {
-        ;
+        
          if(Auth::check()) {
             
            Comment::create([

@@ -22,9 +22,9 @@
         <nav>
             <ul>
                  <li>
-                    <a href="{{ route('mypage', ['tab' => 'sell']) }}"  class="sell-items">出品した商品</a></li>
+                    <a href="{{ route('mypage', ['tab' => 'sell']) }}"  class="sell-items {{ $tab == 'sell' ? 'active-tab' : '' }}">出品した商品</a></li>
                 <li>
-                    <a href="{{ route('mypage', ['tab' => 'buy']) }}"  class="buy-items">購入した商品</a>
+                    <a href="{{ route('mypage', ['tab' => 'buy']) }}"  class="buy-items {{ $tab == 'buy' ?  'active-tab' : '' }}  ">購入した商品</a>
                     
                 </li> 
             </ul>
@@ -36,14 +36,16 @@
         <div class="image-card-group">
         @if($tab==='buy')
             @foreach($items as $buyItem)
-            <div class="image-card">
+                {{--@if($buyItem->purchase && $buyItem->purchase->isPaid)--}}
+                <div class="image-card">
                  
             
-                <img src="{{ asset($buyItem->img_url) }}" alt="" class="image">
+                    <img src="{{ asset($buyItem->img_url) }}" alt="" class="image">
                 
        
-            <label for="" class="image-card-name">{{$buyItem->name}}</label>
-            </div>
+                    <label for="" class="image-card-name">{{$buyItem->name}}</label>
+                </div>
+                {{--@endif--}}
             @endforeach
         @endif
         @if($tab==='sell')

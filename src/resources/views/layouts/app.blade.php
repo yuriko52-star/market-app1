@@ -19,7 +19,7 @@
                 <img src="{{ asset('images/logo (1).svg') }}" > 
             </a>
             <form action="{{route('item.search')}}" class="search-form" method="get">
-                <input type="text" name="keyword" class="search-form__input" placeholder="なにをお探しですか？">
+                <input type="text" name="keyword" class="search-form__input" placeholder="なにをお探しですか？" >
                 <button type="submit" class="hidden-button"></button>
             </form>
         <nav>

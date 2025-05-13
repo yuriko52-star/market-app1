@@ -14,24 +14,39 @@ class ItemController extends Controller
     public function index(Request $request) 
     {
        $userId = Auth::id();
+       $tab = $request->query('tab');
 
-        if ($request->query('tab') == 'mylist') {
+        if ($tab == 'mylist') {
 
          if (Auth::check()) {
-        $items = Auth::user()->likedItems; 
+        $items = Auth::user()->likedItems()->with(['purchase' => function($query) {
+            $query->where('isPaid', true)
+                ->orWhere('payment_method', 'konbini');
+        }])
+        ->get(); 
     } else {
-        
         $items = collect();
         }
     } else {
         if ($userId) {
-            $items = Item::select('id', 'name', 'img_url')->where('user_id', '!=', $userId)->get();
+            $items = Item::select('id', 'name', 'img_url')
+            ->where('user_id', '!=', $userId)
+            ->with(['purchase' => function($query) {
+                $query->where('isPaid',true)
+                ->orWhere('payment_method', 'konbini');
+            }])
+            ->get();
         } else {
-            $items = Item::select('id', 'name', 'img_url')->get();
+            $items = Item::select('id', 'name', 'img_url')
+            ->with(['purchase' => function($query) {
+                $query->where('isPaid', true)
+                ->orWhere('payment_method', 'konbini');
+            }])
+            ->get();
         }
     }
 
-    return view('list', compact('items'));
+    return view('list', compact('items', 'tab'));
 }
 
   
@@ -43,7 +58,9 @@ class ItemController extends Controller
         $keyword = $request->input('keyword');
         session()->put('search_keyword', $keyword);
         $items = Item::where('name', 'LIKE', "%{$keyword}%")->get();
-        return view('list', compact('items'));
+        $tab = 'search';
+        return view('list', compact('items', 'tab'));
+       
      }
 
     
