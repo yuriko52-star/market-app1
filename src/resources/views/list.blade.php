@@ -12,10 +12,10 @@
                 
                 <li>
                   
-                    <a href="{{ route('list',['tab' => 'recommend']) }}" class="page-title {{ $tab == 'recommend' ? 'active-tab': '' }}">おすすめ</a>
+                    <a href="{{ route('list',['tab' => 'recommend', 'search' => $search]) }}" class="page-title {{ $tab == 'recommend' ? 'active-tab': '' }}">おすすめ</a>
                     <li>
                     @if(Auth::check())
-                    <a href="{{ route('list', ['tab' => 'mylist']) }}" class="page-title {{$tab == 'mylist' ? 'active-tab' : '' }}">マイリスト</a>
+                    <a href="{{ route('list', ['tab' => 'mylist', 'search' => $search]) }}" class="page-title {{$tab == 'mylist' ? 'active-tab' : '' }}">マイリスト</a>
                     @endif
    
                 </li>

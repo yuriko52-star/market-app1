@@ -15,41 +15,69 @@ class ItemController extends Controller
     {
         
             $userId = Auth::id();
-            $tab = $request->query('tab');
-     
-             if ($tab == 'mylist') {
+            $tab = $request->query('tab','recommend');
+            $search = $request->query('search');
+            if ($tab == 'mylist' && Auth::check()) {
+                // マイリスト: いいねした商品
+                $items = Auth::user()->likedItems()->with('purchase');
+    
+                if ($search) {
+                    $items = $items->where('name', 'LIKE', "%{$search}%")->with('purchase');
+                } else {
+                    $items = $items->with('purchase');
+                }
+                $items = $items->get();
+            } else {
+                // おすすめ: 自分が出品していない商品
+                $items = Item::select('id', 'name', 'img_url')
+                    ->when($userId, function ($query) use ($userId) {
+                        return $query->where('user_id', '!=', $userId);
+                    })
+                    ->with('purchase');
+    
+                if ($search) {
+                    $items = $items->where('name', 'LIKE', "%{$search}%")->with('purchase');
+                 } else {
+                    $items = $items->with('purchase');
+                 }
+                    $items = $items->get();
+            }
+    
+               /* if ($tab == 'mylist') {
      
               if (Auth::check()) {
-             $items = Auth::user()->likedItems()->with('purchase' )
-                ->get(); 
+               
+                  $items = Auth::user()->likedItems()->with('purchase' )
+                 ->get(); 
          } else {
-             $items = collect();
-             }
+              $items = collect();
+            }
          } else {
              if ($userId) {
-                 $items = Item::select('id', 'name', 'img_url')
-                 ->where('user_id', '!=', $userId)
-                 ->with('purchase')
-                 ->get();   
-            } else {
-                 $items = Item::select('id', 'name', 'img_url')
-                 ->with('purchase')
-                ->get();
+                $items = Item::select('id', 'name', 'img_url')
+                  ->where('user_id', '!=', $userId)
+                  ->with('purchase')
+                  ->get();   
+             } else {
+                  $items = Item::select('id', 'name', 'img_url')
+                  ->with('purchase')
+                 ->get();
              }
          }
-     
-         return view('list', compact('items', 'tab'));
+             */
+
+        return view('list', compact('items', 'tab', 'search'));
      }
      
      public function search (Request $request)
      {
         
         $keyword = $request->input('keyword');
-        session()->put('search_keyword', $keyword);
-        $items = Item::where('name', 'LIKE', "%{$keyword}%")->get();
-        $tab = 'search';
-        return view('list', compact('items', 'tab'));
-       
+    // session()->put('search_keyword', $keyword);
+        // $items = Item::where('name', 'LIKE', "%{$keyword}%")->get();
+        // $tab = 'search';
+        // return view('list', compact('items', 'tab'));
+        return redirect()->route('list', ['tab' => 'recommend', 'search' => $keyword]);
      }
 
     
