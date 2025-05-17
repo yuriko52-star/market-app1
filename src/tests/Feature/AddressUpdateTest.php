@@ -44,7 +44,7 @@ class AddressUpdateTest extends TestCase
             'shipping_building' => '新宿ビル6階',
         ];
 
-        $response = $this->actingAs($user)->post(route('purchase.address.update', ['item_id' => $item->id]), $updateAddress);
+        $response = $this->actingAs($user)->post(route('stripe.checkout', ['item_id' => $item->id]), $updateAddress);
         $response->assertStatus(302);
 
         $response = $this->actingAs($user)->get(route('purchase.show', ['item_id' => $item->id]));
@@ -53,7 +53,7 @@ class AddressUpdateTest extends TestCase
         $response->assertSee('147-2583');
         $response->assertSee('新宿ビル6階');
 
-         $this->actingAs($user)->post(route('purchase.store'), [
+         $this->actingAs($user)->post(route('stripe.checkout'), [
             'item_id' => $item->id,
             'payment_method' => 'card',
             'shipping_address' => '東京都新宿区',  

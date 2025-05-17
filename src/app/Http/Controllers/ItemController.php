@@ -17,29 +17,44 @@ class ItemController extends Controller
             $userId = Auth::id();
             $tab = $request->query('tab','recommend');
             $search = $request->query('search');
-            if ($tab == 'mylist' && Auth::check()) {
+            // if ($tab == 'mylist' && Auth::check()) {
+                if ($tab == 'mylist') {
+                    if (Auth::check()) {
                 // マイリスト: いいねした商品
-                $items = Auth::user()->likedItems()->with('purchase');
+                    $items = Auth::user()->likedItems()->with('purchase');
     
-                if ($search) {
+                    if ($search) {
                     $items = $items->where('name', 'LIKE', "%{$search}%")->with('purchase');
+                    // } else {
+                    // $items = $items->with('purchase');
+                    }
+                    $items = $items->get();
                 } else {
-                    $items = $items->with('purchase');
-                }
-                $items = $items->get();
-            } else {
-                // おすすめ: 自分が出品していない商品
+                    $items = collect();
+                } 
+            }else {
+                 // おすすめ: 全商品表示
                 $items = Item::select('id', 'name', 'img_url')
+                ->with('purchase');
+    
+                if ($userId) {
+        // ログインユーザーは自分の商品を除外
+                $items = $items->where('user_id', '!=', $userId);
+                }
+            // }
+                // おすすめ: 自分が出品していない商品
+                /*$items = Item::select('id', 'name', 'img_url')
                     ->when($userId, function ($query) use ($userId) {
                         return $query->where('user_id', '!=', $userId);
                     })
                     ->with('purchase');
-    
+            */
                 if ($search) {
                     $items = $items->where('name', 'LIKE', "%{$search}%")->with('purchase');
-                 } else {
-                    $items = $items->with('purchase');
-                 }
+                //  } else {
+                }
+                    // $items = $items->with('purchase');
+                //  }
                     $items = $items->get();
             }
     

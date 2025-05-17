@@ -16,7 +16,10 @@
                     <li>
                     @if(Auth::check())
                     <a href="{{ route('list', ['tab' => 'mylist', 'search' => $search]) }}" class="page-title {{$tab == 'mylist' ? 'active-tab' : '' }}">マイリスト</a>
+                    @else
+                    <a href="{{ route('list', ['tab' => 'mylist']) }}" class="page-title">マイリスト</a>
                     @endif
+                    
    
                 </li>
             </ul>
@@ -25,20 +28,22 @@
 
     <div class="under-content">
         <div class="image-card-group">
-            @foreach($items as $item)
-            <div class="image-card">
-                <a href="{{ route('item.show', ['item' =>$item->id]) }}" class="image-card-link">
-                <img src="{{ asset($item->img_url) }}" alt="" class="image">
-                @if($item->purchase)
-                    <p>Sold</p>
-                @endif
-                </a>
+            @if($tab == 'mylist' && !Auth::check())
+            @else
+                @foreach($items as $item)
+                     <div class="image-card">
+                        <a href="{{ route('item.show', ['item' =>$item->id]) }}" class="image-card-link">
+                            <img src="{{ asset($item->img_url) }}" alt="" class="image">
+                            @if($item->purchase)
+                                <p>Sold</p>
+                            @endif
+                        </a>
        
-            <label for="" class="image-card-name">{{$item->name}}</label>
-            </div>
-            @endforeach
+                        <label for="" class="image-card-name">{{$item->name}}</label>
+                    </div>
+                @endforeach
+            @endif
         </div>
-
     </div>
 </div>
 @endsection

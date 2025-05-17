@@ -83,14 +83,14 @@ public function testSearchQueryShouldPersistOnTheMylistPageWithoutOwnItems()
     ]);
 
     
-    $response = $this->actingAs($user)->get(route('list.search', ['keyword' => 'テスト']));
+    $response = $this->actingAs($user)->get(route('item.search', ['keyword' => 'テスト']));
 
     
     foreach ($otherItems as $item) {
         $response->assertSee($item->name);
         $response->assertSee($item->img_url);
     }
-    $response = $this->actingAs($user)->get(route('list.search', ['keyword' => 'テスト']));
+    $response = $this->actingAs($user)->get(route('item.search', ['keyword' => 'テスト']));
 
 
     $response->assertDontSee($ownItem->name);

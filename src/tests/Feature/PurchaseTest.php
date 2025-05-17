@@ -36,7 +36,7 @@ class PurchaseTest extends TestCase
         'img_url' => '/storage/images/user-profile.jpg',
         ]);
         $item = Item::factory()->create();
-         $response = $this->actingAs($user)->post(route('purchase.store'), [
+         $response = $this->actingAs($user)->post(route('stripe.checkout'), [
             'item_id' => $item->id,
             'payment_method' => 'card',
          ]);

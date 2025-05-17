@@ -64,10 +64,16 @@ class ProfileController extends Controller
        /* $items = $user->buyItems()->get();
         */
         if ($tab === 'buy') {
-          $items = $user->purchases()
+          $items = $user->purchases()->with('item')->get()->map(function ($purchase) {
+            return $purchase->item;
+        });
+          /*$items = $user->purchases()
               ->with('item')
               ->get()
               ->pluck('item');
+              \Log::info('購入アイテム：', ['items' => $items]);
+              */
+
       }elseif($tab === 'sell') 
       {
         $items = $user->sellItems()->get();
