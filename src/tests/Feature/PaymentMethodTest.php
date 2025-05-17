@@ -43,7 +43,7 @@ class PaymentMethodTest extends TestCase
             'payment_method' => 'card',
         ]);
 
-        $response = $this->actingAs($user)->post(route('purchase.updatePayment'), [
+        $response = $this->actingAs($user)->post(route('purchase.selectPayment'), [
             'item_id' => $item->id,
             'payment_method' => 'card',
         ]);
@@ -73,21 +73,15 @@ class PaymentMethodTest extends TestCase
             'payment_method' => 'card', 
         ]);
 
-        $this->actingAs($user)->post(route('purchase.updatePayment'),[
+        $this->actingAs($user)->post(route('purchase.selectPayment'),[
             'item_id' => $item->id,
             'payment_method' => 'konbini',
-        ]);
-        $purchase->refresh();
+        ])->assertSessionHas('payment_method', 'konbini');
+        
 
          $response = $this->actingAs($user)->get(route('purchase.show', ['item_id' => $item->id]));
 
         $response->assertSee('コンビニ支払い');
-
-        $this->assertDatabaseHas('purchases', [
-            'user_id' => $user->id,
-            'item_id' => $item->id,
-            'payment_method' => 'konbini',
-        ]);
     }
 
 
