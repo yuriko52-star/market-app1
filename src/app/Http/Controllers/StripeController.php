@@ -23,7 +23,8 @@ class StripeController extends Controller
     */
     $user = auth()->user();
      $item = Item::findOrFail($request->item_id);
-     $paymentMethod = session('payment_method');
+    //  $paymentMethod = session('payment_method');
+    $paymentMethod = $request->input('payment_method');  // ここを修正
     $purchase = Purchase::updateOrCreate(
         ['user_id' => $user->id, 'item_id' => $item->id],
         [

@@ -38,10 +38,15 @@
                     }
                 </style>
                 <p class="form_error">
+    @if (isset($errors) && $errors->has('payment_method'))
+        {{ $errors->first('payment_method') }}
+    @endif
+</p>
+                {{--<p class="form_error">
                     @error('payment_method')
                     {{$message}}
                     @enderror
-                </p>
+                </p>--}}
         </div>
             </form> 
             <form action="{{ route('stripe.checkout') }}" method="post"> 

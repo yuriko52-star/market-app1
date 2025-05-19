@@ -49,6 +49,7 @@ class PurchaseTest extends TestCase
             'payment_method' => 'card',
          ]);
     }
+         
 
     public function testSoldItemsAreMarkedAsSold()
     {
@@ -71,4 +72,5 @@ class PurchaseTest extends TestCase
         $response->assertSee('Sold');
 
     }
+        
 }
