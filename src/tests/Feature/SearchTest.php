@@ -38,68 +38,75 @@ class SearchTest extends TestCase
             'name' => 'テスト商品C',
             'img_url' => '/storage/images/testC.jpg',
         ]);
+        $keyword = 'A';
 
-        $response = $this->get(route('item.search',['keyword' => 'テスト']));
+        $response = $this->get(route('item.search',['keyword' => $keyword]));
+
+        $response->assertRedirect(route('list', ['tab' => 'recommend', 'search' => $keyword]));
+
+        $response = $this->get(route('list', ['tab' => 'recommend', 'search' => $keyword]));
 
         $response->assertStatus(200);
+
         $response->assertSee('テスト商品A');
-        $response->assertSee('テスト商品B');
-        $response->assertSee('テスト商品C');
-
         $response->assertSee($itemA->img_url);
-        $response->assertSee($itemB->img_url);
-        $response->assertSee($itemC->img_url);
         
+        $response->assertDontSee('テスト商品B');
+        $response->assertDontSee('テスト商品C');
+        $response->assertDontSee($itemB->img_url);
+        $response->assertDontSee($itemC->img_url);
     }
 
 
-public function testSearchQueryShouldPersistOnTheMylistPageWithoutOwnItems()
-{
+    public function testSearchQueryShouldPersistOnTheMylistPageWithoutOwnItems()
+    {
     
-    $user = User::factory()->create();
+        $user = User::factory()->create();
 
-    
-    $otherUser = User::factory()->create();
+        $bag1 = Item::factory()->create([
+            'name' => 'ハンドバッグ',
+            'img_url' =>'/storage/images/handbag.jpg',
+            ]);
+        $bag2 = Item::factory()->create([
+            'name' => 'ショルダーバッグ',
+            'img_url' => '/storage/images/sholder.jpg',
+            ]);
+        $kettle = Item::factory()->create([
+            'name' => 'やかん',
+            'img_url' => '/storage/images/kettle.jpg',
+            ]);
+        $user->likedItems()->attach([$bag1->id, $kettle->id]);
+
+        $keyword = 'バッグ';
+        $response = $this->actingAs($user)->get(route('list', [
+        'tab' => 'recommend',
+        'search' => $keyword
+        ]));
    
-    $otherItems = collect([
-        Item::factory()->create([
-        'user_id' => $otherUser->id,
-            'name' => 'テスト商品C',
-            'img_url' =>'/storage/images/testC.jpg',
-        ]),
-        Item::factory()->create([
-            'user_id' => $otherUser->id,
-            'name' => 'テスト商品D',
-            'img_url' => '/storage/images/testD.jpg',
-        ]),
-    ]);
+        $response->assertSee('ハンドバッグ');
+        $response->assertSee($bag1->img_url);
 
+        $response->assertSee('ショルダーバッグ');
+        $response->assertSee($bag2->img_url);
 
-    
-    $ownItem = Item::factory()->create([
-        'user_id' => $user->id,
-        'name' => 'テスト商品1',
-        'img_url' => '/storage/images/test1.jpg',
-    ]);
+        $response->assertDontSee('やかん');
+        $response->assertDontSee($kettle->img_url);
 
-    
-    $response = $this->actingAs($user)->get(route('item.search', ['keyword' => 'テスト']));
+        $response = $this->get(route('list', [
+            'tab' => 'mylist',
+            'search' => $keyword
+        ]));
+        $response->assertStatus(200);
 
-    
-    foreach ($otherItems as $item) {
-        $response->assertSee($item->name);
-        $response->assertSee($item->img_url);
+        $response->assertSee('ハンドバッグ');
+        $response->assertSee($bag1->img_url);
+
+        $response->assertDontSee('ショルダーバッグ');
+        $response->assertDontSee($bag2->img_url);
+     
+        $response->assertDontSee('やかん');
+        $response->assertDontSee($kettle->img_url);
     }
-    $response = $this->actingAs($user)->get(route('item.search', ['keyword' => 'テスト']));
-
-
-    $response->assertDontSee($ownItem->name);
-    $response->assertDontSee($ownItem->img_url);
-    
-    $response->assertSee('href="http://localhost?tab=recommend&amp;keyword=%E3%83%86%E3%82%B9%E3%83%88"', false);
-    $response->assertSee('href="http://localhost/list/search?tab=mylist&amp;keyword=%E3%83%86%E3%82%B9%E3%83%88"', false);
-
-}
 }
 
 

@@ -9,7 +9,7 @@ use App\Models\User;
 use App\Models\Item;
 use App\Models\Purchase;
 use App\Models\Profile;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+
 
 class AddressUpdateTest extends TestCase
 {
@@ -31,15 +31,14 @@ class AddressUpdateTest extends TestCase
     public function testAddressIsUpdatedAndCorrectlySavedWhenPurchasing()
     {
         \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
-       // テストメソッドの最初に追加
- // CSRF トークンを生成し、セッションに設定
- $csrfToken = csrf_token();
-    $this->withSession([
-    '_token' => csrf_token(), 
-     'shipping_address' => '東京都新宿区',
-     'shipping_post_code' => '147-2583',
-     'shipping_building' => '新宿ビル6階',
-    ]);
+      
+        $csrfToken = csrf_token();
+        $this->withSession([
+            '_token' => csrf_token(), 
+            'shipping_address' => '東京都新宿区',
+            'shipping_post_code' => '147-2583',
+            'shipping_building' => '新宿ビル6階',
+        ]);
 
  
         $user = User::factory()->create();

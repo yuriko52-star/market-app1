@@ -7,7 +7,7 @@ use App\Models\Item;
 use App\Models\Profile;
 use App\Models\User;
 use App\Models\Purchase;
-use App\Http\Requests\PurchaseRequest;
+
 use Illuminate\Support\Facades\Auth;
 
 class PurchaseController extends Controller
@@ -40,13 +40,8 @@ class PurchaseController extends Controller
 
     public function selectPayment(Request $request)
     {
-        $request->validate([
-            'item_id' => 'required|exists:items,id',
-            'payment_method' => 'required|in:card,konbini'
-        ]);
-        
         session (['payment_method' => $request->input('payment_method')]);
-            return redirect()->route('purchase.show', ['item_id' => $request->input('item_id') ]);
+        return redirect()->route('purchase.show', ['item_id' => $request->input('item_id') ]);
 
     }
     
@@ -76,16 +71,14 @@ class PurchaseController extends Controller
             'shipping_building' => 'required|string',
         ]);
         
-             // 住所情報をセッションに保存
-    session([
+             
+        session([
         'shipping_address' => $request->input('shipping_address'),
         'shipping_post_code' => $request->input('shipping_post_code'),
         'shipping_building' => $request->input('shipping_building'),
-    ]);
+        ]);
        
          return redirect()->route('purchase.show', ['item_id' => $item_id]);
-        
     }
     
-   
 }

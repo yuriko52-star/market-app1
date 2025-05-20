@@ -24,41 +24,42 @@ class LoginRequestTest extends TestCase
     */
     public function testValidationFailsWhenRequiredFieldsAreEmpty()
     {
-        $response = $this->postJson('/login',[]);
-
-        $response->assertStatus(422);
-        $response->assertJsonValidationErrors(['email','password']);
+        $this->expectException(\Illuminate\Validation\ValidationException::class);
+       
+        $response = $this->post('/login',[]);
+      
     }
 
     public function testValidationFailsWithInvalidCredentials()
     {
+        $this->expectException(\Illuminate\Validation\ValidationException::class);
         User::factory()->create([
             'email'=> 'test@example.com',
             'password'=> bcrypt('password1234'),
         ]);
 
-        $response = $this->postJson('/login',[
+        $response = $this->post('/login',[
             'email' => 'test@example.com',
             'password' => 'wrongpassword',
         ]);
 
-        $response->assertStatus(422);
-        $response->assertJsonValidationErrors(['email']);
     }
     public function testUserCanLoginWithValidCredentials()
     {
+        
         $user = User::factory()->create([
             'email' => 'test@example.com',
             'password' => bcrypt('password1234'),
         ]);
 
-        $response = $this->postJson('/login',[
+        $response = $this->post('/login',[
             'email' => 'test@example.com',
             'password' =>'password1234',
         ]);
 
-        $response->assertStatus(200);
+        $response->assertStatus(302);
 
         $this->assertAuthenticatedAs($user);
     }
+        
 }

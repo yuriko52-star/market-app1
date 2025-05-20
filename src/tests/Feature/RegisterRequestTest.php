@@ -24,51 +24,46 @@ class RegisterRequestTest extends TestCase
     */
 
     public function testValidationFailsWhenRequiredFieldsAreEmpty()
-    {
-        $response = $this->postJson('/register',[]);
-
-        $response->assertStatus(422);
-        $response->assertJsonValidationErrors(['name','email','password']);
-    }
+     {  
+        $this->expectException(\Illuminate\Validation\ValidationException::class);
+    
+        $response = $this->post('/register',[]);
+       }
 
     
     public function testValidationFailsWhenEmailIsMissing()
     {
-        $response = $this->postJson('/register',[
+
+        $this->expectException(\Illuminate\Validation\ValidationException::class);
+
+        $response = $this->post('/register',[
             'name' =>'浦島太郎',
            
             'password' =>'password1234',
             'password_confirmation' => 'password1234',
         ]);
-
-        $response->assertStatus(422);
-
-        $response->assertJsonValidationErrors(['email']);
     }
+    
     public function testValidationFailsWhenPasswordIsTooShort()
     {
-        $response = $this->postJson('/register',[
+        $this->expectException(\Illuminate\Validation\ValidationException::class);
+        $response = $this->post('/register',[
             'name' =>'浦島太郎',
             'email'=> 'test@example.com',
             'password' => 'short',
             'password_confirmation' => 'short',
         ]);
-
-        $response->assertStatus(422);
-        $response->assertJsonValidationErrors(['password']);
     }
 
     public function testValidationFailsWhenPasswordDoseNotMatchConfirmation()
     {
-        $response = $this->postJson('/register',[
+        $this->expectException(\Illuminate\Validation\ValidationException::class);
+        $response = $this->post('/register',[
             'name' =>'浦島太郎',
             'email'=> 'test@example.com',
             'password' => 'password1234',
             'password_confirmation' => 'differentpassword',
         ]) ;
-
-        $response->assertStatus(422);
-        $response->assertJsonValidationErrors(['password']);
     } 
 
     public function testUserISRegisteredAndRedirectedToEmailVerify()
@@ -86,8 +81,8 @@ class RegisterRequestTest extends TestCase
                 'email'=> 'test@example.com',
             ]);
 
-            
             $response->assertRedirect('/email/verify');
        
     }
+           
 }

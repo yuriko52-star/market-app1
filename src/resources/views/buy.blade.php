@@ -23,13 +23,13 @@
             @csrf
                 <input type="hidden" name="item_id" value="{{ $item->id}}">
                 <div class="pay-method">
-                <label for="payment_method" class="label-title">支払い方法</label>
+                    <label for="payment_method" class="label-title">支払い方法</label>
        
-                <select class="select" name="payment_method" id="payment_method" onchange="this.form.submit()">
-                    <option value="" disabled {{ empty($payment_method) ? 'selected' : '' }}>選択してください</option>
-                    <option value="konbini" {{ $payment_method == 'konbini' ? 'selected' : '' }}>コンビニ支払い</option>
-                    <option value="card" {{ $payment_method == 'card' ? 'selected' : '' }}>カード支払い</option>
-                </select>
+                    <select class="select" name="payment_method" id="payment_method" onchange="this.form.submit()">
+                        <option value="" disabled {{ empty($payment_method) ? 'selected' : '' }}>選択してください</option>
+                        <option value="konbini" {{ $payment_method == 'konbini' ? 'selected' : '' }}>コンビニ支払い</option>
+                        <option value="card" {{ $payment_method == 'card' ? 'selected' : '' }}>カード支払い</option>
+                    </select>
 
        
                 <style>
@@ -37,17 +37,13 @@
                     display: none;
                     }
                 </style>
-                <p class="form_error">
-    @if (isset($errors) && $errors->has('payment_method'))
-        {{ $errors->first('payment_method') }}
-    @endif
-</p>
-                {{--<p class="form_error">
-                    @error('payment_method')
-                    {{$message}}
-                    @enderror
-                </p>--}}
-        </div>
+                 <p class="form_error"> 
+                @if (isset($errors) && $errors->has('payment_method'))
+                {{ $errors->first('payment_method') }}
+                @endif
+                </p> 
+                
+                </div>
             </form> 
             <form action="{{ route('stripe.checkout') }}" method="post"> 
                 @csrf

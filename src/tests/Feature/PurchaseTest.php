@@ -27,7 +27,9 @@ class PurchaseTest extends TestCase
 
     public function testAuthenticatedUserCanPurchaseItem()
     {
+        \Stripe\Stripe::setApiKey(env('STRIPE_SECRET'));
         $user = User::factory()->create();
+        $csrfToken = csrf_token();
 
         $user->profile()->create([
         'address' => '東京都渋谷区',
@@ -36,12 +38,14 @@ class PurchaseTest extends TestCase
         'img_url' => '/storage/images/user-profile.jpg',
         ]);
         $item = Item::factory()->create();
-         $response = $this->actingAs($user)->post(route('stripe.checkout'), [
+         $response = $this->actingAs($user)->post(route('stripe.checkout', [
             'item_id' => $item->id,
+            '_token' => csrf_token(),
             'payment_method' => 'card',
-         ]);
+         ]));
 
-         $response->assertRedirect(route('stripe.checkout',['item_id' => $item->id]));
+         $response->assertRedirect();
+         $this->assertStringContainsString('https://checkout.stripe.com', $response->headers->get('Location'));
 
          $this->assertDatabaseHas('purchases', [
             'user_id' => $user->id,
@@ -49,7 +53,7 @@ class PurchaseTest extends TestCase
             'payment_method' => 'card',
          ]);
     }
-         
+        
 
     public function testSoldItemsAreMarkedAsSold()
     {
@@ -72,5 +76,4 @@ class PurchaseTest extends TestCase
         $response->assertSee('Sold');
 
     }
-        
 }

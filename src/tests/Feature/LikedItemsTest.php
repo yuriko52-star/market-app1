@@ -97,21 +97,21 @@ class LikedItemsTest extends TestCase
         $user = User::factory()->create();
         $otherUser = User::factory()->create();
 
-        // 自分が出品した商品（2つ）
+        
         $myItems = Item::factory()->count(2)->create([
             'user_id' => $user->id,
             'img_url' => '/storage/images/testD.jpg',
             'name' => 'My Item'
         ]);
 
-        // 他のユーザーが出品した商品（3つ）
+        
         $otherItems = Item::factory()->count(3)->create([
             'user_id' => $otherUser->id,
             'img_url' => '/storage/images/testE.jpg',
             'name' => 'Other Item'
         ]);
 
-        // ユーザーは他のユーザーの商品のみいいね
+        
         foreach ($otherItems as $item) {
             Like::create([
                 'user_id' => $user->id,
@@ -119,16 +119,16 @@ class LikedItemsTest extends TestCase
             ]);
         }
 
-        // マイリストタブ（いいねした商品）にアクセス
+       
         $response = $this->actingAs($user)->get(route('list', ['tab' => 'mylist']));
 
-        // 自分が出品した商品は表示されない
+        
         foreach ($myItems as $item) {
             $response->assertDontSee($item->name);
             $response->assertDontSee(asset($item->img_url));
         }
 
-        // 他のユーザーの商品（いいねしたもの）は表示される
+      
         foreach ($otherItems as $item) {
             $response->assertSee($item->name);
             $response->assertSee(asset($item->img_url));

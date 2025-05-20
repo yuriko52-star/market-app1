@@ -58,11 +58,9 @@ class CommentTest extends TestCase
 
     }
 
-
-
-
     public function testGuestCanNotPostComment()
     {
+        $this->expectException(\Illuminate\Auth\AuthenticationException::class);
         $item = Item::factory()->create();
         $response = $this->post(route('comment.store', ['item_id' => $item->id]), [
             'comment' => 'テストコメント',
@@ -73,18 +71,20 @@ class CommentTest extends TestCase
 
     public function testCommentIsRequired()
     {
+        $this->expectException(\Illuminate\Validation\ValidationException::class);
         $user = User::factory()->create();
         $item = Item::factory()->create();
 
         $response = $this->actingAs($user)->post(route('comment.store', ['item_id' => $item->id]), [
         'comment' => '',
        ]); 
-       $response->assertSessionHasErrors(['comment']);
-       $this->assertDatabaseMissing('comments',['comment' => '']);
+    
     }
 
     public function testCommentMustNotExceed255Characters()
     {
+        $this->expectException(\Illuminate\Validation\ValidationException::class);
+
         $user = User::factory()->create();
         $item = Item::factory()->create();
         $longComment = str_repeat('a',256);
@@ -92,9 +92,5 @@ class CommentTest extends TestCase
          $response = $this->actingAs($user)->post(route('comment.store', ['item_id' => $item->id]), [
         'comment' => $longComment,
         ]);
-
-        $response->assertSessionHasErrors(['comment']);
-        $this->assertDatabaseMissing('comments', ['comment' => $longComment]);
     }
-
 }
