@@ -36,7 +36,7 @@
         <div class="image-card-group">
         @if($tab==='buy')
             @foreach($items as $buyItem)
-                {{--@if($buyItem->purchase && $buyItem->purchase->isPaid)--}}
+                
                 <div class="image-card">
                  
             
@@ -45,7 +45,7 @@
        
                     <label for="" class="image-card-name">{{$buyItem->name}}</label>
                 </div>
-                {{--@endif--}}
+               
             @endforeach
         @endif
         @if($tab==='sell')

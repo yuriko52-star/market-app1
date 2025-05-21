@@ -24,12 +24,13 @@ class ProfileRequest extends FormRequest
     public function rules()
     {
         return [
-            'img_url' => ['mimes:jpeg,png,jpg'],
+            'img_url' => ['mimes:jpeg,png,jpg', 'required'],
         ];
      }
         public function messages() 
         {
             return [
+                'img_url.required' => '画像を入れてください',
                 'img_url.mimes' =>'拡張子が.jpegもしくは.pngの画像を選択してください',
             ];
         }
