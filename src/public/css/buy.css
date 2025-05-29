@@ -112,6 +112,7 @@ select {
 .form_error {
     color: red;
     text-align: left;
+    margin-top: 10px;
 }
 .pay-method,
 .shipping-info {
@@ -190,7 +191,15 @@ td {
 }
     
 @media screen and (min-width: 768px) and (max-width: 850px) 
-{
+{   
+    .image-card {
+        width: 143px;
+        height: 143px;
+    }
+
+    .item-info {
+        margin-left: 35px;
+    }
     .right-content {
             width: 440px;
             margin-left: 50px;
@@ -200,6 +209,9 @@ td {
             width: 100%;
             height: 220px;
             margin-left: 0;
+        }
+        tr {
+            height: 0;
         }
         th {
             font-size: 14px;
@@ -220,7 +232,7 @@ td {
         }
     
         .item-name {
-            font-size: 19px;
+            font-size: 18px;
         }
         .item-price {
             font-size: 18px;

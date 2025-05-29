@@ -24,7 +24,7 @@
        
         <p class="item-price"><span>￥</span>{{ number_format($item->price) }}<span>（税込）</span>
         </p>
-        <div class="flex">
+        <div class="flex-icon">
             <div class="likes">
        @php
         $liked = false;

@@ -16,9 +16,12 @@
 }
 
 .top-content li a {
+    display: block;
     text-decoration: none;
     margin-left: 100px;
-}
+    margin-bottom: 10px;
+    }
+
 
 .top-content li:nth-child(2) a {
     margin-left: 80px;
@@ -70,7 +73,7 @@ p {
     background-color: red;
     color: white;
     position: absolute;
-    top: 40%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;

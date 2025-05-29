@@ -29,13 +29,23 @@
 img {
     width: 100%;
 }
+.search-form {
+    display: flex;
+    align-items: center;
+    /* margin: 10px 0; */
+}
 .search-form__input {
     width: 30vw;
-    padding: 10px 20px;
-    margin-left: 2%;
+    /* padding: 10px 20px; */
+    padding: 23px;
+    /* margin-left: 2%; */
+    margin-left: 8%;
     height: 25px ;
     border-radius: 5px;
-    margin-bottom: 5px;
+    /* margin-bottom: 5px; */
+    border: 1px solid #ccc;
+    font-size: 14px;
+    background-color: #fff;
 }
 
 input::placeholder {
@@ -45,7 +55,9 @@ input::placeholder {
     font-weight: 400;
 }
 .hidden-button {
-    display: none;
+    /* display: none; */
+    visibility: hidden;
+    position: absolute;
 }
 
 .header-nav {
@@ -69,6 +81,9 @@ li {
     width: 135px;
     cursor: pointer;
 }
+.logout-btn {
+    margin-bottom: 3px;
+}
 .header-nav-link {
     color: #fff;
     text-decoration: none;
@@ -77,13 +92,15 @@ li {
     font-family: Inter;
     font-weight: 400;
     text-align: center;
+    margin-left: 15px;
 }
 .sell-btn {
     color: #000;
     background-color: #fff;
     border-radius: 4px;
-    width: 100px;
-    padding-top: 5px;
+    /* width: 100px; */
+    width: 80px;
+    /* padding-top: 5px; */
     display: inline-block;
     align-items: center;
     text-align: center;
@@ -93,6 +110,12 @@ li {
  {
     .header__inner{
         padding: 5px 15px;
+    }
+    .header__logo {
+        margin-top: 13px;
+    }
+    .search-form {
+         margin: 10px 0;
     }
     .header-nav-link {
         font-size: 24px;
@@ -108,8 +131,8 @@ li {
     .sell-btn {
         border-radius: 4px;
         width: 90px;
-        margin-bottom: 10px;
-        padding-top: 5px;
+        /* margin-bottom: 10px; */
+        /* padding-top: 5px; */
     }
 }
 
@@ -119,9 +142,15 @@ li {
     .header__inner {
         padding: 14px 15px;
     }
+    .header__logo {
+        margin: 13px 0 10px 0;
+    
+    }
   .search-form__input {
-         width: 200px; 
-         display: block; 
+         /* width: 200px;  */
+        width: 264px;
+        display: block;
+        padding: 20px;
     }         
     input::placeholder {
          font-size: 20px;
@@ -130,17 +159,20 @@ li {
     .header-nav-link {
         font-size: 13px;
         margin-right: 10px;
+        margin-left: 0;
     }
     .btn {
         font-size: 13px;
         width: 80px;
     }
     .logout-btn {
-        margin-right: 20px;
+        /* margin-right: 20px; */
+        margin-right: 10px;
+
     }
     .sell-btn {
         width: 60px;
         margin-right: 20px; 
-        padding-top: 5px;
+        /* padding-top: 5px; */
     }
 }

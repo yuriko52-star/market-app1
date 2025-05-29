@@ -11,7 +11,7 @@
     <form action="/login" class="" method="post" novalidate >
         @csrf
     <label for="" >
-        <h2 class="label-title">ユーザー名 / メールアドレス</h2>
+        <h2 class="label-title">メールアドレス</h2>
     </label>
     <input type="email" class="text" name="email" value="{{old('email')}}">
     <div class="form_error">
