@@ -23,7 +23,7 @@ class ProfilesTableSeeder extends Seeder
         ];
         DB::table('profiles')->insert($data);
     
-     $data = [
+        $data = [
             'user_id'=> 2,
             'img_url'=>  '/storage/images/IMG_1304.jpeg',
             'post_code'=>'412-3547',
@@ -31,5 +31,14 @@ class ProfilesTableSeeder extends Seeder
             'building' => '名古屋城',
         ];
         DB::table('profiles')->insert($data);
+        $data = [
+            'user_id'=> 3,
+            'img_url'=>  '/storage/images/IMG_1306.jpg',
+            'post_code'=>'333-4444',
+            'address' =>'愛知県東海市3-2-1',
+            'building' => 'ストア亭',
+        ];
+        DB::table('profiles')->insert($data);
+
     }
 }

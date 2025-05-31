@@ -201,48 +201,45 @@ td {
         margin-left: 35px;
     }
     .right-content {
-            width: 440px;
-            margin-left: 50px;
-        }
+        width: 440px;
+        margin-left: 50px;
+    }
     
-        table {
-            width: 100%;
-            height: 220px;
-            margin-left: 0;
-        }
-        tr {
-            height: 0;
-        }
-        th {
-            font-size: 14px;
-        }
-        td {
-            font-size: 18px;
-        }
-        .buy-btn {
-            width: 100%;
-            text-align: center;
-        }
+    table {
+        width: 100%;
+        height: 220px;
+        margin-left: 0;
+    }
+    tr {
+        height: 0;
+    }
+    th {
+        font-size: 14px;
+    }
+    td {
+        font-size: 18px;
+    }
+    .buy-btn {
+        width: 100%;
+        text-align: center;
+    }
     
-        .button {
-            width: 100%;
-            margin: 0;
-            padding: 10px;
-            display: block;
-        }
-    
-        .item-name {
-            font-size: 18px;
-        }
-        .item-price {
-            font-size: 18px;
-        }
-   
-   
-        .select {
-            margin-left: 0;
-        }
-        .address {
-            margin-left: 0;
-        }
+    .button {
+        width: 100%;
+        margin: 0;
+        padding: 10px;
+        display: block;
+    }
+    .item-name {
+        font-size: 18px;
+    }
+    .item-price {
+        font-size: 18px;
+    }
+   .select {
+        margin-left: 0;
+    }
+    .address {
+        margin-left: 0;
+    }
 }

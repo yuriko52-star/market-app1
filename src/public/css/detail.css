@@ -2,34 +2,21 @@
     display: flex;
     margin: 80px 60px;
 }
-
 .left-content {
     width: 50%;
     padding-top: 40px;
 }
 .image-card {
-    
     width: 100%;
     height: 27%;
     background-color: #d9d9d9;
     position: relative;
     border: none;
-    
-
 }
 .item-img {
     width: 100%;
 }
-.img {
-    font-family: Inter;
-    font-size: 40px;
-    font-weight: 400;
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-}
+
 .right-content {
     width: 50%;
     margin-left: 60px;
@@ -53,7 +40,6 @@
     font-family: Inter;
     font-size: 45px;
     font-weight: 400;
-    /* margin-top: 0; */
     margin-top: 10px;
     text-align: left;
 }
@@ -64,7 +50,6 @@ span {
 }
 .flex-icon {
     display: flex;
-    /* margin-left: 30px; */
     margin: 30px 0 0 43px;
 }
 .likes-icon {
@@ -111,7 +96,6 @@ span {
     border-radius: 4px;
     background-color: #ff5555;
     border: none;
-    /* margin-bottom: 20px; */
     margin: 20px 0;
 }
 .section-title {
@@ -173,7 +157,6 @@ dd {
 } 
 .flex {
     display: flex;
-    /* margin-left: 0 ;  */
     align-items: center;
     margin: 0 0 20px 5px;
 }
@@ -201,12 +184,9 @@ dd {
     font-weight: 300;
     text-align: left;
     width: 570px;
-    /* height: 20px; */
     background-color: #d9d9d9;   
     border-radius: 5px;
     align-items: center;
-    /* padding-top: 25px; */
-    /* padding-bottom: 25px; */
     padding: 20px 0 40px 0;
 }
 .label {
@@ -215,7 +195,6 @@ dd {
     font-weight: 700;
     display: block;
     text-align: left;
-    /* margin-top: 30px; */
     margin: 30px 0 10px;
 }
 .textarea {
@@ -234,11 +213,6 @@ dd {
 }
 @media screen and (min-width: 1400px) and (max-width: 1540px) {
    
-    /*.category {
-        width: 123px;
-        margin-right: 10px;
-    }
-        */
     .condition {
         width: 220px;
     }
@@ -309,14 +283,12 @@ dd {
         font-size: 18px;
     }
     .description {
-        /* font-size:20px; */
-        font-size: 17px; 
+       font-size: 17px; 
     }
     .category {
         font-size: 13px;
         width: 85px;
         padding-top: 5px;
-        /* height: 20px; */
     }
     .condition {
         width: 200px;

@@ -9,9 +9,7 @@ h1 {
     font-family: Inter;
     font-size: 36px;
     font-weight: 700;
-
 }
-
 #previewArea {
     width: 680px;
     height: 150px;
@@ -71,8 +69,6 @@ h1 {
     margin-bottom: 30px;
     padding: 7px 15px 0;
     height: 32px;
-    /* padding: 10px  15px 0;  */
-    /* height: 22px; */
     border: 2px solid #ff5655;
     background-color: #fff;
     color: #ff5655;
@@ -117,8 +113,6 @@ h1 {
     margin-right: 10px;
     display: none;
 }
-
-
 .select-wrapper select:valid+.checkmark {
     display: block;
 }
@@ -151,7 +145,6 @@ option {
     height: 125px;
     border-radius: 4px;
     border: 1px solid #5f5f5f;
-    /* border-color: #5f5f5f; */
     margin-bottom: 50px;
     background-color: #fff;
     margin-bottom: 50px;

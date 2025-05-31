@@ -8,15 +8,12 @@
     align-items: center;
     justify-content: center;
 }
-
-
 .profile_img {
     width: 150px;
     height: 150px;
     border-radius: 50%;
     background-color: #d9d9d9;
     border: none;
-    /* margin-left: 180px; */
     margin-left: 23px;
     margin-right: 80px; 
 }
@@ -26,7 +23,6 @@
     margin-left: 300px;
     width: 300px; 
     height: 50px;
-    /* padding-top: 3px;  */
     padding-top: 5px;
     border-radius: 10px;
     text-decoration: none;
@@ -61,7 +57,6 @@ ul {
 
 .top-content li a {
     text-decoration: none;
-     /* margin-left: 50px;  */
     margin-left: 135px;
 }
 
@@ -80,8 +75,6 @@ ul {
 .buy-items:hover {
     opacity: 0.8;
 }
-    
-
 .under-content {
     margin: 80px 0;
 }
@@ -128,19 +121,10 @@ p {
     .top-content li a {
         margin-left: 105px;
     }
-    /*.update-btn {
-        height: 40px;
-        padding-top: 8px;
-    }
-        */
+    
 }
 @media screen and (min-width: 768px) and (max-width: 850px) {
-    /*.image-file {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-        */
+    
     .profile_img {
         margin-left: 95px;
        }
@@ -156,12 +140,11 @@ p {
         margin-left: 10px;
     }
     .update-btn {
-         margin-left: 0; 
-         margin-right:120px; 
+        margin-left: 0; 
+        margin-right:120px; 
         font-size: 19px;
         width: 250px;
         padding: 3px 5px;
-        /* height: 28px; */
         height: 36px;
     }
     .top-content li a {
