@@ -11,14 +11,18 @@ h1 {
     font-weight: 700;
 }
 #previewArea {
-    width: 680px;
-    height: 150px;
+    width: 682px;
+    height: 682px;
     border-radius: 4px;
     border: 1px dotted #5f5f5f;
     position: relative;
     margin-bottom: 70px;
 }
-
+/*#previewArea .image {
+    width: 300px;
+    height: 300px;
+}
+    */
 .image-btn {
     transform: translate(250px, 40px);
     display: block;

@@ -36,18 +36,40 @@
     text-align: center;
     white-space: nowrap;
 }
-
+.star {
+    width: 40px;
+    height: 40px;
+}
+.star-btn {
+    position: absolute;
+    /* text-align: center; */
+    /* margin: 0 auto; */
+    top: 45%;
+    left: 32%;
+}
+.count {
+    font-size: 24px;
+    font-weight: 700;
+    margin-left: 5px;
+    color: white;
+    padding: 5px 10px;
+    background-color: #ff0000;
+    border-radius: 10px;
+}
 .top-title {
     font-family: Inter;
     font-size: 36px;
     font-weight: 700;
     white-space: nowrap;
+    display: block;
 }
 
 .top-content {
     margin-top: 60px;
     border-bottom: 2px solid #5f5f5f;
+    position: relative;
 }
+
 ul {
     display: flex;
 }
@@ -57,11 +79,14 @@ ul {
 
 .top-content li a {
     text-decoration: none;
-    margin-left: 135px;
+    margin-left: 90px;
+    margin-bottom: 30px;
+    display: block;
 }
 
 .sell-items ,
-.buy-items {
+.buy-items ,
+.transactions{
     font-family: Inter;
     font-size: 24px;
     font-weight: 700;
@@ -153,8 +178,14 @@ p {
     .top-content li:nth-child(2) a {
         margin-left: 30px;
     }
+    .star-btn {
+        margin: 0 auto;
+        left: 0;
+        right: 0;
+    }
     .sell-items ,
-    .buy-items {
+    .buy-items,
+    .transactions {
         font-size: 20px;
     }
     

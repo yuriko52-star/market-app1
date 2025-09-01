@@ -27,6 +27,7 @@ class StripeController extends Controller
             'shipping_address' => session('shipping_address'),
             'shipping_post_code' => session('shipping_post_code'),
             'shipping_building' => session('shipping_building'),
+            'status' => 'paid',
             
         ]
     );

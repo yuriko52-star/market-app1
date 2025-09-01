@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ProfileRequest; 
 use App\Http\Requests\AddressRequest; 
 use App\Models\Profile;
+use App\Models\Purchase;
 use App\Models\User;
 use App\Models\Item;
 use Illuminate\Support\Facades\Auth;
@@ -57,22 +58,56 @@ class ProfileController extends Controller
     {
        $user = Auth::user();
       
-        $tab = $request->query('tab');
+        	$tab = $request->query('tab');
         
          $items = collect();
-         $items = collect();
+        //  $items = collect();
       
-        if ($tab === 'buy') {
-          $items = $user->purchases()->with('item')->get()->map(function ($purchase) {
-            return $purchase->item;
-        });
+        	if ($tab === 'buy') {
+			// 購入した商品（履歴）	
+          	$items = $user->purchases()
+				->where('status', 'completed')
+				->with('item')
+				->get()
+				->map(fn($purchase) => $purchase->item);
           
 
-      }elseif($tab === 'sell') 
-      {
-        $items = $user->sellItems()->get();
-      }
-    
+      	}elseif($tab === 'sell') 
+		// 出品中の商品
+      	{
+        	$items = $user->sellItems()->get();
+      	} elseif ($tab === 'transaction') {
+
+			// 取引中（購入者 or 出品者の両方を考慮）
+
+			$items = Purchase::where(function($q) use ($user) {
+				// 自分が購入者
+				$q->where('user_id', $user->id);
+			})
+			->orWhereHas('item', function($q) use ($user) {
+				// 自分が出品者
+				$q->where('user_id', $user->id);
+			})
+			->where('status', 'paid')
+			// 取引中のステータス
+			->with('item')
+			//未読数バッジの計算
+			
+			// のちに今のコードに差し替え予定
+			/*->with(['item', 'messages' => function($q) use($user) {
+				$q->where('user_id', '!'=, 		     $user->id) 自分以外が送ったメッセージ->where('is_read', false);　未読のみ->latest();
+		}])*/ 
+			->get()
+			->map(fn($purchase) => $purchase->item);
+			/* ->sortByDesc(function($purchase) {
+				$item = $purchase->item;
+				$item->unread_count = $purchase->messages->count();
+				return optional($purchase->messages->first())->created_at;
+				});*/
+		}
+		// 購入者が「取引完了ボタン」を押したら status=completed に更新する処理を作成する予定
+		// 現在の問題点、取引中タブに入っていてもトップ画面に戻るとSold表記がされているが正しい動きなのか？
+
       return view('mypage',compact('user','items','tab'));
     }
 

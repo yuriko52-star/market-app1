@@ -11,12 +11,16 @@ class Purchase extends Model
 
       protected $fillable = [
         'user_id','item_id','payment_method','shipping_address','shipping_post_code',
-        'shipping_building',
+        'shipping_building','status',
     ];
     public function buyer() {
         return $this->belongsTo(User::class,'user_id');
     }
     public function item() {
         return $this->belongsTo(Item::class);
+    }
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
     }
 }

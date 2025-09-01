@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\AUth;
 use App\Http\Controllers\EmailVerificationController;
 use App\Http\Controllers\StripeController;
 use App\Http\Controllers\StripeWebhookController;
+use App\Http\Controllers\DebugController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +37,7 @@ Route::get('/register',[RegisterController::class,'showRegister'])->name('regist
 Route::post('/register',[RegisterController::class,'processRegister'])->name('register.process');
 
 Route::middleware(['auth'])->group(function () {
+    
    
     Route::get('/email/verify', [EmailVerificationController::class, 'show'])
         ->name('verification.notice'); 
@@ -46,7 +48,10 @@ Route::middleware(['auth'])->group(function () {
         ->middleware(['throttle:6,1'])
         ->name('verification.resend');
 });
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth','verified_new'])->group
+(function () 
+// 'verified_new'を消してみる
+{
 Route::get('/mypage/profile',[ProfileController::class,'showProfile'])->name('profile.show');
 Route::get('/mypage/profile/create',[ProfileController::class,'create'])->name('profile.create');
 Route::post('/mypage/profile/store',[ProfileController::class,'store'])->name('profile.store');
@@ -66,6 +71,10 @@ Route::post('/purchase/address/{item_id}', [PurchaseController::class, 'updateAd
 Route::post('/purchase/selectpayment',[PurchaseController::class,'selectPayment'])->name('purchase.selectPayment');
 
 Route::get('/mypage',[ProfileController::class,'show'])->name('mypage');
+
+Route::get('/chat/{purchase}', [ChatController::class,'index'])->name('chat.index');
+Route::post('/chat/{purchase}',[ChatController::class,'store'])->name('chat.store');
+
 Route::post('/checkout',[StripeController::class,'checkout'])->name('stripe.checkout');
 
 Route::get('/success',[StripeController::class,'success'])->name('stripe.success');
@@ -89,3 +98,4 @@ Route::get('/purchase/{item_id}',[PurchaseController::class,'show'])->name('purc
 
 
 
+Route::get('/preview/{viewName}', [DebugController::class, 'show']);

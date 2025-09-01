@@ -72,11 +72,15 @@ class FortifyServiceProvider extends ServiceProvider
 
 
         Fortify::redirects('login', function ($request) {
-            if ($request->user()->hasVerifiedEmail()) {
-                return route('list');
+              return route('list'); // 認証後は常にトップページ
+        });
+            // $user = $request->user();
+            /*if($user->email_verified_at !== null) {
+                 return route('list');
             }
             return route('verification.notice');
         });
+        */
 
         RateLimiter::for('login', function (Request $request) {
              $email = (string) $request->email;

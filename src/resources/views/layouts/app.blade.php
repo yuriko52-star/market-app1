@@ -72,7 +72,7 @@
 
         
         @yield('content')
-
+        @yield('js')
         
     </main>    
    

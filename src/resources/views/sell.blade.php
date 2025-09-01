@@ -13,7 +13,7 @@
                 <label for="" class="label">商品画像</label>
                 <input type="file" id="fileInput" style="display: none;" accept="image/*" name="img_url">
                 <div id="previewArea">
-                    <img src="{{ asset($item->img_url ?? '') }}" alt="" class="">
+                    <img src="{{ asset($item->img_url ?? '') }}" alt="" class="image" id="previewImg">
                     <label for="fileInput" class="image-btn">画像を選択する</label>
                 </div>
                 <p class="form_error">
@@ -102,5 +102,18 @@
         </form>
 
 </div>
+@section('js')
+<script>
+document.getElementById('fileInput').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        document.getElementById('previewImg').src = e.target.result;
+    }
+    reader.readAsDataURL(file);
+});
+</script>
+@endsection
 
 @endsection

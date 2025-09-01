@@ -24,6 +24,6 @@
     @endif
 
 
-    <a href="/" class="">商品一覧ページへ戻る</a>
+    <a href="/mypage" class="">マイページへ戻る</a>
 </div>
 @endsection

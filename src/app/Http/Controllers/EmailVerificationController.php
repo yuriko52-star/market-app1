@@ -21,6 +21,7 @@ class EmailVerificationController extends Controller
        
         if(!$user->profile) {
         return redirect()->route('profile.show')->with('status', 'Email verified!');
+        //いるかな？
     }
     return redirect()->route('list')->with('status', 'Email verified!');
 }
@@ -30,6 +31,7 @@ class EmailVerificationController extends Controller
         $user = $request->user();
         
         $user->sendEmailVerificationNotification();
+        // いるかな？
         return back()->with('message', 'Verification email resent!');
     }
 }

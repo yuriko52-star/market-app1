@@ -15,10 +15,17 @@
             
        
         <label class="top-title">{{$user->name}}</label>
+        
         <a href="{{ route('profile.edit' ,Auth::user()->id) }} " class="update-btn">プロフィールを編集</a>
         
     </div>
-  
+        <button class="star-btn">
+            <img src="{{ asset('images/Star 4.png')}}" alt="" class="star">
+            <img src="{{ asset('images/Star 4.png')}}" alt="" class="star">
+            <img src="{{ asset('images/Star 4.png')}}" alt="" class="star">
+            <img src="{{ asset('images/Star 4.png')}}" alt="" class="star">
+            <img src="{{ asset('images/Star 4.png')}}" alt="" class="star">
+        </button>
         <nav>
             <ul>
                  <li>
@@ -26,7 +33,11 @@
                 <li>
                     <a href="{{ route('mypage', ['tab' => 'buy']) }}"  class="buy-items {{ $tab == 'buy' ?  'active-tab' : '' }}  ">購入した商品</a>
                     
-                </li> 
+                </li>
+                <li> 
+                    <a href="{{ route('mypage',['tab' => 'transaction']) }}" class="transactions {{ $tab == 'transaction' ? 'active-tab' : '' }}">取引中の商品<span class="count">2</span></a> 
+                    <!-- 後で修正 -->
+                </li>
             </ul>
         </nav>
     </div>
@@ -61,7 +72,20 @@
             @endforeach
         @endif
 
-        
+        @if($tab=== 'transaction')
+            @foreach($items as $transaction)
+                <div class="image-card">
+                    {{--a href="{{route('chat.index', $transaction->id) }}">--}}
+                    <a href=""><img src="{{ asset($transaction->img_url) }}" alt="" class="image"></a>
+               
+                {{-- 未読件数バッジを表示する想定（後でMessageモデルと連携） --}}
+                    {{--@if(isset($transaction->unread_count) && $transaction->unread_count > 0)
+                        <span class="badge">{{ $transaction->unread_count }}</span>
+                    @endif--}}
+                    <label class="image-card-name">{{ $transaction->name }}</label>
+                 </div>
+            @endforeach
+        @endif
            
     </div>
 </div>

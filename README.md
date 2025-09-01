@@ -115,7 +115,12 @@
 23. CREATE DATABASE demo_test;  
 24. php artisan migrate --env=testing  
 
-    
+## pro入会テスト用  
+1.  php artisan make:migration add_status_to_purchases_table --table=purchases  
+ 既存のpurchasesテーブルにstatusカラムを追加  
+2. mypabe.blade.phpに 取引中商品のタブを追加  
+3. php artisan make:migration create_messages_tableでチャット用のテーブルを作成  
+4. chat.blafr.phpを作成  
 
 
 

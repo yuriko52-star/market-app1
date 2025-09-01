@@ -26,10 +26,10 @@
         <div id="previewArea">
           
            @if(!empty($user->profile) && !empty($user->profile->img_url))
-            <img src="{{ asset($user->profile->img_url)}}" alt="" class="img">
+            <img src="{{ asset($user->profile->img_url)}}" alt="" class="img" id="previewImg">
             @else
             
-            <img src="" alt="" class="img">
+            <img src="" alt="" class="img" id="previewImg">
             @endif
            
         </div>
@@ -84,4 +84,18 @@
     </form>
     
 </div>
+@section('js')
+<script>
+document.getElementById('fileInput').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(e) {
+        document.getElementById('previewImg').src = e.target.result;
+    }
+    reader.readAsDataURL(file);
+});
+</script>
+@endsection
+
 @endsection
