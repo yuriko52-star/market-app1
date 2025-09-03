@@ -13,8 +13,7 @@
     grid-template-rows: 1fr 2fr 4fr;
 }
 .sidebar {
-    /* width: 20%; */
-    /* height: 100vh; */
+    
     grid-column: 1/2;
     grid-row: 1/7;
     background-color: #868686;
@@ -36,7 +35,7 @@
     
     display: flex;
     align-items: center;
-    flex:f ;
+    ;
     justify-content: flex-start;
     gap: 20px;
     border-bottom: 2px solid #5f5f5f;
@@ -51,7 +50,7 @@
 }
 .top-content h1 {
     width: 68%;
-    font-size: 36px;
+    font-size: 2.25em;
     font-weight: 700;
 }
 .middle-content {
@@ -90,63 +89,93 @@
     
     
 }
-.under-content .flex { 
-    display: flex;
-    justify-content: space-between;
-
-}
-.under-content .item:last-child {
-    margin-top: 150px;
-    margin-right: 27px;
-}   
-.under-content .label {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 24px;
-    margin: 26px 0 8px 24px;
-    /* width: 45%; */
-}    
-
-.under-content .my-label {
-    /* margin-left: 100px; */
+.item.my-message{
     display: flex;
     justify-content: flex-end;
+    margin:16px  ;
+ }
+ .message-wrapper {
+    max-width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+ }
+.other-message-wrapper {
+    max-width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+} 
+
+
+
+
+
+.my-label {
+    
+    display: flex;
+   
     align-items: center;
-    gap: 24px;
-    margin-bottom: 8px;
+    gap: 10px;
+    margin-bottom: 4px;
+    
     
 }
-.label p,
-.my-label p {
-    font-size: 20px;
-    font-weight: 700px;
+.under-content .other-label {
+   
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+   
+
 }
 
-.under-content .user-img {
+
+.other-label p,
+.my-label p {
+    font-size: 20px;
+    font-weight: 700;
+    align-items: center;
+    gap: 24px;
+    
+    margin: 26px 0 8px 24px;
+}
+
+.user-img {
     width: 60px;
     height: 60px;
     border-radius: 50%;
     background-color: #5f5f5f;
+    
 }
-.under-content .input {
+.my-message-body,
+.other-message-body {
     width: 460px;
     height: 60px;
     background-color: #868686;
-    margin: 0  0 10px 26px;
-    display: block;
+    
+     margin: 16px   0 4px 26px; 
+    
     color: #fff;
-    padding: 20px;
-}
-.under-content .btns {
-    text-align: right;
-    margin-bottom: 180px;
+    padding: 10px;
+    word-break: break-word;
+    text-align: left;
+    
 }
 
-.under-content .message {
-        width: 73%;
+.btns {
+    display: flex;
+    text-align: right;
+    gap: 8px;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+ .message {
+         
+         width: 80%;
         height: 44px;
-        margin: 214px 19px 18px 27px;
+        
         border: 1px solid #5f5f5f;
         padding: 10px 20px;
         border-radius: 4px;
@@ -154,13 +183,11 @@
 .send-btn {
     width: 80px;
     height: 60px;
-    position: absolute;
-    bottom: 13px;
-    right: 35px;
+    
     
 }
 .add-btn {
-    padding: 8px 20px;
+    padding: 8px 15px;
     color: #ff5555;
     border: 2px solid #ff5555;
     font-family: Inter;
@@ -170,8 +197,7 @@
     border-radius: 10px;    
     text-align: center;
    
-    margin-bottom: 4px;
-
+   
 }
 .complete-btn {
     font-family: Inter;
@@ -183,3 +209,23 @@
         padding: 15px 12px;
         border-radius: 30px;
 }
+.flex-btn {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+@media screen and (min-width: 768px) and (max-width: 850px) {
+    .message {
+        width: 60%;
+    }
+        .top-content h1 {
+           
+            font-size: 1.8em;
+            
+        }
+        .sidebar {
+            font-size: 1.5em;
+        }
+
+}
+    

@@ -12,8 +12,16 @@ class ChatController extends Controller
 {
     public function index(Purchase $purchase) 
     {
-        $messages = $purchase->messages()->with('user')->orderBy('created_at')->get();
-        return view('chat', compact('purchase', 'messages'));
+        $messages = $purchase->messages()
+            ->with('user.profile')
+            ->orderBy('created_at')
+            ->get();
+// 出品者・購入者・商品をビューに渡す
+            $buyer = $purchase->buyer;
+            $seller = $purchase->seller;
+            $item = $purchase->item;
+
+        return view('chat', compact('purchase', 'messages', 'buyer','seller', 'item'));
     }
 
     public function store(Request $request ,Purchase  $purchase){
@@ -23,7 +31,7 @@ class ChatController extends Controller
         // あとでフォームリクエストを作成する
         Message::create([
             'purchase_id' => $purchase->id,
-            'user_id' => auth()->id,
+            'user_id' => auth()->id(),
             'body' => $request->body,
         ]);
         return redirect()->route('chat.index', $purchase->id);

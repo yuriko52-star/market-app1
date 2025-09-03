@@ -19,6 +19,9 @@ class Purchase extends Model
     public function item() {
         return $this->belongsTo(Item::class);
     }
+    public function seller() {
+        return $this->hasOneThrough(User::class, Item::class, 'id', 'id','item_id', 'user_id' );
+    }
     public function messages()
     {
         return $this->hasMany(Message::class);

@@ -75,8 +75,8 @@
         @if($tab=== 'transaction')
             @foreach($items as $transaction)
                 <div class="image-card">
-                    {{--a href="{{route('chat.index', $transaction->id) }}">--}}
-                    <a href=""><img src="{{ asset($transaction->img_url) }}" alt="" class="image"></a>
+                    
+                    <a href="{{ route('chat.index', $transaction->id)}}"><img src="{{ asset($transaction->img_url) }}" alt="" class="image"></a>
                
                 {{-- 未読件数バッジを表示する想定（後でMessageモデルと連携） --}}
                     {{--@if(isset($transaction->unread_count) && $transaction->unread_count > 0)

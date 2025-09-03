@@ -13,6 +13,8 @@ use App\Http\Controllers\EmailVerificationController;
 use App\Http\Controllers\StripeController;
 use App\Http\Controllers\StripeWebhookController;
 use App\Http\Controllers\DebugController;
+use App\Http\Controllers\ChatController;
+use App\Http\Controllers\MessageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,7 +75,14 @@ Route::post('/purchase/selectpayment',[PurchaseController::class,'selectPayment'
 Route::get('/mypage',[ProfileController::class,'show'])->name('mypage');
 
 Route::get('/chat/{purchase}', [ChatController::class,'index'])->name('chat.index');
+
+// チャット用
+
 Route::post('/chat/{purchase}',[ChatController::class,'store'])->name('chat.store');
+
+Route::put('/messages/{message}', [MessageController::class, 'update'])->name('messages.update');
+Route::delete('/messages/{message}', [MessageController::class, 'destroy'])->name('messages.destroy');
+
 
 Route::post('/checkout',[StripeController::class,'checkout'])->name('stripe.checkout');
 
