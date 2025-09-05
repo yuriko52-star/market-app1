@@ -69,13 +69,22 @@ class ProfileController extends Controller
 				->where('status', 'completed')
 				->with('item')
 				->get()
-				->map(fn($purchase) => $purchase->item);
-          
+        // こちらが最新
+        ->map(function($purchase) {
+            $purchase->unread_count = $purchase->messages()
+                ->where('user_id', '!=', auth()->id())
+                ->where('is_read', false)
+                ->count();
+            return $purchase;
+        });
+				// ->map(fn($purchase) => $purchase->item);
+          // 9/5外した
 
-      	}elseif($tab === 'sell') 
+      	}elseif ($tab === 'sell') 
 		// 出品中の商品
       	{
         	$items = $user->sellItems()->get();
+
       	} elseif ($tab === 'transaction') {
 
 			// 取引中（購入者 or 出品者の両方を考慮）
@@ -89,24 +98,47 @@ class ProfileController extends Controller
 				$q->where('user_id', $user->id);
 			})
 			->where('status', 'paid')
+      // 下から書き換え
+      ->with('item', 'messages')
+        ->get()
+        ->map(function($purchase) use ($user) {
+            $purchase->unread_count = $purchase->messages
+                ->where('user_id', '!=', $user->id)
+                ->where('is_read', false)
+                ->count();
+            return $purchase;
+        })
+         ->sortByDesc(fn($purchase) => optional($purchase->messages->first())->created_at);
 			// 取引中のステータス
-			->with('item')
-			//未読数バッジの計算
+			// ->with('item')
+			//未読数バッジの計算 最初はこちら
 			
-			// のちに今のコードに差し替え予定
+			// のちに今のコードに差し替え
 			/*->with(['item', 'messages' => function($q) use($user) {
-				$q->where('user_id', '!'=, 		     $user->id) 自分以外が送ったメッセージ->where('is_read', false);　未読のみ->latest();
-		}])*/ 
+				$q->where('user_id', '!=', 		     $user->id) 
+				// 自分以外が送ったメッセージ
+				->where('is_read', false);
+				// 　未読のみ
+				// ->latest();
+		}]) 
 			->get()
-			->map(fn($purchase) => $purchase->item);
-			/* ->sortByDesc(function($purchase) {
+      ->map(function($purchase) {
+                // unread_count を追加
+                $purchase->unread_count = $purchase->messages->count();
+                return $purchase;
+
+			 /*->map(fn($purchase) => $purchase->item)
+			->sortByDesc(function($purchase) {
 				$item = $purchase->item;
 				$item->unread_count = $purchase->messages->count();
 				return optional($purchase->messages->first())->created_at;
-				});*/
+        こちらは9/5上のコードに書き換えた*
+				})
+        ->sortByDesc(fn($purchase) => optional($purchase->messages->first())->created_at);
+        */
 		}
-		// 購入者が「取引完了ボタン」を押したら status=completed に更新する処理を作成する予定
-		// 現在の問題点、取引中タブに入っていてもトップ画面に戻るとSold表記がされているが正しい動きなのか？
+		
+		
 
       return view('mypage',compact('user','items','tab'));
     }

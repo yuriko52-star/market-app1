@@ -15,6 +15,7 @@ use App\Http\Controllers\StripeWebhookController;
 use App\Http\Controllers\DebugController;
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\RatingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,16 +74,19 @@ Route::post('/purchase/address/{item_id}', [PurchaseController::class, 'updateAd
 Route::post('/purchase/selectpayment',[PurchaseController::class,'selectPayment'])->name('purchase.selectPayment');
 
 Route::get('/mypage',[ProfileController::class,'show'])->name('mypage');
+// チャット用
 
 Route::get('/chat/{purchase}', [ChatController::class,'index'])->name('chat.index');
 
-// チャット用
+
 
 Route::post('/chat/{purchase}',[ChatController::class,'store'])->name('chat.store');
 
 Route::put('/messages/{message}', [MessageController::class, 'update'])->name('messages.update');
 Route::delete('/messages/{message}', [MessageController::class, 'destroy'])->name('messages.destroy');
+// 星評価用
 
+Route::post('/purchases/{purchase}/ratings',[RatingController::class, 'store'])->name('ratings.store');
 
 Route::post('/checkout',[StripeController::class,'checkout'])->name('stripe.checkout');
 

@@ -6,21 +6,23 @@
     display: none;
 }
 .wrapper {
+    max-width: 1550px;
+    display: flex;
+    justify-content: center;
+    /* display: grid; */
+    /* grid-template-columns: 1fr 4fr; */
     
-    display: grid;
-    grid-template-columns: 1fr 4fr;
-    
-    grid-template-rows: 1fr 2fr 4fr;
+    /* grid-template-rows: 1fr 2fr 4fr; */
 }
 .sidebar {
-    
-    grid-column: 1/2;
-    grid-row: 1/7;
+    width: 20%;
+    /* grid-column: 1/2; */
+    /* grid-row: 1/7; */
     background-color: #868686;
     color: #fff;
     font-family: Inter;
     font-weight: 400;
-    font-style: Regular;
+    /* font-style: Regular; */
     font-size: 30px;
     text-align: center;
         
@@ -29,15 +31,19 @@
 .sidebar p {
     margin-top: 13px;
 }
+.contents {
+    width: 80%;
+}
 .top-content {
-    grid-column: 2/5;
-    grid-row: 1/2;
+    /* width: 80%; */
+    /* grid-column: 2/5; */
+    /* grid-row: 1/2; */
     
     display: flex;
     align-items: center;
-    ;
-    justify-content: flex-start;
-    gap: 20px;
+    
+     justify-content: space-between; 
+    /* gap: 20px; */
     border-bottom: 2px solid #5f5f5f;
     
 }
@@ -52,10 +58,12 @@
     width: 68%;
     font-size: 2.25em;
     font-weight: 700;
+    
 }
 .middle-content {
-    grid-column: 2/5;
-    grid-row: 2/3;
+    /* width: 80%; */
+    /* grid-column: 2/5; */
+    /* grid-row: 2/3; */
     border-bottom: 2px solid #5f5f5f;
     display: flex;
     justify-content: flex-start;
@@ -82,13 +90,7 @@
     font-size: 36px;
         
 }
-.under-content {
-    grid-column: 2/5;
-    grid-row: 3/7;
-    position: relative;
-    
-    
-}
+
 .item.my-message{
     display: flex;
     justify-content: flex-end;
@@ -162,7 +164,11 @@
     text-align: left;
     
 }
-
+.edit-input {
+    width: 460px;
+    height: 60px;
+    border: #868686;
+}
 .btns {
     display: flex;
     text-align: right;
@@ -202,30 +208,223 @@
 .complete-btn {
     font-family: Inter;
         font-weight: 700;
-        font-style: Bold;
+        
         font-size: 20px;
         color: #fff;
         background-color: #ff8282;
         padding: 15px 12px;
         border-radius: 30px;
+        margin-right: 22px;
 }
 .flex-btn {
     display: flex;
     justify-content: space-around;
     align-items: center;
 }
+/* .form-error */
+.form-error {
+    color: red;
+    padding-left: 10px;
+    font-size: 20px;
+    font-weight: bold;
+}
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+     
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+        
+        z-index: 1000;
+}
+
+.modal.hidden {
+     display: none; 
+   
+}
+
+.modal-content {
+    
+ /* padding: 20px ;  */
+   /* max-width: 500px; */
+    text-align: center;
+    background: #fdfce6;
+    border: 1px solid #000;
+    border-radius: 15px;
+    margin-left: 250px;
+}
+.top-modal {
+
+padding: 20px;
+border-bottom: 1px solid #000;
+}
+.modal-title {
+    font-size: 35px;
+    font-weight: 400;
+    /* padding: 20px; */
+    
+    text-align: left;
+}
+.middle-modal {
+    padding: 19px 20px 14px;
+    border-bottom: 1px solid #000;
+}
+.question {
+    font-size: 20px;
+    font-weight: 400;
+    color: #868686;
+    text-align: left;
+    margin-bottom: 31px;
+}.star-btn {
+    width: 100px;
+    height: 100px;
+    margin-right: 13px;
+    
+}
+/*.star-btn.selected {
+    color: gold;
+    /* 効かなかったら画像を切り替えStar 1.pngへ 
+}
+*/
+.under-modal {
+    position: relative;
+    /* padding: 20px 50px; */
+    height: 80px;
+
+}
+.submit-btn {
+    font-size: 24px;
+    font-weight: 400;
+    color: #fff;
+    background-color: #ff8282;
+    padding: 10px 16px;
+    border-radius: 5px;
+    position: absolute;
+    /* left: 8px; */
+    top: 15px;
+    right: 20px;
+
+
+}
 @media screen and (min-width: 768px) and (max-width: 850px) {
     .message {
         width: 60%;
     }
-        .top-content h1 {
+    .top-content h1 {
+            width: 58%;
+            font-size: 24px;
+            
+    }
+    .top-content img {
+        margin-left: 18px
+    }
+    .complete-btn {
+            
+        font-size: 14px;
+            
+        padding: 13px 11px;
+        border-radius: 30px;
+            
+    }
+            
+        
+    .sidebar {
+        font-size: 24px;
+    }
+    .middle-content .text .item-name {
+            
+        font-size: 35px;
+            
+    
+    }
+    
+    .middle-content .text .price {
+            
+        font-size: 30px;
+    
+    }
+        /* .modal { 
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+    
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+    
+            z-index: 1000;
+        }
+    
+        /*.modal.hidden {
+         display: none; 
+       
+    }
+    */
+        .modal-content {
+    
+            
            
-            font-size: 1.8em;
+            margin-left: 150px;
+        }
+    
+        .top-modal {
+    
+            padding: 10px;
             
         }
-        .sidebar {
-            font-size: 1.5em;
+    
+        .modal-title {
+            font-size: 20px;
+            
         }
-
+            
+    
+        
+    
+        .question {
+            font-size: 15px;
+            
+            margin-bottom: 15px;
+        }
+    
+        .star-btn {
+            width: 50px;
+            height: 50px;
+            margin-right: 5px;
+    
+        }
+    
+        .under-modal {
+            position: relative;
+            
+            height: 50px;
+    
+        }
+    
+        .submit-btn {
+            font-size: 18px;
+            
+            padding: 8px 10px;
+            border-radius: 5px;
+            position: absolute;
+            
+            top: 5px;
+            right: 10px;
+    
+    
+        }
+    
+    
+    
 }
     

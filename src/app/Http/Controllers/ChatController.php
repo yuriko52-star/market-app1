@@ -7,11 +7,20 @@ use App\Models\Message;
 use App\Models\Purchase;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\ChatRequest; 
 
 class ChatController extends Controller
 {
     public function index(Purchase $purchase) 
     {
+        $user = auth()->user();
+        // 相手の未読メッセージを既読にする
+    $purchase->messages()
+        ->where('user_id', '!=', $user->id)
+        ->where('is_read', false)
+        ->update(['is_read' => true]);
+
+        // メッセージ取得
         $messages = $purchase->messages()
             ->with('user.profile')
             ->orderBy('created_at')
@@ -24,7 +33,7 @@ class ChatController extends Controller
         return view('chat', compact('purchase', 'messages', 'buyer','seller', 'item'));
     }
 
-    public function store(Request $request ,Purchase  $purchase){
+    public function store(ChatRequest $request ,Purchase  $purchase){
         $request->validate([
             'body' => 'required|string',
         ]);
@@ -36,4 +45,5 @@ class ChatController extends Controller
         ]);
         return redirect()->route('chat.index', $purchase->id);
     }
+    
 }

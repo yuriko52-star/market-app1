@@ -19,13 +19,16 @@
         <a href="{{ route('profile.edit' ,Auth::user()->id) }} " class="update-btn">プロフィールを編集</a>
         
     </div>
-        <button class="star-btn">
-            <img src="{{ asset('images/Star 4.png')}}" alt="" class="star">
-            <img src="{{ asset('images/Star 4.png')}}" alt="" class="star">
-            <img src="{{ asset('images/Star 4.png')}}" alt="" class="star">
-            <img src="{{ asset('images/Star 4.png')}}" alt="" class="star">
-            <img src="{{ asset('images/Star 4.png')}}" alt="" class="star">
-        </button>
+    <p class="stars">
+        @for($i = 1; $i <=5; $i++)
+            @if($i <= round($user->averageRating()))
+                <img src="{{ asset('images/Star 1.png')}}" alt="" class="star">
+            @else
+                <img src="{{ asset('images/Star 4.png') }}" alt="" class="star">
+            @endif
+        @endfor
+
+    </p>
         <nav>
             <ul>
                  <li>
@@ -35,8 +38,12 @@
                     
                 </li>
                 <li> 
-                    <a href="{{ route('mypage',['tab' => 'transaction']) }}" class="transactions {{ $tab == 'transaction' ? 'active-tab' : '' }}">取引中の商品<span class="count">2</span></a> 
-                    <!-- 後で修正 -->
+                    <a href="{{ route('mypage',['tab' => 'transaction']) }}" class="transactions {{ $tab == 'transaction' ? 'active-tab' : '' }}">取引中の商品
+                        @if($items->sum('unread_count') > 0)
+                        <span class="count">{{ $items->sum('unread_count') }}</span>
+                        @endif
+                    </a> 
+                   
                 </li>
             </ul>
         </nav>
@@ -46,15 +53,15 @@
     <div class="under-content">
         <div class="image-card-group">
         @if($tab==='buy')
-            @foreach($items as $buyItem)
+            @foreach($items as $purchase)
                 
                 <div class="image-card">
                  
             
-                    <img src="{{ asset($buyItem->img_url) }}" alt="" class="image">
+                    <img src="{{ asset($purchase->item->img_url) }}" alt="" class="image">
                 
        
-                    <label for="" class="image-card-name">{{$buyItem->name}}</label>
+                    <label for="" class="image-card-name">{{$purchase->item->name}}</label>
                 </div>
                
             @endforeach
@@ -72,19 +79,18 @@
             @endforeach
         @endif
 
-        @if($tab=== 'transaction')
-            @foreach($items as $transaction)
-                <div class="image-card">
-                    
-                    <a href="{{ route('chat.index', $transaction->id)}}"><img src="{{ asset($transaction->img_url) }}" alt="" class="image"></a>
-               
-                {{-- 未読件数バッジを表示する想定（後でMessageモデルと連携） --}}
-                    {{--@if(isset($transaction->unread_count) && $transaction->unread_count > 0)
-                        <span class="badge">{{ $transaction->unread_count }}</span>
-                    @endif--}}
-                    <label class="image-card-name">{{ $transaction->name }}</label>
-                 </div>
-            @endforeach
+        @if($tab==='transaction')
+        @foreach($items as $purchase)
+        <div class="image-card">
+            <a href="{{ route('chat.index', $purchase->id) }}">
+                <img src="{{ asset($purchase->item->img_url) }}" alt="" class="image">
+                @if($purchase->unread_count > 0)
+                    <span class="badge">{{ $purchase->unread_count }}</span>
+                @endif
+            </a>
+        <label class="image-card-name">{{ $purchase->item->name }}</label>
+        </div>
+        @endforeach
         @endif
            
     </div>

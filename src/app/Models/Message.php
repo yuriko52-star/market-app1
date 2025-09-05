@@ -21,6 +21,7 @@ class Message extends Model
     }
 }
 /*メッセージの並び順を「新規メッセージが来た順」にする Controllerにて
+
 $transactions = Purchase::where(function($q) use ($user) {
                         $q->where('user_id', $user->id)       // 自分が購入者
                           ->orWhereHas('item', function($q) use ($user) {
@@ -36,5 +37,6 @@ $transactions = Purchase::where(function($q) use ($user) {
                         return optional($purchase->messages->first())->created_at;
                     });
                     */
+                    
 
 

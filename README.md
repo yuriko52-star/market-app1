@@ -118,9 +118,10 @@
 ## pro入会テスト用  
 1.  php artisan make:migration add_status_to_purchases_table --table=purchases  
  既存のpurchasesテーブルにstatusカラムを追加  
-2. mypabe.blade.phpに 取引中商品のタブを追加  
+2. mypage.blade.phpに 取引中商品のタブを追加  
 3. php artisan make:migration create_messages_tableでチャット用のテーブルを作成  
 4. chat.blade.phpを作成  
+5. 星評価のためのテーブルを作成  
 ## ご案内  
 この度、新たな機能を追加いたしました。チャットにて出品者様と購入者様がじかにやりとりができるようになっております。修正をしたいときは、編集ボタンを押すと入力フォームに切り替わりますのでそのまま入力してエンターキーを押してください。 
 

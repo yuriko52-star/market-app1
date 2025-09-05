@@ -10,8 +10,8 @@
         <p>その他の取引</p>
     </div>
 
-
-    <div class="top-content">
+    <div class="contents">
+        <div class="top-content">
         @if(auth()->id() === $buyer->id)
           <!-- 自分が購入者なので、相手は出品者  -->
             <img src="{{ asset($seller->profile->img_url) }}" alt="" class="">
@@ -19,7 +19,7 @@
         <!-- 自分が出品者なので、相手は購入者  -->
             <img src="{{ asset($buyer->profile->img_url) }}" alt="" class="">
         @endif
-        <h1 class="">「
+            <h1 class="">「
             @if(auth()->id() === $buyer->id)
                 {{ $seller->name }}
             @else
@@ -28,60 +28,60 @@
                 」さんとの取引画面</h1>
         @if(auth()->id() === $buyer->id)
         <!-- 購入者だけ表示 -->
-        <form action="" class="">
-            @csrf
-            <button class="complete-btn">取引を完了する</button>
-        </form>
-        @endif
-    </div>
-    <!-- top-content -->
-    <div class="middle-content">
-        <img src="{{ asset($item->img_url) }}" alt="" class="">
-        <div class="text">
-            <p class="item-name">{{ $item->name }}</p>
-            <p class="price">{{ number_format($item->price) }}円</p>
-        </div>
-    </div>
-<!-- middle-content -->
-    <div class="under-content">
-        <div class="flex">
-    @foreach($messages as $message) 
-        @if($message->user_id === auth()->id())
-            {{-- 自分（右側） --}}
             
-        <div class="item my-message">
-            <div class="message-wrapper">
-                <div class="my-label">
-                    {{-- 自分の名前と画像 --}}
-                    <p>{{ auth()->user()->name }}</p>
-                    <img src="{{ asset(auth()->user()->profile->img_url) }}" alt="" class="user-img">
-                </div>
-                {{-- 通常表示 --}}
-                <p class="my-message-body" id="message-{{ $message->id }}">{{ $message->body }}</p>
-               
-             {{-- 編集フォーム --}}
-                <form action="{{route('messages.update', $message->id)}}" method="post" class="edit-form" id="form-{{ $message->id }}" style="display:none;">
-                    @csrf 
-                    @method('PUT')
-                    <input type="text"name="body" value="{{$message->body}}"class=".edit-input" >
-                </form>
-              
-                 
-                <div class="btns">
-                    <button type="button" class="edit-btn" data-id="{{ $message->id }}">
-                        編集
-                    </button>
-                    <!-- </form> -->
-                
-                    <form method="POST" action="{{ route('messages.destroy', $message->id) }}">
-                        @csrf
-                        @method('DELETE')
-                    <button type="submit">削除</button>   
-                    </form>
-                </div>
+            <button class="complete-btn" onclick="openModal()">取引を完了する</button>
+            
+        @endif
+        </div>
+    <!-- top-content -->
+        <div class="middle-content">
+            <img src="{{ asset($item->img_url) }}" alt="" class="">
+            <div class="text">
+                <p class="item-name">{{ $item->name }}</p>
+                <p class="price">{{ number_format($item->price) }}円</p>
             </div>
         </div>
-        @else
+<!-- middle-content -->
+        <div class="under-content">
+            <div class="flex">
+        @foreach($messages as $message) 
+            @if($message->user_id === auth()->id())
+            {{-- 自分（右側） --}}
+            
+            <div class="item my-message">
+                <div class="message-wrapper">
+                    <div class="my-label">
+                    {{-- 自分の名前と画像 --}}
+                        <p>{{ auth()->user()->name }}</p>
+                        <img src="{{ asset(auth()->user()->profile->img_url) }}" alt="" class="user-img">
+                    </div>
+                {{-- 通常表示 --}}
+                    <p class="my-message-body" id="message-{{ $message->id }}">{{ $message->body }}</p>
+
+               
+             {{-- 編集フォーム --}}
+                    <form action="{{route('messages.update', $message->id)}}" method="post" class="edit-form" id="form-{{ $message->id }}" style="display:none;">
+                    @csrf 
+                    @method('PUT')
+                        <input type="text"name="body" value="{{$message->body}}"class=".edit-input" >
+                    </form>
+              
+                 
+                    <div class="btns">
+                        <button type="button" class="edit-btn" data-id="{{ $message->id }}">
+                        編集
+                        </button>
+                    <!-- </form> -->
+                
+                        <form method="POST" action="{{ route('messages.destroy', $message->id) }}">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit">削除</button>   
+                        </form>
+                    </div>
+                </div>
+            </div>
+            @else
             {{-- 相手（左側） --}}
             <div class="item other-message">
                 <div class="other-message-wrapper">
@@ -109,7 +109,7 @@
             @csrf
             <div class="flex-btn">
                 <input type="text" class="message"name="body" placeholder="取引メッセージを記入してください">
-        
+            
         
                 <button class="add-btn">画像を追加</button>
                 <button class="send-btn">
@@ -117,17 +117,68 @@
                 </button>
             </div>
         </form>
+            <p class="form-error">
+                @error('body')
+                {{$message}}
+                @enderror
+            </p>
         
-    </div>
+        </div>
     <!--under-content  -->
-    
+    </div>
 
 </div>
 <!-- wrapper -->
-@endsection
 
 
-<script>
+
+
+<!-- モーダル -->
+<form action="{{ route('ratings.store', $purchase->id) }}" method="post">
+    @csrf
+ <div class="modal hidden" id="ratingModal">
+    <!-- あとでclass="modal hiddenにする" -->
+    <div class="modal-content">
+        <div class="top-modal">
+        <h2 class="modal-title">取引が完了しました。</h2>
+        </div>
+        <div class="middle-modal">
+        <p class="question">今回の取引相手はどうでしたか？</p>
+        <!-- 星評価 -->
+         <div class="stars" id="starRating">
+            @for($i = 1; $i <= 5; $i++)
+                <button type ="button" class="star-btn" data-value="{{$i}}">
+                    <img src="{{ asset('images/Star 4.png') }}" alt="星{{$i}}">
+                </button>
+            @endfor
+         </div>
+         </div>
+         <!-- 選んだ星の値を送る -->
+          <div class="under-modal">
+          <input type="hidden" name="rating" id="ratingValue">
+
+          <button type="submit" class="submit-btn">送信する</button>
+          </div>
+          @if(
+    !$purchase->ratings->where('from_user_id', auth()->id())->count() &&
+    $purchase->ratings->where('from_user_id', $purchase->buyer->id)->count()
+)
+            <script>
+            document.addEventListener('DOMContentLoaded', () => {
+            openModal(); // ページロード時に自動でモーダルを表示
+            });
+            </script>
+            @endif
+
+    </div>
+ </div>
+</form>
+
+
+
+
+
+ <script>
    document.addEventListener('DOMContentLoaded', () => {
     // 編集ボタンを押したら切り替え
     document.querySelectorAll('.edit-btn').forEach(btn => {
@@ -150,4 +201,33 @@
     });
 });
 </script>
+<script>
+
+    function openModal() {
+    document.getElementById('ratingModal').classList.remove('hidden');
+}
+document.addEventListener('DOMContentLoaded', () => {
+    const stars = document.querySelectorAll('.star-btn');
+    const ratingInput = document.getElementById('ratingValue');
+
+    stars.forEach(star => {
+        star.addEventListener('click', () => {
+            const value = star.dataset.value;
+            ratingInput.value = value;
+
+            // クリックした星までを黄色に、それ以降は灰色に
+            stars.forEach(s => {
+                const img = s.querySelector('img');
+                if (s.dataset.value <= value) {
+                    img.src = '/images/Star 1.png';
+                } else {
+                    img.src = '/images/Star 4.png';
+                }
+            });
+        });
+    });
+});
+
+</script>
+@endsection
 
