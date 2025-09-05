@@ -30,4 +30,5 @@ class Purchase extends Model
     {
         return $this->hasMany(Rating::class);
     }
+    
 }

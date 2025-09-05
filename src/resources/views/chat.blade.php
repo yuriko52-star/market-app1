@@ -63,7 +63,7 @@
                     <form action="{{route('messages.update', $message->id)}}" method="post" class="edit-form" id="form-{{ $message->id }}" style="display:none;">
                     @csrf 
                     @method('PUT')
-                        <input type="text"name="body" value="{{$message->body}}"class=".edit-input" >
+                        <input type="text"name="body" value="{{$message->body}}"class="edit-input" >
                     </form>
               
                  
@@ -103,7 +103,7 @@
     @endforeach
     </div>
 
-{{ $isSeller ? '出品者です' : '購入者です' }}
+
     <!-- 相手のmessage -->
         <form action="{{ route('chat.store', $purchase->id)}}" method="post">
             @csrf

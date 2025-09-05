@@ -26,21 +26,29 @@ class ChatController extends Controller
             ->orderBy('created_at')
             ->get();
 // 出品者・購入者・商品をビューに渡す
+
             $buyer = $purchase->buyer;
             $seller = $purchase->seller;
             $item = $purchase->item;
 
             // 自分が出品者かどうか
-    $isSeller = ($user->id === $seller->id);
-
+    $isSeller = $user->id === $purchase->seller->id;
+/*dd([
+    'user_id' => $user->id,
+    'buyer_id' => $buyer->id,
+    'seller_id' => $seller->id,
+    'isSeller' => $isSeller,
+]);
+*/
         return view('chat', compact('purchase', 'messages', 'buyer','seller', 'item', 'isSeller'));
+    
     }
 
     public function store(ChatRequest $request ,Purchase  $purchase){
         $request->validate([
             'body' => 'required|string',
         ]);
-        // あとでフォームリクエストを作成する
+        
         Message::create([
             'purchase_id' => $purchase->id,
             'user_id' => auth()->id(),

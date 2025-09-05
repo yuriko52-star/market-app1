@@ -165,9 +165,16 @@
     
 }
 .edit-input {
-    width: 460px;
-    height: 60px;
-    border: #868686;
+    border: 2px solid #4A90E2;
+       
+        max-width: 800px;
+        height: 60px;
+        border-radius: 6px;
+        padding: 6px 30px;
+        font-size: 14px;
+        width: 100%;
+        box-sizing: border-box;
+        display: block;
 }
 .btns {
     display: flex;
