@@ -30,7 +30,10 @@ class ChatController extends Controller
             $seller = $purchase->seller;
             $item = $purchase->item;
 
-        return view('chat', compact('purchase', 'messages', 'buyer','seller', 'item'));
+            // 自分が出品者かどうか
+    $isSeller = ($user->id === $seller->id);
+
+        return view('chat', compact('purchase', 'messages', 'buyer','seller', 'item', 'isSeller'));
     }
 
     public function store(ChatRequest $request ,Purchase  $purchase){

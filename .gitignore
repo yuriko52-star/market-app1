@@ -5,3 +5,5 @@ src/.env.testing
 src/database/migrations/2025_05_13_144729_remove_is_paid_from_purchases_table.php
 
 src/database/migrations/2025_05_12_144552_add_is_paid_to_purchases_table.php
+
+src/app/Mail/TransactionCompletedMail.php

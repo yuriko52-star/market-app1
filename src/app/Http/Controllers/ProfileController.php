@@ -61,86 +61,51 @@ class ProfileController extends Controller
         	$tab = $request->query('tab');
         
          $items = collect();
-        //  $items = collect();
-      
         	if ($tab === 'buy') {
-			// 購入した商品（履歴）	
+				
           	$items = $user->purchases()
 				->where('status', 'completed')
 				->with('item')
 				->get()
-        // こちらが最新
-        ->map(function($purchase) {
-            $purchase->unread_count = $purchase->messages()
-                ->where('user_id', '!=', auth()->id())
-                ->where('is_read', false)
-                ->count();
-            return $purchase;
-        });
-				// ->map(fn($purchase) => $purchase->item);
-          // 9/5外した
+        		->map(function($purchase) {
+            		$purchase->unread_count = $purchase->messages()
+                	->where('user_id', '!=', auth()->id())
+                	->where('is_read', false)
+                	->count();
 
-      	}elseif ($tab === 'sell') 
-		// 出品中の商品
-      	{
-        	$items = $user->sellItems()->get();
+            		return $purchase;
+        		});
+				}elseif ($tab === 'sell') 
+				{
+        			$items = $user->sellItems()->get();
 
-      	} elseif ($tab === 'transaction') {
+      			} elseif ($tab === 'transaction') {
 
-			// 取引中（購入者 or 出品者の両方を考慮）
+				// 取引中（購入者 or 出品者の両方を考慮）
 
-			$items = Purchase::where(function($q) use ($user) {
+				$items = Purchase::where(function($q) use ($user) {
 				// 自分が購入者
-				$q->where('user_id', $user->id);
-			})
-			->orWhereHas('item', function($q) use ($user) {
+				$q->where('user_id', $user->id)
+			
+				->orWhereHas('item', function($q) use ($user) {
 				// 自分が出品者
 				$q->where('user_id', $user->id);
-			})
+				});
+    		})
 			->where('status', 'paid')
-      // 下から書き換え
-      ->with('item', 'messages')
-        ->get()
-        ->map(function($purchase) use ($user) {
+      
+      		->with('item', 'messages')
+        	->get()
+        	->map(function($purchase) use ($user) {
             $purchase->unread_count = $purchase->messages
                 ->where('user_id', '!=', $user->id)
                 ->where('is_read', false)
                 ->count();
             return $purchase;
-        })
+        	})
          ->sortByDesc(fn($purchase) => optional($purchase->messages->first())->created_at);
-			// 取引中のステータス
-			// ->with('item')
-			//未読数バッジの計算 最初はこちら
-			
-			// のちに今のコードに差し替え
-			/*->with(['item', 'messages' => function($q) use($user) {
-				$q->where('user_id', '!=', 		     $user->id) 
-				// 自分以外が送ったメッセージ
-				->where('is_read', false);
-				// 　未読のみ
-				// ->latest();
-		}]) 
-			->get()
-      ->map(function($purchase) {
-                // unread_count を追加
-                $purchase->unread_count = $purchase->messages->count();
-                return $purchase;
-
-			 /*->map(fn($purchase) => $purchase->item)
-			->sortByDesc(function($purchase) {
-				$item = $purchase->item;
-				$item->unread_count = $purchase->messages->count();
-				return optional($purchase->messages->first())->created_at;
-        こちらは9/5上のコードに書き換えた*
-				})
-        ->sortByDesc(fn($purchase) => optional($purchase->messages->first())->created_at);
-        */
-		}
-		
-		
-
-      return view('mypage',compact('user','items','tab'));
+    	}
+		return view('mypage',compact('user','items','tab'));
     }
 
       public function edit($userId)

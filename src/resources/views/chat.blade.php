@@ -103,7 +103,7 @@
     @endforeach
     </div>
 
-
+{{ $isSeller ? '出品者です' : '購入者です' }}
     <!-- 相手のmessage -->
         <form action="{{ route('chat.store', $purchase->id)}}" method="post">
             @csrf
@@ -159,16 +159,18 @@
 
           <button type="submit" class="submit-btn">送信する</button>
           </div>
-          @if(
+          {{--@if(
     !$purchase->ratings->where('from_user_id', auth()->id())->count() &&
     $purchase->ratings->where('from_user_id', $purchase->buyer->id)->count()
-)
+)--}}
+    @if($isSeller && !$purchase->ratings->where('from_user_id', auth()->id())->count())
             <script>
             document.addEventListener('DOMContentLoaded', () => {
             openModal(); // ページロード時に自動でモーダルを表示
             });
             </script>
             @endif
+        
 
     </div>
  </div>
