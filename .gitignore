@@ -9,3 +9,6 @@ src/database/migrations/2025_05_12_144552_add_is_paid_to_purchases_table.php
 
 src/storage/app/public/images/68bb90a3e61d8_IMG_2155.JPG
 src/storage/app/public/images/68a13b2f12969_banana.png
+src/storage/app/public/chat_images/*
+src/storage/app/public/chat-image/*
+src/storage/app/public/images/sGqsqhGYCaPmAxeV70jJYreNX1JFpfBQ1ryZQl6d.jpg

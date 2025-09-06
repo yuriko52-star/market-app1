@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Message extends Model
 {
     use HasFactory;
-    protected $fillable = ['purchase_id','user_id','body','is_read'];
+    protected $fillable = ['purchase_id','user_id','body','is_read','image_path'];
     public function purchase() 
     {
         return $this->belongsTo(Purchase::class);

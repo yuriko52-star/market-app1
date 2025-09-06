@@ -52,6 +52,7 @@
         <div class="under-content">
             <div class="flex">
         @foreach($messages as $message) 
+        {{--{{dd($message->image_path)}}--}}
             @if($message->user_id === auth()->id())
             {{-- 自分（右側） --}}
             
@@ -64,6 +65,13 @@
                     </div>
             {{-- 通常表示 --}}
                     <p class="my-message-body" id="message-{{ $message->id }}">{{ $message->body }}</p>
+                    @if($message->image_path)
+                 <div class="chat-image">
+                    <img src="{{ asset('storage/' .$message->image_path) }}" alt="添付画像" style="max-width:200px">
+                    
+                </div>
+                
+                @endif
 
                
              {{-- 編集フォーム --}}
@@ -104,6 +112,13 @@
                     <img src="{{ asset($message->user->profile->img_url) }}" alt="" class="user-img">
                 </div>
                 <p class="other-message-body">{{ $message->body }}</p>
+                 @if($message->image_path)
+                 <div class="chat-image">
+                    <img src="{{ asset('storage/' .$message->image_path) }}" alt="添付画像" style="max-width:200px">
+                    
+                </div>
+                
+                @endif
                 </div>
             </div>
         @endif
@@ -112,21 +127,27 @@
 
 
     <!-- 相手のmessage -->
-        <form action="{{ route('chat.store', $purchase->id)}}" method="post">
+        <form action="{{ route('chat.store', $purchase->id)}}" method="post" enctype="multipart/form-data">
             @csrf
             <div class="flex-btn">
                 <input type="text" id="chat-input" class="message"name="body" placeholder="取引メッセージを記入してください">
             
-        
-                <button type  class="add-btn">画像を追加</button>
+                <input type="file" name="image" id="chat-image" accept="image/*" style="display:none">
+                <button type="button"  class="add-btn" onclick="document.getElementById('chat-image').click()">画像を追加</button>
                 <button type="submit" class="send-btn">
                     <img src="{{ asset('images/inputbuttun 1.png')}}" alt="" class="input-btn">
                 </button>
             </div>
+           <div id="image-preview"></div>
         </form>
             <p class="form-error">
                 @error('body')
                 {{$message}}
+                @enderror
+            </p>
+            <p class="form-error">
+                @error('image')
+                {{ $message }}
                 @enderror
             </p>
         </div>
@@ -198,9 +219,8 @@
             });
         });
     });
-</script>
+ </script>
 <script>
-
     function openModal() {
     document.getElementById('ratingModal').classList.remove('hidden');
     }
@@ -229,21 +249,46 @@
 </script>
 <!-- 入力情報の保持 -->
 <script>
-    const input = document.getElementById('chat-input');
-    const key = `chat-draft-{{ $purchase->id }}`; // 取引ごとにキーを分ける
+    document.addEventListener('DOMContentLoaded', () => {
+        const chatInput = document.getElementById('chat-input');
+        const chatImage = document.getElementById('chat-image');
+        const imagePreview = document.getElementById('image-preview');
+        const form = chatInput.form;
+        const storageKey = `chat-draft-{{ $purchase->id }}`; // 取引ごとにキーを分ける
 
     // ページ読み込み時に保存された下書きを復元
-    input.value = localStorage.getItem(key) || '';
+    chatInput.value = localStorage.getItem(storageKey) || '';
 
     // 入力が変わるたびに保存
-    input.addEventListener('input', () => {
-        localStorage.setItem(key, input.value);
+    chatInput.addEventListener('input', () => {
+        localStorage.setItem(storageKey, chatInput.value);
+    });
+
+// 画像プレビュー
+ 
+   chatImage.addEventListener('change', e => {
+    const file = e.target.files[0];
+    if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function(event) {
+            
+            imagePreview.innerHTML =`<img src="${event.target.result}" style="max-width:100px">`;
+        };
+        reader.readAsDataURL(file);
     });
 
     // 送信時に下書きを削除
-    input.form.addEventListener('submit', () => {
+        form.addEventListener('submit', () => {
+        localStorage.removeItem(storageKey);
+        });
+    });
+
+    /*input.form.addEventListener('submit', () => {
         localStorage.removeItem(key);
     });
+    */
 </script>
+
+
 @endsection
 

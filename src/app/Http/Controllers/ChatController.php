@@ -40,21 +40,25 @@ class ChatController extends Controller
                 $query->where('user_id' ,$user->id);
               });
         })
-        ->with('item')                     // 商品名用
+        ->with('item')  // 商品名用
         ->get();
         return view('chat', compact('purchase', 'messages', 'buyer','seller', 'item', 'otherPurchases'));
     
     }
 
     public function store(ChatRequest $request ,Purchase  $purchase){
-        $request->validate([
-            'body' => 'required|string',
-        ]);
+        
+        $path = null;
+        
+        if($request->hasFile('image')) {
+            $path = $request->file('image')->store('images', 'public');
+        }
         
         Message::create([
             'purchase_id' => $purchase->id,
             'user_id' => auth()->id(),
             'body' => $request->body,
+            'image_path' => $path,
         ]);
         return redirect()->route('chat.index', $purchase->id);
     }
