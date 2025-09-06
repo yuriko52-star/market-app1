@@ -21,7 +21,7 @@ class TransactionCompletedMail extends Mailable
      */
     public function __construct(Purchase $purchase)
     {
-        $this->purchase = $purchase;
+        $this->purchase = $purchase->load('buyer', 'item');
     }
 
     /**

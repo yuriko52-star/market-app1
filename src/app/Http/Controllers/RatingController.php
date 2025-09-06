@@ -51,6 +51,8 @@ class RatingController extends Controller
     } else {
         // もし購入者が評価した直後なら出品者に通知メールを送信
         if($fromUserId === $purchase->buyer->id) {
+
+            $purchase->load('buyer', 'seller', 'item');
             Mail::to($purchase->seller->email)
             ->send(new TransactionCompletedMail($purchase));
         }

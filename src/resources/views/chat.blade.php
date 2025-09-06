@@ -8,6 +8,13 @@
 <div class="wrapper">
     <div class="sidebar">
         <p>その他の取引</p>
+        @if($otherPurchases->isNotEmpty())
+        @foreach($otherPurchases as $p)
+        <a href="{{ route('chat.index', $p->id) }}" class="">{{ $p->item->name }}
+
+        </a>
+        @endforeach
+        @endif
     </div>
 
     <div class="contents">
@@ -27,13 +34,13 @@
             @endif
                 」さんとの取引画面</h1>
         @if(auth()->id() === $buyer->id)
-        <!-- 購入者だけ表示 -->
+        
             
             <button class="complete-btn" onclick="openModal()">取引を完了する</button>
             
         @endif
         </div>
-    <!-- top-content -->
+    
         <div class="middle-content">
             <img src="{{ asset($item->img_url) }}" alt="" class="">
             <div class="text">
@@ -41,7 +48,7 @@
                 <p class="price">{{ number_format($item->price) }}円</p>
             </div>
         </div>
-<!-- middle-content -->
+
         <div class="under-content">
             <div class="flex">
         @foreach($messages as $message) 
@@ -51,11 +58,11 @@
             <div class="item my-message">
                 <div class="message-wrapper">
                     <div class="my-label">
-                    {{-- 自分の名前と画像 --}}
+            {{-- 自分の名前と画像 --}}
                         <p>{{ auth()->user()->name }}</p>
                         <img src="{{ asset(auth()->user()->profile->img_url) }}" alt="" class="user-img">
                     </div>
-                {{-- 通常表示 --}}
+            {{-- 通常表示 --}}
                     <p class="my-message-body" id="message-{{ $message->id }}">{{ $message->body }}</p>
 
                
@@ -71,7 +78,7 @@
                         <button type="button" class="edit-btn" data-id="{{ $message->id }}">
                         編集
                         </button>
-                    <!-- </form> -->
+                    
                 
                         <form method="POST" action="{{ route('messages.destroy', $message->id) }}">
                         @csrf
@@ -108,11 +115,11 @@
         <form action="{{ route('chat.store', $purchase->id)}}" method="post">
             @csrf
             <div class="flex-btn">
-                <input type="text" class="message"name="body" placeholder="取引メッセージを記入してください">
+                <input type="text" id="chat-input" class="message"name="body" placeholder="取引メッセージを記入してください">
             
         
-                <button class="add-btn">画像を追加</button>
-                <button class="send-btn">
+                <button type  class="add-btn">画像を追加</button>
+                <button type="submit" class="send-btn">
                     <img src="{{ asset('images/inputbuttun 1.png')}}" alt="" class="input-btn">
                 </button>
             </div>
@@ -122,13 +129,9 @@
                 {{$message}}
                 @enderror
             </p>
-        
         </div>
-    <!--under-content  -->
     </div>
-
 </div>
-<!-- wrapper -->
 
 
 
@@ -136,83 +139,76 @@
 <!-- モーダル -->
 <form action="{{ route('ratings.store', $purchase->id) }}" method="post">
     @csrf
- <div class="modal hidden" id="ratingModal">
-    <!-- あとでclass="modal hiddenにする" -->
-    <div class="modal-content">
-        <div class="top-modal">
-        <h2 class="modal-title">取引が完了しました。</h2>
-        </div>
-        <div class="middle-modal">
-        <p class="question">今回の取引相手はどうでしたか？</p>
+    <div class="modal hidden" id="ratingModal">
+    
+        <div class="modal-content">
+            <div class="top-modal">
+                <h2 class="modal-title">取引が完了しました。</h2>
+            </div>
+            <div class="middle-modal">
+                <p class="question">今回の取引相手はどうでしたか？</p>
         <!-- 星評価 -->
-         <div class="stars" id="starRating">
-            @for($i = 1; $i <= 5; $i++)
-                <button type ="button" class="star-btn" data-value="{{$i}}">
-                    <img src="{{ asset('images/Star 4.png') }}" alt="星{{$i}}">
-                </button>
-            @endfor
-         </div>
-         </div>
+                <div class="stars" id="starRating">
+                    @for($i = 1; $i <= 5; $i++)
+                        <button type ="button" class="star-btn" data-value="{{$i}}">
+                            <img src="{{ asset('images/Star 4.png') }}" alt="星{{$i}}">
+                        </button>
+                    @endfor
+                </div>
+            </div>
          <!-- 選んだ星の値を送る -->
           <div class="under-modal">
-          <input type="hidden" name="rating" id="ratingValue">
+            <input type="hidden" name="rating" id="ratingValue">
 
-          <button type="submit" class="submit-btn">送信する</button>
+            <button type="submit" class="submit-btn">送信する</button>
           </div>
-          {{--@if(
-    !$purchase->ratings->where('from_user_id', auth()->id())->count() &&
-    $purchase->ratings->where('from_user_id', $purchase->buyer->id)->count()
-)--}}
-    @if($isSeller && !$purchase->ratings->where('from_user_id', auth()->id())->count())
-            <script>
-            document.addEventListener('DOMContentLoaded', () => {
-            openModal(); // ページロード時に自動でモーダルを表示
-            });
-            </script>
-            @endif
-        
+            @if(
+                !$purchase->ratings->where('from_user_id', auth()->id())->count() &&
+                $purchase->ratings->where('from_user_id', $purchase->buyer->id)->count())
 
+                <script>
+                    document.addEventListener('DOMContentLoaded', () => {
+                    openModal(); // ページロード時に自動でモーダルを表示
+                    });
+                </script>
+            @endif
+        </div>
     </div>
- </div>
 </form>
 
-
-
-
-
- <script>
-   document.addEventListener('DOMContentLoaded', () => {
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
     // 編集ボタンを押したら切り替え
-    document.querySelectorAll('.edit-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const id = this.dataset.id;
-            document.getElementById('message-' + id).style.display = 'none';
-            document.getElementById('form-' + id).style.display = 'block';
-            document.querySelector('#form-' + id + ' .edit-input').focus();
+        document.querySelectorAll('.edit-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const id = this.dataset.id;
+                document.getElementById('message-' + id).style.display = 'none';
+                document.getElementById('form-' + id).style.display = 'block';
+                document.querySelector('#form-' + id + ' .edit-input').focus();
+            });
         });
-    });
 
     // Enterキーでフォーム送信
-    document.querySelectorAll('.edit-input').forEach(input => {
-        input.addEventListener('keydown', function(e) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                this.form.submit();
-            }
+        document.querySelectorAll('.edit-input').forEach(input => {
+            input.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    this.form.submit();
+                }
+            });
         });
     });
-});
 </script>
 <script>
 
     function openModal() {
     document.getElementById('ratingModal').classList.remove('hidden');
-}
-document.addEventListener('DOMContentLoaded', () => {
-    const stars = document.querySelectorAll('.star-btn');
-    const ratingInput = document.getElementById('ratingValue');
+    }
+    document.addEventListener('DOMContentLoaded', () => {
+        const stars = document.querySelectorAll('.star-btn');
+        const ratingInput = document.getElementById('ratingValue');
 
-    stars.forEach(star => {
+        stars.forEach(star => {
         star.addEventListener('click', () => {
             const value = star.dataset.value;
             ratingInput.value = value;
@@ -230,6 +226,24 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+</script>
+<!-- 入力情報の保持 -->
+<script>
+    const input = document.getElementById('chat-input');
+    const key = `chat-draft-{{ $purchase->id }}`; // 取引ごとにキーを分ける
+
+    // ページ読み込み時に保存された下書きを復元
+    input.value = localStorage.getItem(key) || '';
+
+    // 入力が変わるたびに保存
+    input.addEventListener('input', () => {
+        localStorage.setItem(key, input.value);
+    });
+
+    // 送信時に下書きを削除
+    input.form.addEventListener('submit', () => {
+        localStorage.removeItem(key);
+    });
 </script>
 @endsection
 

@@ -31,16 +31,18 @@ class ChatController extends Controller
             $seller = $purchase->seller;
             $item = $purchase->item;
 
-            // 自分が出品者かどうか
-    $isSeller = $user->id === $purchase->seller->id;
-/*dd([
-    'user_id' => $user->id,
-    'buyer_id' => $buyer->id,
-    'seller_id' => $seller->id,
-    'isSeller' => $isSeller,
-]);
-*/
-        return view('chat', compact('purchase', 'messages', 'buyer','seller', 'item', 'isSeller'));
+// 他の取引（この取引以外の「進行中の取引」）
+    $otherPurchases = Purchase::where('id', '!=', $purchase->id)
+        ->where('status', 'paid') 
+        ->where(function ($q) use ($user) {
+            $q->where('user_id', $user->id)
+              ->orWhereHas('item', function($query) use ($user) {
+                $query->where('user_id' ,$user->id);
+              });
+        })
+        ->with('item')                     // 商品名用
+        ->get();
+        return view('chat', compact('purchase', 'messages', 'buyer','seller', 'item', 'otherPurchases'));
     
     }
 
