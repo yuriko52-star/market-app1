@@ -25,7 +25,7 @@ class ItemsTableSeeder extends Seeder
         ];
         DB::table('items')->insert($data);
           $data = [
-            'user_id' => 2,
+            'user_id' => 1,
             'condition_id'=> 2,
             'name' => 'HDD',
             'img_url' =>  '/storage/images/HDD+Hard+Disk.jpg',
@@ -45,7 +45,7 @@ class ItemsTableSeeder extends Seeder
         ];
         DB::table('items')->insert($data);
           $data = [
-            'user_id' => 2,
+            'user_id' => 1,
             'condition_id'=> 4,
             'name' => '革靴',
             'img_url' =>  '/storage/images/Leather+Shoes+Product+Photo.jpg',
@@ -75,7 +75,7 @@ class ItemsTableSeeder extends Seeder
         ];
         DB::table('items')->insert($data);
           $data = [
-            'user_id' => 1,
+            'user_id' => 2,
             'condition_id'=> 3,
             'name' => 'ショルダーバッグ',
             'img_url' =>  '/storage/images/Purse+fashion+pocket.jpg',
@@ -95,7 +95,7 @@ class ItemsTableSeeder extends Seeder
         ];
         DB::table('items')->insert($data);
           $data = [
-            'user_id' => 1,
+            'user_id' => 2,
             'condition_id'=> 1,
             'name' => 'コーヒーミル',
             'img_url' =>  '/storage/images/Waitress+with+Coffee+Grinder.jpg',
