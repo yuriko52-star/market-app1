@@ -41,7 +41,7 @@ services:
 
   app:
     build: ./docker/php
-    container_name: laravel_app
+    container_name: laravel_app9
     ports:
       - "8000:8000"
     volumes:
