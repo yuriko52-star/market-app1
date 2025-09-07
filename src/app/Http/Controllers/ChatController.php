@@ -15,34 +15,34 @@ class ChatController extends Controller
     {
         $user = auth()->user();
         // 相手の未読メッセージを既読にする
-    $purchase->messages()
-        ->where('user_id', '!=', $user->id)
-        ->where('is_read', false)
-        ->update(['is_read' => true]);
+        $purchase->messages()
+            ->where('user_id', '!=', $user->id)
+            ->where('is_read', false)
+            ->update(['is_read' => true]);
 
         // メッセージ取得
         $messages = $purchase->messages()
             ->with('user.profile')
             ->orderBy('created_at')
             ->get();
-// 出品者・購入者・商品をビューに渡す
+        
 
             $buyer = $purchase->buyer;
             $seller = $purchase->seller;
             $item = $purchase->item;
 
-// 他の取引（この取引以外の「進行中の取引」）
-    $otherPurchases = Purchase::where('id', '!=', $purchase->id)
-        ->where('status', 'paid') 
-        ->where(function ($q) use ($user) {
-            $q->where('user_id', $user->id)
-              ->orWhereHas('item', function($query) use ($user) {
-                $query->where('user_id' ,$user->id);
-              });
-        })
-        ->with('item')  // 商品名用
-        ->get();
-        return view('chat', compact('purchase', 'messages', 'buyer','seller', 'item', 'otherPurchases'));
+        // 他の取引（この取引以外の「進行中の取引」）
+            $otherPurchases = Purchase::where('id', '!=', $purchase->id)
+                ->where('status', 'paid') 
+                ->where(function ($q) use ($user) {
+                    $q->where('user_id', $user->id)
+                    ->orWhereHas('item', function($query) use ($user) {
+                        $query->where('user_id' ,$user->id);
+                    });
+                })
+                ->with('item') 
+                ->get();
+            return view('chat', compact('purchase', 'messages', 'buyer','seller', 'item', 'otherPurchases'));
     
     }
 

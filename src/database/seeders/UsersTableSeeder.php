@@ -36,7 +36,7 @@ class UsersTableSeeder extends Seeder
             'name' => 'セネカ',
             'email'=> 'seneka@roma.com',
             'password' => Hash::make('senekaseneka'),
-            // 'email_verified_at' => Carbon::now(),
+            
         ];
         DB::table('users')->insert($data);
         

@@ -22,42 +22,36 @@ class RatingController extends Controller
 
         // 相手（to_user_id）を判定
         $toUserId = $purchase->buyer->id === $fromUserId
-        ? $purchase->seller->id   // 評価者が購入者なら相手は出品者
-        : $purchase->buyer->id;   // 評価者が出品者なら相手は購入者
+        ? $purchase->seller->id   : $purchase->buyer->id;   
 
-    // すでに評価済みなら更新
-    // Rating::updateOrCreate(
-    Rating::create([
-        // [
+        Rating::create([
+        
             'purchase_id' => $purchase->id,
             'from_user_id' => $fromUserId,
-        // ],
-        // [
             'to_user_id' => $toUserId,
             'rating'     => $request->rating,
         ]);
 
-    // 両者が評価済みか確認.もしエラーが出たら書き換える
-    $buyerRated = Rating::where('purchase_id', $purchase->id)
-        ->where('from_user_id', $purchase->buyer->id)
-        ->exists();
+    
+        $buyerRated = Rating::where('purchase_id', $purchase->id)
+            ->where('from_user_id', $purchase->buyer->id)
+            ->exists();
 
-    $sellerRated = Rating::where('purchase_id', $purchase->id)
-        ->where('from_user_id', $purchase->seller->id)
-        ->exists();
+        $sellerRated = Rating::where('purchase_id', $purchase->id)
+            ->where('from_user_id', $purchase->seller->id)
+            ->exists();
 
-    if ($buyerRated && $sellerRated) {
-        $purchase->update(['status' => 'completed']);
-    } else {
+            if ($buyerRated && $sellerRated) {
+                $purchase->update(['status' => 'completed']);
+            } else {
         // もし購入者が評価した直後なら出品者に通知メールを送信
-        if($fromUserId === $purchase->buyer->id) {
+                if($fromUserId === $purchase->buyer->id) {
 
-            $purchase->load('buyer', 'seller', 'item');
-            Mail::to($purchase->seller->email)
-            ->send(new TransactionCompletedMail($purchase));
-        }
-    }
-
+                    $purchase->load('buyer', 'seller', 'item');
+                    Mail::to($purchase->seller->email)
+                    ->send(new TransactionCompletedMail($purchase));
+                }
+            }
 
         return redirect()->route('list')->with('success','評価を送信しました');
     }

@@ -17,12 +17,13 @@ use Illuminate\Support\Facades\Storage;
 class ProfileController extends Controller
 {
   public function __construct()
-  {
-    $this->middleware(['auth','verified']);
-  }
+  	{
+    	$this->middleware(['auth','verified']);
+  	}
+
     public function showProfile() {
-         $user = Auth::user();
-           $profile = $user->profile ?? null; 
+        $user = Auth::user();
+        $profile = $user->profile ?? null; 
     
        return view('profile',compact('user','profile'));
     }
@@ -44,10 +45,11 @@ class ProfileController extends Controller
       $profile->building = $addressRequest->building;
 
       if ($profileRequest->hasFile('img_url') && $profileRequest->file('img_url')->isValid()) {
-        $filename = uniqid() . '_' . $profileRequest->file('img_url')->getClientOriginalName();
-        $profileRequest->file('img_url')->storeAs('public/images', $filename);
-        $profile->img_url = "/storage/images/$filename";
-    } 
+        	$filename = uniqid() . '_' . $profileRequest->file('img_url')->getClientOriginalName();
+        	$profileRequest->file('img_url')->storeAs('public/images', $filename);
+        	$profile->img_url = "/storage/images/$filename";
+    	} 
+
         $profile->save();
      return redirect()->route('list');
     }
@@ -58,28 +60,28 @@ class ProfileController extends Controller
     {
        $user = Auth::user();
       
-        	$tab = $request->query('tab');
+        $tab = $request->query('tab');
         
-         $items = collect();
-        	if ($tab === 'buy') {
-				
-          	$items = $user->purchases()
-				->where('status', 'completed')
-				->with('item')
-				->get()
-        		->map(function($purchase) {
-            		$purchase->unread_count = $purchase->messages()
-                	->where('user_id', '!=', auth()->id())
-                	->where('is_read', false)
-                	->count();
+        $items = collect();
+        	if ($tab === 'buy')
+			{
+				$items = $user->purchases()
+					->where('status', 'completed')
+					->with('item')
+					->get()
+        			->map(function($purchase) {
+            			$purchase->unread_count = $purchase->messages()
+                		->where('user_id', '!=', auth()->id())
+                		->where('is_read', false)
+                		->count();
 
-            		return $purchase;
-        		});
-				}elseif ($tab === 'sell') 
-				{
-        			$items = $user->sellItems()->get();
+            			return $purchase;
+        			});
+			} elseif ($tab === 'sell') 
+			{
+        		$items = $user->sellItems()->get();
 
-      			} elseif ($tab === 'transaction') {
+      		} elseif ($tab === 'transaction') {
 
 				// 取引中（購入者 or 出品者の両方を考慮）
 
@@ -87,61 +89,61 @@ class ProfileController extends Controller
 				// 自分が購入者
 				$q->where('user_id', $user->id)
 			
-				->orWhereHas('item', function($q) use ($user) {
+					->orWhereHas('item', function($q) use ($user) {
 				// 自分が出品者
-				$q->where('user_id', $user->id);
-				});
-    		})
-			->where('status', 'paid')
+						$q->where('user_id', $user->id);
+					});
+    			})
+				->where('status', 'paid')
       
-      		->with('item', 'messages')
-        	->get()
-        	->map(function($purchase) use ($user) {
-            $purchase->unread_count = $purchase->messages
-                ->where('user_id', '!=', $user->id)
-                ->where('is_read', false)
-                ->count();
-            return $purchase;
-        	})
-         ->sortByDesc(fn($purchase) => optional($purchase->messages->first())->created_at);
-    	}
-		return view('mypage',compact('user','items','tab'));
+      			->with('item', 'messages')
+        		->get()
+        		->map(function($purchase) use ($user) {
+            		$purchase->unread_count = $purchase->messages
+                	->where('user_id', '!=', $user->id)
+                	->where('is_read', false)
+                	->count();
+            		return $purchase;
+        		})
+        		->sortByDesc(fn($purchase) => optional($purchase->messages->first())->created_at);
+    		}
+			return view('mypage',compact('user','items','tab'));
     }
 
-      public function edit($userId)
+    public function edit($userId)
     {
       $user = User::find($userId);
    
       return view('profile',compact('user'));
     }
   
-  public function update(ProfileRequest $profileRequest,AddressRequest $addressRequest ,User $user)
-  {
-    $validated = array_merge(
-      $profileRequest->validated(),
-      $addressRequest->validated()
-    );
+  	public function update(ProfileRequest $profileRequest,AddressRequest $addressRequest ,User $user)
+	{
+		$validated = array_merge(
+      	$profileRequest->validated(),
+      	$addressRequest->validated()
+    	);
 
-    if($profileRequest->hasFile('img_url') && $profileRequest->file('img_url')->isValid()) {
-      if ($user->profile && $user->profile->img_url) {
-        Storage::delete(str_replace('/storage','public/',$user->profile->img_url));
-      }
-      $filename = uniqid() .'_' . $profileRequest->file('img_url')->getClientOriginalName();
+    	if($profileRequest->hasFile('img_url') && $profileRequest->file('img_url')->isValid()) {
+      		if ($user->profile && $user->profile->img_url) {
+        		Storage::delete(str_replace('/storage','public/',$user->profile->img_url));
+      		}
+    		$filename = uniqid() .'_' . $profileRequest->file('img_url')->getClientOriginalName();
 
-      $profileRequest->file('img_url')->storeAs('public/images',$filename);
+      		$profileRequest->file('img_url')->storeAs('public/images',$filename);
 
-      $validated['img_url'] = "/storage/images/$filename";
+      		$validated['img_url'] = "/storage/images/$filename";
 
-    }
+		}
    
-    if (!$user->profile) {
-        $user->profile()->create($validated);
-    } else {
-        $user->profile->update($validated);
-    }
+    	if (!$user->profile) {
+        	$user->profile()->create($validated);
+    	} else {
+        	$user->profile->update($validated);
+    	}
 
-    return redirect()->route('profile.edit' ,$user->id);
-  }
+    	return redirect()->route('profile.edit' ,$user->id);
+  	}
     
 
 }

@@ -14,27 +14,25 @@ class StripeController extends Controller
 {
    public function checkout(PurchaseRequest $request)
    {
-    Stripe::setApiKey(config('services.stripe.secret'));
+        Stripe::setApiKey(config('services.stripe.secret'));
     
-    $user = auth()->user();
-     $item = Item::findOrFail($request->item_id);
+        $user = auth()->user();
+        $item = Item::findOrFail($request->item_id);
     
-    $paymentMethod = $request->input('payment_method');  
-    $purchase = Purchase::updateOrCreate(
-        ['user_id' => $user->id, 'item_id' => $item->id],
-        [
-            'payment_method' => $paymentMethod,
-            'shipping_address' => session('shipping_address'),
-            'shipping_post_code' => session('shipping_post_code'),
-            'shipping_building' => session('shipping_building'),
-            'status' => 'paid',
+        $paymentMethod = $request->input('payment_method');  
+        $purchase = Purchase::updateOrCreate(
+            [ 'user_id' => $user->id, 'item_id' => $item->id],
+            [
+                'payment_method' => $paymentMethod,
+                'shipping_address' => session('shipping_address'),
+                'shipping_post_code' => session('shipping_post_code'),
+                'shipping_building' => session('shipping_building'),
+                'status' => 'paid',
             
-        ]
-    );
-   
-
-   $sessionData = [
-             'payment_method_types' => [$paymentMethod],
+            ]
+        );
+        $sessionData = [
+            'payment_method_types' => [$paymentMethod],
             
             'line_items' => [[
             'price_data' => [
@@ -43,15 +41,15 @@ class StripeController extends Controller
                 'unit_amount' => $item->price,
                 ],
             'quantity' => 1,
-        ]],
-        'mode'=> 'payment',
+            ]],
+            'mode'=> 'payment',
         
-        'success_url' => route('stripe.success',[
+            'success_url' => route('stripe.success',[
             
             'item_id' => $item->id,
             'payment_method' => $paymentMethod 
-        ]),
-        'cancel_url' => route('stripe.cancel'),
+            ]),
+            'cancel_url' => route('stripe.cancel'),
         ];
         
 
@@ -62,14 +60,14 @@ class StripeController extends Controller
     public function success(Request $request)
    {
     
-    $user = auth()->user();
-    $item_id = $request->query('item_id');
-     $payment_method = $request->query('payment_method');
+        $user = auth()->user();
+        $item_id = $request->query('item_id');
+        $payment_method = $request->query('payment_method');
     
-    $purchase = Purchase::where('user_id', $user->id)
+        $purchase = Purchase::where('user_id', $user->id)
             ->where('item_id', $item_id)
             ->first();
-    $purchase->save();
+        $purchase->save();
 
         return view('success');
    }

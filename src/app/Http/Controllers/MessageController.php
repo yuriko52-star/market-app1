@@ -17,9 +17,10 @@ class MessageController extends Controller
         if ($message->user_id !== auth()->id()) {
             abort(403, '権限がありません');
         }
-        $request->validate([
+        /*$request->validate([
             'body' => 'required|string|max:400',
         ]);
+        */
         $message->update([
             'body' => $request->body,
         ]);

@@ -42,11 +42,8 @@
 }
 .stars {
     position: absolute;
-    /* text-align: center; 
-    /* margin: 0 auto; */
     top: 45%;
     left: 40%;
-    
 }
     
 .count {
@@ -54,7 +51,6 @@
     font-weight: 700;
     margin-left: 5px;
     color: white;
-    /* padding:  5px; */
     width: 35px;
     height: 35px;
     background-color: #ff0000;
@@ -101,7 +97,7 @@ ul {
 }
 .active-tab {
     color: #ff0000;
-    }
+}
 
 .sell-items:hover,
 .buy-items:hover {
@@ -118,7 +114,7 @@ ul {
     margin: 0 40px;
 }
 .image-card {
-position: relative;
+    position: relative;
 }
 .image {
     width: 290px;
@@ -144,14 +140,12 @@ p {
         font-weight: 700;
         margin-left: 5px;
         color: white;
-        /* padding:  5px; */
         width: 35px;
         height: 35px;
         background-color: #ff0000;
         border-radius: 50px;
         display: inline-block;
         text-align: center;
-        /* right: 80%; */
         left: 0;
 }
 .image-card-name {
@@ -203,7 +197,6 @@ p {
     .stars {
         margin: 0 auto;
         left: 50%;
-        /* right: 0; */
     }
     .sell-items ,
     .buy-items,

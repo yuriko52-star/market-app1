@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\AUth;
 use App\Http\Controllers\EmailVerificationController;
 use App\Http\Controllers\StripeController;
 use App\Http\Controllers\StripeWebhookController;
-use App\Http\Controllers\DebugController;
+
 use App\Http\Controllers\ChatController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\RatingController;
@@ -53,7 +53,7 @@ Route::middleware(['auth'])->group(function () {
 });
 Route::middleware(['auth','verified_new'])->group
 (function () 
-// 'verified_new'を消してみる
+
 {
 Route::get('/mypage/profile',[ProfileController::class,'showProfile'])->name('profile.show');
 Route::get('/mypage/profile/create',[ProfileController::class,'create'])->name('profile.create');
@@ -77,19 +77,15 @@ Route::get('/mypage',[ProfileController::class,'show'])->name('mypage');
 // チャット用
 
 Route::get('/chat/{purchase}', [ChatController::class,'index'])->name('chat.index');
-
-
-
 Route::post('/chat/{purchase}',[ChatController::class,'store'])->name('chat.store');
 
 Route::put('/messages/{message}', [MessageController::class, 'update'])->name('messages.update');
 Route::delete('/messages/{message}', [MessageController::class, 'destroy'])->name('messages.destroy');
-// 星評価用
 
+// 星評価用
 Route::post('/purchases/{purchase}/ratings',[RatingController::class, 'store'])->name('ratings.store');
 
 Route::post('/checkout',[StripeController::class,'checkout'])->name('stripe.checkout');
-
 Route::get('/success',[StripeController::class,'success'])->name('stripe.success');
 Route::get('/cancel',[StripeController::class,'cancel'])->name('stripe.cancel');
 
