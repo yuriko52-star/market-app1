@@ -94,7 +94,7 @@ Route::post('/stripe/webhook',[StripeWebhookController::class,'handleWebhook'])-
 Route::get('/download-image', [ImageController::class, 'downloadImage']);
 
 
-Route::get('/', [ItemController::class, 'index'])->name('list');
+ Route::get('/', [ItemController::class, 'index'])->name('list');
 
  Route::get('/search',[ItemController::class,'search'])->name('item.search');
 
