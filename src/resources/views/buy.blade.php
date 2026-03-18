@@ -11,7 +11,8 @@
     <div class="left-content">
         <div class="item">
             <div class="image-card">
-             <img src="{{ asset('storage/' . $item->img_url) }}" alt="" class="item-img">
+             <!-- <img src="{{ asset('$item->img_url) }}" alt="" class="item-img"> -->
+             <img src="{{ asset(ltrim($item->img_url, '/')) }}">
            
              </div>
             <div class="item-info">
