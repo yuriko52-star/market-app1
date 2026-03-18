@@ -11,7 +11,7 @@
     <div class="left-content">
         <div class="item">
             <div class="image-card">
-             <img src="{{ asset($item->img_url) }}" alt="" class="item-img">
+             <img src="{{ asset('storage/' . $item->img_url) }}" alt="" class="item-img">
            
              </div>
             <div class="item-info">

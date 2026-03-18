@@ -33,7 +33,7 @@
                 @foreach($items as $item)
                      <div class="image-card">
                         <a href="{{ route('item.show', ['item' =>$item->id]) }}" class="image-card-link">
-                            <img src="{{ asset($item->img_url) }}" alt="" class="image">
+                            <img src="{{ asset('storage/' . $item->img_url) }}" alt="" class="image">
                             @if($item->purchase)
                                 <p>Sold</p>
                             @endif
