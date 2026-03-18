@@ -32,6 +32,7 @@
             @else
                 @foreach($items as $item)
                      <div class="image-card">
+                        <p>DEBUG: {{ $item->img_url }}</p>
                         <a href="{{ route('item.show', ['item' =>$item->id]) }}" class="image-card-link">
                             <!-- <img src="{{ asset($item->img_url) }}" alt="" class="image"> -->
                             <img src="{{ asset(ltrim($item->img_url, '/')) }}">
