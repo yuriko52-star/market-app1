@@ -7,9 +7,9 @@
 <div class="content">
     <p>登録していただいたメールアドレスに認証メールを送付しました。</p>
     <p>メール認証を完了してください。</p>
-   <a href="http://localhost:8025" class="verify-btn">
+    <a href="http://localhost:8025" class="verify-btn"> 
      認証はこちらから
-   </a>
+   </a> 
   @if (session('message'))
             <div class="alert alert-success">
                 {{ session('message') }}

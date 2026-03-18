@@ -47,16 +47,18 @@ class FortifyServiceProvider extends ServiceProvider
          return view('auth.register');
         });
 
-        Fortify::verifyEmailView(function () {
+        /* Fortify::verifyEmailView(function () {
         return view('auth.verify-email');
         });
+        */
 
-        $this->app->singleton(
+        /*$this->app->singleton(
         VerifyEmailViewResponse::class,
         function () {
             return response()->view('auth.verify-email');
         }
         );
+        */
          Fortify::loginView(function () { 
             return view('auth.login'); 
         });

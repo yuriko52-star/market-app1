@@ -9,7 +9,7 @@ use App\Http\Controllers\LikeController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PurchaseController;
 use Illuminate\Support\Facades\AUth;
-use App\Http\Controllers\EmailVerificationController;
+// use App\Http\Controllers\EmailVerificationController;
 use App\Http\Controllers\StripeController;
 use App\Http\Controllers\StripeWebhookController;
 
@@ -42,16 +42,16 @@ Route::post('/register',[RegisterController::class,'processRegister'])->name('re
 Route::middleware(['auth'])->group(function () {
     
    
-    Route::get('/email/verify', [EmailVerificationController::class, 'show'])
-        ->name('verification.notice'); 
-    Route::get('/email/verify/{id}/{hash}', [EmailVerificationController::class, 'verify'])
-        ->middleware(['signed', 'throttle:6,1'])
-        ->name('verification.verify');
-    Route::post('/email/resend', [EmailVerificationController::class, 'resend'])
-        ->middleware(['throttle:6,1'])
-        ->name('verification.resend');
+    // Route::get('/email/verify', [EmailVerificationController::class, 'show'])
+        // ->name('verification.notice'); 
+    // Route::get('/email/verify/{id}/{hash}', [EmailVerificationController::class, 'verify'])
+        // ->middleware(['signed', 'throttle:6,1'])
+        // ->name('verification.verify');
+    // Route::post('/email/resend', [EmailVerificationController::class, 'resend'])
+        // ->middleware(['throttle:6,1'])
+        // ->name('verification.resend');
 });
-Route::middleware(['auth','verified_new'])->group
+ Route::middleware(['auth'])->group
 (function () 
 
 {
